@@ -4,29 +4,40 @@ import { Button } from './Button';
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'outline', 'ghost', 'danger'],
-      description: '按钮变体样式',
+      options: ['primary', 'secondary', 'default', 'text', 'link'],
+      description: '按钮变体',
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md'],
       description: '按钮尺寸',
+    },
+    dashed: {
+      control: 'boolean',
+      description: '是否为虚线边框',
+    },
+    danger: {
+      control: 'boolean',
+      description: '是否为危险按钮（红色）',
     },
     loading: {
       control: 'boolean',
       description: '是否为加载状态',
     },
-    block: {
-      control: 'boolean',
-      description: '是否为块级按钮',
-    },
     disabled: {
       control: 'boolean',
       description: '是否禁用',
+    },
+    block: {
+      control: 'boolean',
+      description: '是否为块级按钮',
     },
   },
 };
@@ -34,156 +45,315 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-// 基础用法
+// Default story
+export const Default: Story = {
+  args: {
+    children: 'Button',
+    variant: 'primary',
+  },
+};
+
+// ============================================
+// Types
+// ============================================
+export const AllVariants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="default">Default</Button>
+        <Button variant="text">Text</Button>
+        <Button variant="link">Link</Button>
+      </div>
+    </div>
+  ),
+};
+
 export const Primary: Story = {
   args: {
-    children: '主要按钮',
+    children: 'Primary Button',
     variant: 'primary',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    children: '次要按钮',
+    children: 'Secondary Button',
     variant: 'secondary',
   },
 };
 
-export const Outline: Story = {
+export const DefaultVariant: Story = {
   args: {
-    children: '轮廓按钮',
-    variant: 'outline',
+    children: 'Default Button',
+    variant: 'default',
   },
 };
 
-export const Ghost: Story = {
+export const Text: Story = {
   args: {
-    children: '幽灵按钮',
-    variant: 'ghost',
+    children: 'Text Button',
+    variant: 'text',
   },
 };
 
+export const Link: Story = {
+  args: {
+    children: 'Link Button',
+    variant: 'link',
+  },
+};
+
+// ============================================
+// Dashed
+// ============================================
+export const Dashed: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <Button variant="primary" dashed>Primary Dashed</Button>
+      <Button variant="secondary" dashed>Secondary Dashed</Button>
+      <Button variant="default" dashed>Default Dashed</Button>
+    </div>
+  ),
+};
+
+// ============================================
+// Danger
+// ============================================
 export const Danger: Story = {
-  args: {
-    children: '危险按钮',
-    variant: 'danger',
-  },
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <Button variant="primary" danger>Primary Danger</Button>
+      <Button variant="secondary" danger>Secondary Danger</Button>
+      <Button variant="default" danger>Default Danger</Button>
+      <Button variant="text" danger>Text Danger</Button>
+      <Button variant="link" danger>Link Danger</Button>
+    </div>
+  ),
 };
 
-// 尺寸
-export const Small: Story = {
-  args: {
-    children: '小按钮',
-    size: 'sm',
-  },
+export const DangerDashed: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <Button variant="primary" danger dashed>Primary</Button>
+      <Button variant="secondary" danger dashed>Secondary</Button>
+      <Button variant="default" danger dashed>Default</Button>
+    </div>
+  ),
 };
 
-export const Medium: Story = {
-  args: {
-    children: '中按钮',
-    size: 'md',
-  },
+// ============================================
+// Sizes
+// ============================================
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <Button size="md" variant="primary">Medium (40px)</Button>
+      <Button size="sm" variant="primary">Small (30px)</Button>
+    </div>
+  ),
 };
 
-export const Large: Story = {
-  args: {
-    children: '大按钮',
-    size: 'lg',
-  },
+// ============================================
+// States
+// ============================================
+export const Disabled: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <Button variant="primary" disabled>Primary</Button>
+      <Button variant="secondary" disabled>Secondary</Button>
+      <Button variant="default" disabled>Default</Button>
+      <Button variant="text" disabled>Text</Button>
+      <Button variant="link" disabled>Link</Button>
+    </div>
+  ),
 };
 
-// 状态
 export const Loading: Story = {
   args: {
-    children: '加载中',
+    children: 'Loading...',
     loading: true,
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    children: '禁用按钮',
-    disabled: true,
   },
 };
 
 export const Block: Story = {
   args: {
-    children: '块级按钮',
+    children: 'Block Button',
     block: true,
   },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '300px' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
-// 带图标
+// ============================================
+// With Icons
+// ============================================
 const SearchIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <circle cx="11" cy="11" r="8" />
-    <path d="m21 21-4.3-4.3" />
+    <path d="m21 21-4.35-4.35" />
   </svg>
 );
 
-const ArrowRightIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
+const ArrowIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M5 12h14M12 5l7 7-7 7" />
   </svg>
 );
 
-export const WithIconLeft: Story = {
-  args: {
-    children: '搜索',
-    iconLeft: <SearchIcon />,
-  },
-};
-
-export const WithIconRight: Story = {
-  args: {
-    children: '下一步',
-    iconRight: <ArrowRightIcon />,
-  },
-};
-
-// 所有变体展示
-export const AllVariants: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="danger">Danger</Button>
-    </div>
-  ),
-};
-
-// 所有尺寸展示
-export const AllSizes: Story = {
+export const WithIcons: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-      <Button size="sm">Small</Button>
-      <Button size="md">Medium</Button>
-      <Button size="lg">Large</Button>
+      <Button iconLeft={<SearchIcon />}>Search</Button>
+      <Button iconRight={<ArrowIcon />}>Next</Button>
+      <Button iconLeft={<SearchIcon />} iconRight={<ArrowIcon />}>
+        Both Icons
+      </Button>
     </div>
   ),
 };
 
+// ============================================
+// Dark Mode
+// ============================================
+export const DarkMode: Story = {
+  render: () => (
+    <div
+      data-theme="dark"
+      style={{
+        padding: '32px',
+        backgroundColor: '#18181b',
+        borderRadius: '12px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px',
+      }}
+    >
+      {/* All Variants */}
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', color: '#a1a1aa' }}>Variants (Dark Mode)</h4>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="default">Default</Button>
+          <Button variant="text">Text</Button>
+          <Button variant="link">Link</Button>
+        </div>
+      </div>
+
+      {/* Dashed */}
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', color: '#a1a1aa' }}>Dashed (Dark Mode)</h4>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Button variant="primary" dashed>Primary</Button>
+          <Button variant="secondary" dashed>Secondary</Button>
+          <Button variant="default" dashed>Default</Button>
+        </div>
+      </div>
+
+      {/* Danger */}
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', color: '#a1a1aa' }}>Danger (Dark Mode)</h4>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Button variant="primary" danger>Primary</Button>
+          <Button variant="secondary" danger>Secondary</Button>
+          <Button variant="default" danger>Default</Button>
+          <Button variant="text" danger>Text</Button>
+          <Button variant="link" danger>Link</Button>
+        </div>
+      </div>
+
+      {/* Disabled */}
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', color: '#a1a1aa' }}>Disabled (Dark Mode)</h4>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Button variant="primary" disabled>Primary</Button>
+          <Button variant="secondary" disabled>Secondary</Button>
+          <Button variant="default" disabled>Default</Button>
+          <Button variant="text" disabled>Text</Button>
+          <Button variant="link" disabled>Link</Button>
+        </div>
+      </div>
+    </div>
+  ),
+};
+
+// ============================================
+// Complete Overview
+// ============================================
+export const Overview: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+      {/* Normal */}
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', color: '#393939' }}>Normal</h3>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="default">Default</Button>
+          <Button variant="text">Text</Button>
+          <Button variant="link">Link</Button>
+        </div>
+      </div>
+
+      {/* Dashed */}
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', color: '#393939' }}>Dashed</h3>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Button variant="primary" dashed>Primary</Button>
+          <Button variant="secondary" dashed>Secondary</Button>
+          <Button variant="default" dashed>Default</Button>
+        </div>
+      </div>
+
+      {/* Danger */}
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', color: '#393939' }}>Danger</h3>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Button variant="primary" danger>Primary</Button>
+          <Button variant="secondary" danger>Secondary</Button>
+          <Button variant="default" danger>Default</Button>
+          <Button variant="text" danger>Text</Button>
+          <Button variant="link" danger>Link</Button>
+        </div>
+      </div>
+
+      {/* Danger + Dashed */}
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', color: '#393939' }}>Danger + Dashed</h3>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Button variant="primary" danger dashed>Primary</Button>
+          <Button variant="secondary" danger dashed>Secondary</Button>
+          <Button variant="default" danger dashed>Default</Button>
+        </div>
+      </div>
+
+      {/* Disabled */}
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', color: '#393939' }}>Disabled</h3>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Button variant="primary" disabled>Primary</Button>
+          <Button variant="secondary" disabled>Secondary</Button>
+          <Button variant="default" disabled>Default</Button>
+          <Button variant="text" disabled>Text</Button>
+          <Button variant="link" disabled>Link</Button>
+        </div>
+      </div>
+
+      {/* Sizes */}
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', color: '#393939' }}>Sizes</h3>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Button variant="primary" size="md">Medium (40px)</Button>
+          <Button variant="primary" size="sm">Small (30px)</Button>
+        </div>
+      </div>
+    </div>
+  ),
+};

@@ -1,6 +1,95 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
 
+// ============================================
+// Button CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Primary type
+  --apron-button-primary-bg: #{$color-primary-500};
+  --apron-button-primary-bg-hover: #{$color-primary-400};
+  --apron-button-primary-bg-active: #{$color-primary-900};
+  --apron-button-primary-text: #FFFFFF;
+  --apron-button-primary-border: #{$color-primary-500};
+
+  // Secondary type
+  --apron-button-secondary-bg: transparent;
+  --apron-button-secondary-text: #{$color-secondary-500};
+  --apron-button-secondary-text-hover: #{$color-secondary-600};
+  --apron-button-secondary-text-active: #{$color-secondary-700};
+  --apron-button-secondary-border: #{$color-secondary-500};
+  --apron-button-secondary-border-hover: #{$color-secondary-600};
+  --apron-button-secondary-border-active: #{$color-secondary-700};
+
+  // Default type
+  --apron-button-default-bg: transparent;
+  --apron-button-default-text: #{$color-primary-500};
+  --apron-button-default-text-hover: #{$color-primary-400};
+  --apron-button-default-text-active: #{$color-primary-900};
+  --apron-button-default-border: #{$color-primary-500};
+  --apron-button-default-border-hover: #{$color-primary-400};
+  --apron-button-default-border-active: #{$color-primary-900};
+
+  // Text type
+  --apron-button-text-bg: #FFFFFF;
+  --apron-button-text-bg-hover: #{$color-primary-50};
+  --apron-button-text-bg-active: #{$color-primary-100};
+
+  // Danger
+  --apron-button-danger-color: #{$color-error-600};
+
+  // Disabled
+  --apron-button-disabled-bg: #{$color-neutral-100};
+  --apron-button-disabled-text: #{$color-neutral-400};
+  --apron-button-disabled-border: #{$color-neutral-300};
+}
+
+// ============================================
+// Button CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  // Primary type
+  --apron-button-primary-bg: #{$color-primary-200};
+  --apron-button-primary-bg-hover: #{$color-primary-700};
+  --apron-button-primary-bg-active: #{$color-primary-50};
+  --apron-button-primary-text: #{$color-primary-900};
+  --apron-button-primary-border: #{$color-primary-200};
+
+  // Secondary type
+  --apron-button-secondary-bg: transparent;
+  --apron-button-secondary-text: #{$color-secondary-400};
+  --apron-button-secondary-text-hover: #{$color-secondary-300};
+  --apron-button-secondary-text-active: #{$color-secondary-200};
+  --apron-button-secondary-border: #{$color-secondary-400};
+  --apron-button-secondary-border-hover: #{$color-secondary-300};
+  --apron-button-secondary-border-active: #{$color-secondary-200};
+
+  // Default type
+  --apron-button-default-bg: transparent;
+  --apron-button-default-text: #{$color-primary-200};
+  --apron-button-default-text-hover: #{$color-primary-700};
+  --apron-button-default-text-active: #{$color-primary-50};
+  --apron-button-default-border: #{$color-primary-200};
+  --apron-button-default-border-hover: #{$color-primary-700};
+  --apron-button-default-border-active: #{$color-primary-50};
+
+  // Text type
+  --apron-button-text-bg: #{$color-neutral-800};
+  --apron-button-text-bg-hover: #{$color-neutral-700};
+  --apron-button-text-bg-active: #{$color-neutral-600};
+
+  // Danger
+  --apron-button-danger-color: #{$color-error-500};
+
+  // Disabled
+  --apron-button-disabled-bg: #{$color-neutral-800};
+  --apron-button-disabled-text: #{$color-neutral-600};
+  --apron-button-disabled-border: #{$color-neutral-700};
+}
+
+// ============================================
+// Button Base Styles
+// ============================================
 .apron-button {
   @include flex-center;
   @include button-reset;
@@ -10,116 +99,260 @@
   font-family: var(--apron-font-family);
   font-weight: $font-weight-medium;
   line-height: 1;
-  border-radius: var(--apron-radius-md);
   transition: all var(--apron-transition-fast);
+  white-space: nowrap;
+  border-style: solid;
+  border-width: 1px;
 
   &:focus-visible {
     @include focus-ring;
   }
 
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-
+  // ============================================
   // Sizes
+  // ============================================
   &--sm {
-    height: 32px;
-    padding: 0 $spacing-3;
+    height: 30px;
+    padding: 0 $spacing-4;
     font-size: $font-size-sm;
+    border-radius: 15px;
   }
 
   &--md {
     height: 40px;
-    padding: 0 $spacing-4;
+    padding: 0 $spacing-5;
     font-size: $font-size-base;
+    border-radius: 20px;
   }
 
-  &--lg {
-    height: 48px;
-    padding: 0 $spacing-6;
-    font-size: $font-size-lg;
-  }
-
-  // Variants
+  // ============================================
+  // Primary Type (实心填充按钮)
+  // ============================================
   &--primary {
-    background-color: var(--apron-color-primary);
-    color: #ffffff;
+    background-color: var(--apron-button-primary-bg);
+    border-color: var(--apron-button-primary-border);
+    color: var(--apron-button-primary-text);
 
     &:hover:not(:disabled) {
-      background-color: var(--apron-color-primary-hover);
+      background-color: var(--apron-button-primary-bg-hover);
+      border-color: var(--apron-button-primary-bg-hover);
     }
 
     &:active:not(:disabled) {
-      background-color: var(--apron-color-primary-active);
+      background-color: var(--apron-button-primary-bg-active);
+      border-color: var(--apron-button-primary-bg-active);
+    }
+
+    &:disabled {
+      background-color: var(--apron-button-disabled-bg);
+      border-color: var(--apron-button-disabled-border);
+      color: var(--apron-button-disabled-text);
+      cursor: not-allowed;
+    }
+
+    // Primary + Danger
+    &.apron-button--danger {
+      background-color: var(--apron-button-danger-color);
+      border-color: var(--apron-button-danger-color);
+      color: #FFFFFF;
+
+      &:hover:not(:disabled) {
+        background-color: #{$color-error-500};
+        border-color: #{$color-error-500};
+      }
+
+      &:active:not(:disabled) {
+        background-color: #{$color-error-600};
+        border-color: #{$color-error-600};
+      }
     }
   }
 
+  // ============================================
+  // Secondary Type (透明背景，边框按钮)
+  // ============================================
   &--secondary {
-    background-color: var(--apron-color-bg-secondary);
-    color: var(--apron-color-text);
-    border: 1px solid var(--apron-color-border);
+    background-color: var(--apron-button-secondary-bg);
+    border-color: var(--apron-button-secondary-border);
+    color: var(--apron-button-secondary-text);
 
     &:hover:not(:disabled) {
-      background-color: var(--apron-color-border);
+      border-color: var(--apron-button-secondary-border-hover);
+      color: var(--apron-button-secondary-text-hover);
     }
 
     &:active:not(:disabled) {
-      background-color: var(--apron-color-border-hover);
+      border-color: var(--apron-button-secondary-border-active);
+      color: var(--apron-button-secondary-text-active);
+    }
+
+    &:disabled {
+      background-color: transparent;
+      border-color: var(--apron-button-disabled-border);
+      color: var(--apron-button-disabled-text);
+      cursor: not-allowed;
+    }
+
+    // Secondary + Danger
+    &.apron-button--danger {
+      border-color: var(--apron-button-danger-color);
+      color: var(--apron-button-danger-color);
+
+      &:hover:not(:disabled) {
+        border-color: #{$color-error-500};
+        color: #{$color-error-500};
+      }
+
+      &:active:not(:disabled) {
+        border-color: #{$color-error-600};
+        color: #{$color-error-600};
+      }
     }
   }
 
-  &--outline {
+  // ============================================
+  // Default Type (边框按钮，primary 颜色)
+  // ============================================
+  &--default {
+    background-color: var(--apron-button-default-bg);
+    border-color: var(--apron-button-default-border);
+    color: var(--apron-button-default-text);
+
+    &:hover:not(:disabled) {
+      border-color: var(--apron-button-default-border-hover);
+      color: var(--apron-button-default-text-hover);
+    }
+
+    &:active:not(:disabled) {
+      border-color: var(--apron-button-default-border-active);
+      color: var(--apron-button-default-text-active);
+    }
+
+    &:disabled {
+      background-color: transparent;
+      border-color: var(--apron-button-disabled-border);
+      color: var(--apron-button-disabled-text);
+      cursor: not-allowed;
+    }
+
+    // Default + Danger
+    &.apron-button--danger {
+      border-color: var(--apron-button-danger-color);
+      color: var(--apron-button-danger-color);
+
+      &:hover:not(:disabled) {
+        border-color: #{$color-error-500};
+        color: #{$color-error-500};
+      }
+
+      &:active:not(:disabled) {
+        border-color: #{$color-error-600};
+        color: #{$color-error-600};
+      }
+    }
+  }
+
+  // ============================================
+  // Text Type (无边框，有底色)
+  // ============================================
+  &--text {
+    background-color: var(--apron-button-text-bg);
+    border-color: transparent;
+    color: var(--apron-button-default-text);
+
+    &:hover:not(:disabled) {
+      background-color: var(--apron-button-text-bg-hover);
+      color: var(--apron-button-default-text-hover);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--apron-button-text-bg-active);
+      color: var(--apron-button-default-text-active);
+    }
+
+    &:disabled {
+      background-color: var(--apron-button-disabled-bg);
+      color: var(--apron-button-disabled-text);
+      cursor: not-allowed;
+    }
+
+    // Text + Danger
+    &.apron-button--danger {
+      color: var(--apron-button-danger-color);
+
+      &:hover:not(:disabled) {
+        background-color: rgba($color-error-600, 0.08);
+        color: #{$color-error-500};
+      }
+
+      &:active:not(:disabled) {
+        background-color: rgba($color-error-600, 0.15);
+        color: #{$color-error-600};
+      }
+    }
+  }
+
+  // ============================================
+  // Link Type (无边框，无背景，secondary 颜色)
+  // ============================================
+  &--link {
     background-color: transparent;
-    color: var(--apron-color-primary);
-    border: 1px solid var(--apron-color-primary);
+    border-color: transparent;
+    color: var(--apron-button-secondary-text);
+    padding: 0;
+    height: auto;
 
     &:hover:not(:disabled) {
-      background-color: var(--apron-color-primary-light);
+      color: var(--apron-button-secondary-text-hover);
     }
 
     &:active:not(:disabled) {
-      background-color: $color-primary-200;
+      color: var(--apron-button-secondary-text-active);
+    }
+
+    &:disabled {
+      color: var(--apron-button-disabled-text);
+      cursor: not-allowed;
+    }
+
+    // Link + Danger
+    &.apron-button--danger {
+      color: var(--apron-button-danger-color);
+
+      &:hover:not(:disabled) {
+        color: #{$color-error-500};
+      }
+
+      &:active:not(:disabled) {
+        color: #{$color-error-600};
+      }
     }
   }
 
-  &--ghost {
-    background-color: transparent;
-    color: var(--apron-color-text);
-
-    &:hover:not(:disabled) {
-      background-color: var(--apron-color-bg-secondary);
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--apron-color-border);
-    }
+  // ============================================
+  // Dashed (虚线边框修饰符)
+  // ============================================
+  &--dashed {
+    border-style: dashed;
   }
 
-  &--danger {
-    background-color: var(--apron-color-error);
-    color: #ffffff;
-
-    &:hover:not(:disabled) {
-      background-color: $color-error-600;
-    }
-
-    &:active:not(:disabled) {
-      background-color: darken($color-error-600, 5%);
-    }
-  }
-
+  // ============================================
   // Block
+  // ============================================
   &--block {
     width: 100%;
   }
 
+  // ============================================
   // Loading
+  // ============================================
   &--loading {
     pointer-events: none;
   }
 
+  // ============================================
   // Icon
+  // ============================================
   &__icon {
     display: flex;
     align-items: center;
@@ -131,7 +364,9 @@
     }
   }
 
+  // ============================================
   // Spinner
+  // ============================================
   &__spinner {
     display: flex;
     align-items: center;
@@ -144,7 +379,9 @@
     }
   }
 
+  // ============================================
   // Content
+  // ============================================
   &__content {
     display: inline-flex;
     align-items: center;
@@ -159,4 +396,3 @@
     transform: rotate(360deg);
   }
 }
-

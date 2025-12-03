@@ -2,14 +2,18 @@ import React, { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import './Button.scss';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonVariant = 'primary' | 'secondary' | 'default' | 'text' | 'link';
+export type ButtonSize = 'sm' | 'md';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** 按钮变体样式 */
+  /** 按钮变体 */
   variant?: ButtonVariant;
   /** 按钮尺寸 */
   size?: ButtonSize;
+  /** 是否为虚线边框 */
+  dashed?: boolean;
+  /** 是否为危险按钮（红色） */
+  danger?: boolean;
   /** 是否为加载状态 */
   loading?: boolean;
   /** 是否为块级按钮（宽度100%） */
@@ -27,6 +31,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       variant = 'primary',
       size = 'md',
+      dashed = false,
+      danger = false,
       loading = false,
       block = false,
       disabled,
@@ -42,6 +48,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'apron-button',
       `apron-button--${variant}`,
       `apron-button--${size}`,
+      dashed && 'apron-button--dashed',
+      danger && 'apron-button--danger',
       block && 'apron-button--block',
       loading && 'apron-button--loading',
       className,
@@ -88,4 +96,3 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
-

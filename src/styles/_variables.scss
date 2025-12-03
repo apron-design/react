@@ -2,17 +2,29 @@
 // Design Tokens - Apron Design System
 // ============================================
 
-// Colors - Primary
-$color-primary-50: #eff6ff;
-$color-primary-100: #dbeafe;
-$color-primary-200: #bfdbfe;
-$color-primary-300: #93c5fd;
-$color-primary-400: #60a5fa;
-$color-primary-500: #3b82f6;
-$color-primary-600: #2563eb;
-$color-primary-700: #1d4ed8;
-$color-primary-800: #1e40af;
-$color-primary-900: #1e3a8a;
+// Colors - Primary (基于 500: #393939, 900: #000000 计算)
+$color-primary-50: #f8f8f8;   // 灰度 248
+$color-primary-100: #e8e8e8;  // 灰度 232
+$color-primary-200: #c8c8c8;  // 灰度 200
+$color-primary-300: #999999;  // 灰度 153
+$color-primary-400: #666666;  // 灰度 102
+$color-primary-500: #393939;  // 灰度 57 (基准)
+$color-primary-600: #2b2b2b;  // 灰度 43
+$color-primary-700: #1d1d1d;  // 灰度 29
+$color-primary-800: #0e0e0e;  // 灰度 14
+$color-primary-900: #000000;  // 灰度 0 (基准)
+
+// Colors - Secondary (基于 500: #4C9EEA 计算)
+$color-secondary-50: #F0F7FE;
+$color-secondary-100: #DBE9FC;
+$color-secondary-200: #B8D4F8;
+$color-secondary-300: #8FBEF3;
+$color-secondary-400: #6DAEEF;
+$color-secondary-500: #4C9EEA;  // 基准
+$color-secondary-600: #3182CE;
+$color-secondary-700: #2468AC;
+$color-secondary-800: #1A4E85;
+$color-secondary-900: #133660;
 
 // Colors - Neutral
 $color-neutral-50: #fafafa;
@@ -32,7 +44,7 @@ $color-success-600: #16a34a;
 $color-warning-500: #f59e0b;
 $color-warning-600: #d97706;
 $color-error-500: #ef4444;
-$color-error-600: #dc2626;
+$color-error-600: #c11717;
 $color-info-500: #06b6d4;
 $color-info-600: #0891b2;
 
