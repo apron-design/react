@@ -21,11 +21,11 @@
 Apron 指的是机场停机坪
 
 我们希望这套组件排列在一起时像停机坪一样整齐，同时也符合我们的设计理念：
-- *A*greement - 一致
-- *P*eace - 平和
-- *R*ealizing - 意识
-- *O*pen - 开放
-- *N*ecessity - 必要
+- **A**greement - 一致
+- **P**eace - 平和
+- **R**ealizing - 意识
+- **O**pen - 开放
+- **N**ecessity - 必要
 
 ## 📦 安装
 

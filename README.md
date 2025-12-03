@@ -23,11 +23,11 @@ We intentionally provide a consistent, peaceful, awareness-guiding, open, and ne
 Apron refers to the airport apron.
 
 We hope that when these components are arranged together, they will be as neat as an airport apron, while also reflecting our design philosophy:
-- *A*greement
-- *P*eace
-- *R*ealizing
-- *O*pen
-- *N*ecessity
+- **A**greement
+- **P**eace
+- **R**ealizing
+- **O**pen
+- **N**ecessity
 
 ## 📦 Installation
 
