@@ -1,6 +1,6 @@
 {
   "name": "@apron-design/react",
-  "version": "15.0.1",
+  "version": "21.0.1",
   "description": "A modern React component library with SCSS",
   "type": "module",
   "main": "./dist/index.cjs",
