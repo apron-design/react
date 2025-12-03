@@ -1,0 +1,73 @@
+// ============================================
+// Apron Design System - Main Stylesheet
+// ============================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// CSS Custom Properties (for runtime theming)
+:root {
+  // Colors
+  --apron-color-primary: #{$color-primary-500};
+  --apron-color-primary-hover: #{$color-primary-600};
+  --apron-color-primary-active: #{$color-primary-700};
+  --apron-color-primary-light: #{$color-primary-100};
+
+  --apron-color-text: #{$color-neutral-900};
+  --apron-color-text-secondary: #{$color-neutral-600};
+  --apron-color-text-disabled: #{$color-neutral-400};
+
+  --apron-color-bg: #ffffff;
+  --apron-color-bg-secondary: #{$color-neutral-50};
+  --apron-color-bg-elevated: #ffffff;
+
+  --apron-color-border: #{$color-neutral-200};
+  --apron-color-border-hover: #{$color-neutral-300};
+
+  --apron-color-success: #{$color-success-500};
+  --apron-color-warning: #{$color-warning-500};
+  --apron-color-error: #{$color-error-500};
+  --apron-color-info: #{$color-info-500};
+
+  // Typography
+  --apron-font-family: #{$font-family-sans};
+  --apron-font-family-mono: #{$font-family-mono};
+
+  // Radius
+  --apron-radius-sm: #{$radius-sm};
+  --apron-radius-md: #{$radius-md};
+  --apron-radius-lg: #{$radius-lg};
+
+  // Shadows
+  --apron-shadow-sm: #{$shadow-sm};
+  --apron-shadow-md: #{$shadow-md};
+  --apron-shadow-lg: #{$shadow-lg};
+
+  // Transitions
+  --apron-transition-fast: #{$transition-fast};
+  --apron-transition-normal: #{$transition-normal};
+}
+
+// Dark mode
+[data-theme='dark'] {
+  --apron-color-text: #{$color-neutral-100};
+  --apron-color-text-secondary: #{$color-neutral-400};
+  --apron-color-text-disabled: #{$color-neutral-600};
+
+  --apron-color-bg: #{$color-neutral-900};
+  --apron-color-bg-secondary: #{$color-neutral-800};
+  --apron-color-bg-elevated: #{$color-neutral-800};
+
+  --apron-color-border: #{$color-neutral-700};
+  --apron-color-border-hover: #{$color-neutral-600};
+}
+
+// Base reset for components
+.apron {
+  font-family: var(--apron-font-family);
+  color: var(--apron-color-text);
+  line-height: $line-height-normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+

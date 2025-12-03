@@ -1,0 +1,33 @@
+# Source files
+src/
+.storybook/
+
+# Config files
+*.config.ts
+*.config.js
+.eslintrc.cjs
+.prettierrc
+tsconfig.json
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+coverage/
+
+# Build tools
+storybook-static/
+
+# IDE
+.idea/
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# Docs
+*.md
+!README.md
+
