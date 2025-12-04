@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Alert, alert } from './Alert';
+import { Alert } from './Alert';
+import { message } from '../Message';
 import { Button } from '../Button';
 
 const meta: Meta<typeof Alert> = {
@@ -112,21 +113,21 @@ export const GlobalAlerts: Story = {
         点击按钮触发全局提示，提示会从页面顶部降下，5秒后自动消失
       </p>
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-        <Button onClick={() => alert.info('This is an info message')}>
+        <Button onClick={() => message.info('This is an info message')}>
           Info
         </Button>
-        <Button onClick={() => alert.success('Operation successful!')}>
+        <Button onClick={() => message.success('Operation successful!')}>
           Success
         </Button>
-        <Button onClick={() => alert.warning('Please be careful!')}>
+        <Button onClick={() => message.warning('Please be careful!')}>
           Warning
         </Button>
-        <Button onClick={() => alert.error('Something went wrong!')}>
+        <Button onClick={() => message.error('Something went wrong!')}>
           Error
         </Button>
       </div>
       <div style={{ display: 'flex', gap: '8px' }}>
-        <Button onClick={() => alert.clear()}>
+        <Button onClick={() => message.clear()}>
           Clear All
         </Button>
       </div>
@@ -140,10 +141,10 @@ export const GlobalAlerts: Story = {
 export const MultipleAlerts: Story = {
   render: () => {
     const showMultiple = () => {
-      alert.info('First message');
-      setTimeout(() => alert.success('Second message'), 500);
-      setTimeout(() => alert.warning('Third message'), 1000);
-      setTimeout(() => alert.error('Fourth message'), 1500);
+      message.info('First message');
+      setTimeout(() => message.success('Second message'), 500);
+      setTimeout(() => message.warning('Third message'), 1000);
+      setTimeout(() => message.error('Fourth message'), 1500);
     };
 
     return (
@@ -168,13 +169,13 @@ export const CustomDuration: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '400px' }}>
       <h4 style={{ margin: 0, color: '#393939' }}>自定义显示时长</h4>
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-        <Button onClick={() => alert.info('2 seconds', 2000)}>
+        <Button onClick={() => message.info('2 seconds', 2000)}>
           2s Duration
         </Button>
-        <Button onClick={() => alert.success('10 seconds', 10000)}>
+        <Button onClick={() => message.success('10 seconds', 10000)}>
           10s Duration
         </Button>
-        <Button onClick={() => alert.warning('Will not auto close', 0)}>
+        <Button onClick={() => message.warning('Will not auto close', 0)}>
           No Auto Close
         </Button>
       </div>
@@ -191,7 +192,7 @@ export const WithHTMLContent: Story = {
       <h4 style={{ margin: 0, color: '#393939' }}>富文本内容</h4>
       <Button
         onClick={() =>
-          alert.success(
+          message.success(
             <span>
               Your file <strong>report.pdf</strong> has been uploaded successfully!
             </span>

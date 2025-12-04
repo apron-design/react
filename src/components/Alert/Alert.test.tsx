@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor, act } from '@testing-library/react';
-import { Alert, alert } from './Alert';
+import { Alert } from './Alert';
+import { message } from '../Message';
 
 describe('Alert', () => {
   it('renders correctly', () => {
@@ -55,10 +56,10 @@ describe('Alert', () => {
   });
 });
 
-describe('alert global methods', () => {
+describe('message global methods', () => {
   beforeEach(() => {
-    // Clean up any existing alerts
-    alert.clear();
+    // Clean up any existing messages
+    message.clear();
     // Remove any existing container
     const existingRoot = document.querySelector('.apron-alert-root');
     if (existingRoot) {
@@ -67,12 +68,12 @@ describe('alert global methods', () => {
   });
 
   afterEach(() => {
-    alert.clear();
+    message.clear();
   });
 
-  it('creates alert container when called', async () => {
+  it('creates message container when called', async () => {
     act(() => {
-      alert.info('Test message');
+      message.info('Test message');
     });
 
     await waitFor(() => {
@@ -80,9 +81,9 @@ describe('alert global methods', () => {
     });
   });
 
-  it('shows info alert', async () => {
+  it('shows info message', async () => {
     act(() => {
-      alert.info('Info message');
+      message.info('Info message');
     });
 
     await waitFor(() => {
@@ -90,9 +91,9 @@ describe('alert global methods', () => {
     });
   });
 
-  it('shows success alert', async () => {
+  it('shows success message', async () => {
     act(() => {
-      alert.success('Success message');
+      message.success('Success message');
     });
 
     await waitFor(() => {
@@ -100,9 +101,9 @@ describe('alert global methods', () => {
     });
   });
 
-  it('shows warning alert', async () => {
+  it('shows warning message', async () => {
     act(() => {
-      alert.warning('Warning message');
+      message.warning('Warning message');
     });
 
     await waitFor(() => {
@@ -110,9 +111,9 @@ describe('alert global methods', () => {
     });
   });
 
-  it('shows error alert', async () => {
+  it('shows error message', async () => {
     act(() => {
-      alert.error('Error message');
+      message.error('Error message');
     });
 
     await waitFor(() => {
@@ -120,19 +121,19 @@ describe('alert global methods', () => {
     });
   });
 
-  it('returns alert id', () => {
+  it('returns message id', () => {
     let id: string;
     act(() => {
-      id = alert.info('Test');
+      id = message.info('Test');
     });
     expect(id!).toBeDefined();
     expect(typeof id!).toBe('string');
   });
 
-  it('can remove alert by id', async () => {
+  it('can remove message by id', async () => {
     let id: string;
     act(() => {
-      id = alert.info('Test message', 0); // duration 0 = no auto close
+      id = message.info('Test message', 0); // duration 0 = no auto close
     });
 
     await waitFor(() => {
@@ -140,18 +141,18 @@ describe('alert global methods', () => {
     });
 
     act(() => {
-      alert.remove(id!);
+      message.remove(id!);
     });
 
     // Note: The alert might still be visible during exit animation
     // but will be removed from the list
   });
 
-  it('can clear all alerts', async () => {
+  it('can clear all messages', async () => {
     act(() => {
-      alert.info('Message 1', 0);
-      alert.success('Message 2', 0);
-      alert.warning('Message 3', 0);
+      message.info('Message 1', 0);
+      message.success('Message 2', 0);
+      message.warning('Message 3', 0);
     });
 
     await waitFor(() => {
@@ -161,7 +162,7 @@ describe('alert global methods', () => {
     });
 
     act(() => {
-      alert.clear();
+      message.clear();
     });
 
     await waitFor(() => {
@@ -171,11 +172,11 @@ describe('alert global methods', () => {
     });
   });
 
-  it('shows multiple alerts stacked', async () => {
+  it('shows multiple messages stacked', async () => {
     act(() => {
-      alert.info('First', 0);
-      alert.success('Second', 0);
-      alert.warning('Third', 0);
+      message.info('First', 0);
+      message.success('Second', 0);
+      message.warning('Third', 0);
     });
 
     await waitFor(() => {
@@ -188,7 +189,7 @@ describe('alert global methods', () => {
     vi.useFakeTimers();
 
     act(() => {
-      alert.info('Auto close test', 1000);
+      message.info('Auto close test', 1000);
     });
 
     await waitFor(() => {
