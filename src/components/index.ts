@@ -17,6 +17,7 @@ export * from './Image';
 export * from './Input';
 export * from './InputOtp';
 export * from './Link';
+export * from './Message';
 export * from './Modal';
 export * from './Pagination';
 export * from './Popover';
