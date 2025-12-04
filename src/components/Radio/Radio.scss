@@ -1,0 +1,195 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Radio CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Unchecked state
+  --apron-radio-bg: #ffffff;
+  --apron-radio-border: #{$color-neutral-300};
+  --apron-radio-border-hover: #{$color-neutral-400};
+
+  // Checked state
+  --apron-radio-checked-bg: #ffffff;
+  --apron-radio-checked-border: #{$color-success-500};
+  --apron-radio-checked-dot: #{$color-success-500};
+
+  // Disabled state
+  --apron-radio-disabled-bg: #{$color-neutral-100};
+  --apron-radio-disabled-border: #{$color-neutral-200};
+  --apron-radio-disabled-checked-bg: #{$color-neutral-100};
+  --apron-radio-disabled-dot: #{$color-neutral-400};
+  --apron-radio-disabled-text: #{$color-neutral-400};
+
+  // Label
+  --apron-radio-label-color: #{$color-primary-500};
+}
+
+// ============================================
+// Radio CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  // Unchecked state
+  --apron-radio-bg: #{$color-neutral-800};
+  --apron-radio-border: #{$color-neutral-600};
+  --apron-radio-border-hover: #{$color-neutral-500};
+
+  // Checked state
+  --apron-radio-checked-bg: #{$color-neutral-800};
+  --apron-radio-checked-border: #{$color-success-500};
+  --apron-radio-checked-dot: #{$color-success-500};
+
+  // Disabled state
+  --apron-radio-disabled-bg: #{$color-neutral-800};
+  --apron-radio-disabled-border: #{$color-neutral-700};
+  --apron-radio-disabled-checked-bg: #{$color-neutral-800};
+  --apron-radio-disabled-dot: #{$color-neutral-600};
+  --apron-radio-disabled-text: #{$color-neutral-600};
+
+  // Label
+  --apron-radio-label-color: #{$color-primary-200};
+}
+
+// ============================================
+// Radio Base Styles
+// ============================================
+.apron-radio {
+  display: inline-flex;
+  align-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--apron-font-family);
+  font-size: $font-size-base;
+
+  // Input wrapper
+  &__input-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+  }
+
+  // Hidden native input
+  &__input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    cursor: inherit;
+    z-index: 1;
+  }
+
+  // Custom radio circle
+  &__circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    background-color: var(--apron-radio-bg);
+    border: 1.5px solid var(--apron-radio-border);
+    border-radius: 50%;
+    transition: all $transition-fast;
+  }
+
+  // Inner dot
+  &__dot {
+    width: 13px;
+    height: 13px;
+    background-color: var(--apron-radio-checked-dot);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: all $transition-fast;
+  }
+
+  // Label text
+  &__label {
+    margin-left: 10px;
+    line-height: 25px;
+    color: var(--apron-radio-label-color);
+  }
+
+  // Label not clickable
+  &--label-not-clickable {
+    .apron-radio__label {
+      cursor: default;
+    }
+  }
+
+  // Hover state (only for unchecked state)
+  &:hover:not(.apron-radio--disabled):not(.apron-radio--checked) {
+    .apron-radio__circle {
+      border-color: var(--apron-radio-border-hover);
+    }
+  }
+
+  // Focus state
+  &__input:focus-visible + .apron-radio__circle {
+    @include focus-ring;
+  }
+
+  // ============================================
+  // Checked State
+  // ============================================
+  &--checked {
+    .apron-radio__circle {
+      background-color: var(--apron-radio-checked-bg);
+      border-color: var(--apron-radio-checked-border);
+    }
+
+    .apron-radio__dot {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // ============================================
+  // Disabled State
+  // ============================================
+  &--disabled {
+    cursor: not-allowed;
+
+    .apron-radio__circle {
+      background-color: var(--apron-radio-disabled-bg);
+      border-color: var(--apron-radio-disabled-border);
+    }
+
+    .apron-radio__label {
+      color: var(--apron-radio-disabled-text);
+    }
+
+    // Disabled + Checked
+    &.apron-radio--checked {
+      .apron-radio__circle {
+        background-color: var(--apron-radio-disabled-checked-bg);
+        border-color: var(--apron-radio-disabled-border);
+      }
+
+      .apron-radio__dot {
+        background-color: var(--apron-radio-disabled-dot);
+      }
+    }
+  }
+}
+
+// ============================================
+// Radio Group Styles
+// ============================================
+.apron-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-4;
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+}
+

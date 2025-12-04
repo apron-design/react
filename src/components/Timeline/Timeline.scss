@@ -1,0 +1,283 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Timeline CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-timeline-line-color: #{$color-neutral-200};
+  --apron-timeline-dot-default: #{$color-neutral-400};
+  --apron-timeline-dot-primary: #{$color-primary-500};
+  --apron-timeline-dot-main: #{$color-secondary-500};
+  --apron-timeline-dot-success: #{$color-success-500};
+  --apron-timeline-dot-warning: #{$color-warning-500};
+  --apron-timeline-dot-danger: #{$color-error-500};
+  --apron-timeline-title-color: #{$color-primary-900};
+  --apron-timeline-text-color: #{$color-neutral-500};
+}
+
+// ============================================
+// Timeline CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-timeline-line-color: #{$color-neutral-700};
+  --apron-timeline-dot-default: #{$color-neutral-500};
+  --apron-timeline-dot-primary: #{$color-primary-300};
+  --apron-timeline-dot-main: #{$color-secondary-400};
+  --apron-timeline-dot-success: #{$color-success-500};
+  --apron-timeline-dot-warning: #{$color-warning-500};
+  --apron-timeline-dot-danger: #{$color-error-500};
+  --apron-timeline-title-color: #{$color-primary-100};
+  --apron-timeline-text-color: #{$color-neutral-400};
+}
+
+// ============================================
+// Timeline Base
+// ============================================
+.apron-timeline {
+  position: relative;
+  width: 100%;
+  font-family: var(--apron-font-family);
+  transition: all $transition-slow;
+
+  // ============================================
+  // Side: Right (内容在右边，默认)
+  // ============================================
+  &--right {
+    .apron-timeline-item {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      padding-left: 20px;
+      padding-bottom: 24px;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      // 竖线
+      &::before {
+        content: '';
+        position: absolute;
+        left: 2.5px;
+        transform: translateX(-50%);
+        top: 7.5px;
+        bottom: -10px;
+        width: 1px;
+        background-color: var(--apron-timeline-line-color);
+      }
+
+      &:last-child::before {
+        display: none;
+      }
+
+      &__dot {
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: var(--apron-timeline-dot-default);
+        flex-shrink: 0;
+        transition: all $transition-slow;
+      }
+
+      &__content {
+        flex: 1;
+      }
+    }
+  }
+
+  // ============================================
+  // Side: Left (内容在左边)
+  // ============================================
+  &--left {
+    .apron-timeline-item {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding-right: 20px;
+      padding-bottom: 24px;
+      text-align: right;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      // 竖线
+      &::before {
+        content: '';
+        position: absolute;
+        right: 2.5px;
+        transform: translateX(50%);
+        top: 7.5px;
+        bottom: -3px;
+        width: 1px;
+        background-color: var(--apron-timeline-line-color);
+      }
+
+      &:last-child::before {
+        display: none;
+      }
+
+      &__dot {
+        position: absolute;
+        right: 0;
+        top: 5px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: var(--apron-timeline-dot-default);
+        flex-shrink: 0;
+        transition: all $transition-slow;
+      }
+
+      &__content {
+        flex: 1;
+      }
+    }
+  }
+
+  // ============================================
+  // Side: Both (内容交替左右)
+  // ============================================
+  &--both {
+    .apron-timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 15px;
+      padding-bottom: 24px;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      // 竖线
+      &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 7.5px;
+        bottom: -3px;
+        width: 1px;
+        background-color: var(--apron-timeline-line-color);
+      }
+
+      &:last-child::before {
+        display: none;
+      }
+
+      &__left {
+        text-align: right;
+      }
+
+      &__right {
+        text-align: left;
+      }
+
+      &__dot {
+        position: relative;
+        top: 5px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: var(--apron-timeline-dot-default);
+        flex-shrink: 0;
+        z-index: 1;
+        transition: all $transition-slow;
+      }
+
+      // 奇数项：显示左边内容
+      &:nth-child(odd) {
+        .apron-timeline-item__left {
+          .apron-timeline-item__content {
+            display: block;
+          }
+        }
+        .apron-timeline-item__right {
+          .apron-timeline-item__content {
+            display: none;
+          }
+        }
+      }
+
+      // 偶数项：显示右边内容
+      &:nth-child(even) {
+        .apron-timeline-item__left {
+          .apron-timeline-item__content {
+            display: none;
+          }
+        }
+        .apron-timeline-item__right {
+          .apron-timeline-item__content {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// TimelineItem Content Styles
+// ============================================
+.apron-timeline-item {
+  &__content {
+    transition: all $transition-slow;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: var(--apron-timeline-title-color);
+    line-height: $line-height-normal;
+    margin-bottom: 4px;
+    transition: all $transition-slow;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: var(--apron-timeline-text-color);
+    line-height: $line-height-normal;
+    transition: all $transition-slow;
+  }
+
+  &__date {
+    font-size: $font-size-sm;
+    color: var(--apron-timeline-text-color);
+    line-height: $line-height-normal;
+    transition: all $transition-slow;
+  }
+
+  // ============================================
+  // Dot Colors
+  // ============================================
+  &--dot-default .apron-timeline-item__dot {
+    background-color: var(--apron-timeline-dot-default);
+  }
+
+  &--dot-primary .apron-timeline-item__dot {
+    background-color: var(--apron-timeline-dot-primary);
+  }
+
+  &--dot-main .apron-timeline-item__dot {
+    background-color: var(--apron-timeline-dot-main);
+  }
+
+  &--dot-success .apron-timeline-item__dot {
+    background-color: var(--apron-timeline-dot-success);
+  }
+
+  &--dot-warning .apron-timeline-item__dot {
+    background-color: var(--apron-timeline-dot-warning);
+  }
+
+  &--dot-danger .apron-timeline-item__dot {
+    background-color: var(--apron-timeline-dot-danger);
+  }
+}
+

@@ -1,0 +1,311 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Popover CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-popover-bg: #ffffff;
+  --apron-popover-border-color: #{$color-neutral-200};
+  --apron-popover-title-color: #{$color-primary-900};
+  --apron-popover-body-color: #{$color-primary-900};
+  --apron-popover-shadow: #{$shadow-lg};
+}
+
+// ============================================
+// Popover CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-popover-bg: #{$color-neutral-900};
+  --apron-popover-border-color: #{$color-neutral-700};
+  --apron-popover-title-color: #{$color-neutral-100};
+  --apron-popover-body-color: #{$color-primary-100};
+  --apron-popover-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}
+
+// ============================================
+// Popover Base Styles
+// ============================================
+.apron-popover {
+  position: absolute;
+  z-index: $z-index-popover;
+  min-width: 300px;
+  max-width: 500px;
+  background-color: var(--apron-popover-bg);
+  border: 1px solid var(--apron-popover-border-color);
+  border-radius: $radius-lg;
+  box-shadow: var(--apron-popover-shadow);
+  transition: opacity $transition-slow, transform $transition-slow;
+  animation: apron-popover-fade-in 0.2s ease;
+
+  // ============================================
+  // Arrow (底部箭头，指向下方)
+  // ============================================
+  &__arrow {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 6px;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+
+    &::before {
+      bottom: 0;
+      border-top: 6px solid var(--apron-popover-border-color);
+    }
+
+    &::after {
+      bottom: 1px;
+      border-top: 6px solid var(--apron-popover-bg);
+    }
+  }
+
+  // ============================================
+  // Content
+  // ============================================
+  &__content {
+    padding: 10px 15px;
+  }
+
+  // ============================================
+  // Title
+  // ============================================
+  &__title {
+    font-family: var(--apron-font-family);
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: var(--apron-popover-title-color);
+    line-height: $line-height-normal;
+    margin-bottom: 8px;
+  }
+
+  // ============================================
+  // Body
+  // ============================================
+  &__body {
+    font-family: var(--apron-font-family);
+    font-size: $font-size-sm;
+    color: var(--apron-popover-body-color);
+    line-height: $line-height-normal;
+  }
+
+  // ============================================
+  // Footer (PopoverConfirm)
+  // ============================================
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  // ============================================
+  // Button (mini size)
+  // ============================================
+  &__btn {
+    @include button-reset;
+    @include flex-center;
+
+    height: 24px;
+    padding: 0 10px;
+    font-family: var(--apron-font-family);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    line-height: 1;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all $transition-slow;
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    // Primary
+    &--primary {
+      background-color: $color-primary-500;
+      border-color: $color-primary-500;
+      color: #ffffff;
+
+      &:hover {
+        background-color: $color-primary-600;
+        border-color: $color-primary-600;
+      }
+
+      &:active {
+        background-color: $color-primary-700;
+        border-color: $color-primary-700;
+      }
+    }
+
+    // Secondary
+    &--secondary {
+      background-color: transparent;
+      border-color: $color-secondary-500;
+      color: $color-secondary-500;
+
+      &:hover {
+        border-color: $color-secondary-600;
+        color: $color-secondary-600;
+      }
+
+      &:active {
+        border-color: $color-secondary-700;
+        color: $color-secondary-700;
+      }
+    }
+
+    // Default
+    &--default {
+      background-color: transparent;
+      border-color: $color-primary-500;
+      color: $color-primary-500;
+
+      &:hover {
+        border-color: $color-primary-600;
+        color: $color-primary-600;
+      }
+
+      &:active {
+        border-color: $color-primary-700;
+        color: $color-primary-700;
+      }
+    }
+
+    // Text
+    &--text {
+      background-color: transparent;
+      border-color: transparent;
+      color: $color-primary-500;
+
+      &:hover {
+        background-color: $color-primary-100;
+        color: $color-primary-600;
+      }
+
+      &:active {
+        background-color: $color-primary-200;
+        color: $color-primary-700;
+      }
+    }
+
+    // Link
+    &--link {
+      background-color: transparent;
+      border-color: transparent;
+      color: $color-secondary-500;
+      padding: 0;
+      height: auto;
+
+      &:hover {
+        color: $color-secondary-600;
+      }
+
+      &:active {
+        color: $color-secondary-700;
+      }
+    }
+  }
+}
+
+// Dark mode button overrides
+[data-theme='dark'] {
+  .apron-popover__btn {
+    &--primary {
+      background-color: $color-primary-200;
+      border-color: $color-primary-200;
+      color: $color-primary-900;
+
+      &:hover {
+        background-color: $color-primary-100;
+        border-color: $color-primary-100;
+      }
+
+      &:active {
+        background-color: $color-primary-50;
+        border-color: $color-primary-50;
+      }
+    }
+
+    &--secondary {
+      border-color: $color-secondary-400;
+      color: $color-secondary-400;
+
+      &:hover {
+        border-color: $color-secondary-300;
+        color: $color-secondary-300;
+      }
+
+      &:active {
+        border-color: $color-secondary-200;
+        color: $color-secondary-200;
+      }
+    }
+
+    &--default {
+      border-color: $color-primary-200;
+      color: $color-primary-200;
+
+      &:hover {
+        border-color: $color-primary-100;
+        color: $color-primary-100;
+      }
+
+      &:active {
+        border-color: $color-primary-50;
+        color: $color-primary-50;
+      }
+    }
+
+    &--text {
+      color: $color-primary-200;
+
+      &:hover {
+        background-color: $color-neutral-700;
+        color: $color-primary-100;
+      }
+
+      &:active {
+        background-color: $color-neutral-600;
+        color: $color-primary-50;
+      }
+    }
+
+    &--link {
+      color: $color-secondary-400;
+
+      &:hover {
+        color: $color-secondary-300;
+      }
+
+      &:active {
+        color: $color-secondary-200;
+      }
+    }
+  }
+}
+
+// ============================================
+// Animation
+// ============================================
+@keyframes apron-popover-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

@@ -5,6 +5,42 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
+// Component Styles
+@use '../components/Alert/Alert.scss';
+@use '../components/Avatar/Avatar.scss';
+@use '../components/Badge/Badge.scss';
+@use '../components/Button/Button.scss';
+@use '../components/Card/Card.scss';
+@use '../components/Cascader/Cascader.scss';
+@use '../components/Checkbox/Checkbox.scss';
+@use '../components/Collapse/Collapse.scss';
+@use '../components/DatePicker/DatePicker.scss';
+@use '../components/Divider/Divider.scss';
+@use '../components/Drawer/Drawer.scss';
+@use '../components/Empty/Empty.scss';
+@use '../components/Form/Form.scss';
+@use '../components/Grid/Grid.scss';
+@use '../components/Image/Image.scss';
+@use '../components/Input/Input.scss';
+@use '../components/InputOtp/InputOtp.scss';
+@use '../components/Link/Link.scss';
+@use '../components/Modal/Modal.scss';
+@use '../components/Pagination/Pagination.scss';
+@use '../components/Popover/Popover.scss';
+@use '../components/Radio/Radio.scss';
+@use '../components/Rate/Rate.scss';
+@use '../components/Select/Select.scss';
+@use '../components/Skeleton/Skeleton.scss';
+@use '../components/Space/Space.scss';
+@use '../components/Spin/Spin.scss';
+@use '../components/Steps/Steps.scss';
+@use '../components/Switch/Switch.scss';
+@use '../components/Tabs/Tabs.scss';
+@use '../components/Tag/Tag.scss';
+@use '../components/Timeline/Timeline.scss';
+@use '../components/Toast/Toast.scss';
+@use '../components/Tooltip/Tooltip.scss';
+
 // CSS Custom Properties (for runtime theming)
 :root {
   // Colors
@@ -69,5 +105,17 @@
   line-height: $line-height-normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+// Global box-sizing for all Apron components
+[class^='apron-'],
+[class*=' apron-'] {
+  box-sizing: border-box;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 }
 

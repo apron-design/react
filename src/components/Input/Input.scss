@@ -1,0 +1,347 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Input CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Inactive state (空且无焦点)
+  --apron-input-bg: #{$color-primary-50};
+  --apron-input-border: #{$color-primary-50};
+  --apron-input-text: #{$color-primary-300};
+  --apron-input-placeholder: #{$color-primary-300};
+
+  // Active state (有内容或有焦点)
+  --apron-input-active-bg: #ffffff;
+  --apron-input-active-border: #{$color-primary-500};
+  --apron-input-active-text: #{$color-primary-500};
+
+  // Disabled state
+  --apron-input-disabled-bg: #{$color-neutral-100};
+  --apron-input-disabled-border: #{$color-neutral-200};
+  --apron-input-disabled-text: #{$color-neutral-400};
+
+  // Icon
+  --apron-input-icon-color: #{$color-primary-300};
+  --apron-input-icon-hover-color: #{$color-primary-500};
+}
+
+// ============================================
+// Input CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  // Inactive state
+  --apron-input-bg: #{$color-neutral-800};
+  --apron-input-border: #{$color-neutral-700};
+  --apron-input-text: #{$color-neutral-400};
+  --apron-input-placeholder: #{$color-neutral-500};
+
+  // Active state
+  --apron-input-active-bg: #{$color-neutral-900};
+  --apron-input-active-border: #{$color-primary-200};
+  --apron-input-active-text: #{$color-primary-200};
+
+  // Disabled state
+  --apron-input-disabled-bg: #{$color-neutral-800};
+  --apron-input-disabled-border: #{$color-neutral-700};
+  --apron-input-disabled-text: #{$color-neutral-600};
+
+  // Icon
+  --apron-input-icon-color: #{$color-neutral-500};
+  --apron-input-icon-hover-color: #{$color-primary-200};
+}
+
+// ============================================
+// Input Base Styles
+// ============================================
+.apron-input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: var(--apron-input-bg);
+  border: 1px solid var(--apron-input-border);
+  border-radius: 20px;
+  font-family: var(--apron-font-family);
+  font-size: $font-size-base;
+  transition: all $transition-fast;
+  position: relative;
+  overflow: hidden;
+
+  // Native input
+  &__inner {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    padding: 0 $spacing-4;
+    border: none;
+    background: transparent;
+    color: var(--apron-input-text);
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+
+    &::placeholder {
+      color: var(--apron-input-placeholder);
+    }
+
+    // 隐藏浏览器默认的密码切换按钮
+    &::-ms-reveal,
+    &::-ms-clear {
+      display: none;
+    }
+
+    &::-webkit-credentials-auto-fill-button {
+      visibility: hidden;
+    }
+  }
+
+  // Prepend
+  &__prepend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-left: $spacing-4;
+    color: var(--apron-input-text);
+    flex-shrink: 0;
+
+    &--string {
+      min-width: 65px;
+      padding: 0 $spacing-3;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+  // Append
+  &__append {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-right: $spacing-4;
+    color: var(--apron-input-text);
+    flex-shrink: 0;
+
+    &--string {
+      min-width: 50px;
+      padding: 0 $spacing-3;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+  // Suffix (icons container)
+  &__suffix {
+    display: flex;
+    align-items: center;
+    gap: $spacing-1;
+    padding-right: $spacing-3;
+    flex-shrink: 0;
+  }
+
+  // Icon button
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--apron-input-icon-color);
+    cursor: pointer;
+    border-radius: $radius-full;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: var(--apron-input-icon-hover-color);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Has prepend - adjust inner padding
+  &--has-prepend {
+    .apron-input__inner {
+      padding-left: $spacing-2;
+    }
+  }
+
+  // Has append - adjust inner padding
+  &--has-append {
+    .apron-input__inner {
+      padding-right: $spacing-2;
+    }
+  }
+
+  // Active state
+  &--active {
+    background-color: var(--apron-input-active-bg);
+    border-color: var(--apron-input-active-border);
+
+    .apron-input__inner {
+      color: var(--apron-input-active-text);
+    }
+
+    .apron-input__prepend,
+    .apron-input__append {
+      color: var(--apron-input-active-text);
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    background-color: var(--apron-input-disabled-bg);
+    border-color: var(--apron-input-disabled-border);
+    cursor: not-allowed;
+
+    .apron-input__inner {
+      color: var(--apron-input-disabled-text);
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: var(--apron-input-disabled-text);
+      }
+    }
+
+    .apron-input__prepend,
+    .apron-input__append {
+      color: var(--apron-input-disabled-text);
+    }
+  }
+}
+
+// ============================================
+// Textarea Base Styles
+// ============================================
+.apron-textarea {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--apron-input-bg);
+  border: 1px solid var(--apron-input-border);
+  border-radius: 20px;
+  font-family: var(--apron-font-family);
+  font-size: $font-size-base;
+  transition: all $transition-fast;
+  position: relative;
+
+  // Wrapper (滚动容器，滚动条占满高度)
+  &__wrapper {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 20px 20px 0 0;
+
+    // 当没有 footer 时，底部也有圆角
+    &:last-child {
+      border-radius: 20px;
+    }
+  }
+
+  // Native textarea
+  &__inner {
+    display: block;
+    width: 100%;
+    min-height: calc(#{$line-height-normal} * 3em + #{$spacing-3} * 2);
+    padding: $spacing-3 $spacing-4;
+    border: none;
+    background: transparent;
+    color: var(--apron-input-text);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: $line-height-normal;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+
+    &::placeholder {
+      color: var(--apron-input-placeholder);
+    }
+  }
+
+  // Footer (计数 + 清除按钮)
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-3;
+    flex-shrink: 0;
+  }
+
+  // Count
+  &__count {
+    font-size: $font-size-sm;
+    color: var(--apron-input-icon-color);
+  }
+
+  // Clear button
+  &__clear-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--apron-input-icon-color);
+    cursor: pointer;
+    border-radius: $radius-full;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: var(--apron-input-icon-hover-color);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Active state
+  &--active {
+    background-color: var(--apron-input-active-bg);
+    border-color: var(--apron-input-active-border);
+
+    .apron-textarea__inner {
+      color: var(--apron-input-active-text);
+    }
+
+    .apron-textarea__count {
+      color: var(--apron-input-active-text);
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    background-color: var(--apron-input-disabled-bg);
+    border-color: var(--apron-input-disabled-border);
+    cursor: not-allowed;
+
+    .apron-textarea__inner {
+      color: var(--apron-input-disabled-text);
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: var(--apron-input-disabled-text);
+      }
+    }
+
+    .apron-textarea__count {
+      color: var(--apron-input-disabled-text);
+    }
+  }
+}
+

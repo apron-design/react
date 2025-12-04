@@ -1,0 +1,114 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Divider CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-divider-color: #{$color-neutral-300};
+  --apron-divider-text-color: #{$color-neutral-500};
+}
+
+// ============================================
+// Divider CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-divider-color: #{$color-neutral-600};
+  --apron-divider-text-color: #{$color-neutral-400};
+}
+
+// ============================================
+// Divider Base Styles
+// ============================================
+.apron-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: $spacing-4 0;
+  font-family: var(--apron-font-family);
+  transition: all $transition-slow;
+
+  // ============================================
+  // Line (无文字时的完整线)
+  // ============================================
+  &__line {
+    flex: 1;
+    height: 1px;
+    background-color: var(--apron-divider-color);
+    transition: all $transition-slow;
+  }
+
+  // ============================================
+  // Dashed 修饰符
+  // ============================================
+  &--dashed &__line {
+    background: none;
+    border-top: 1px dashed var(--apron-divider-color);
+    height: 0;
+  }
+
+  // ============================================
+  // 有文字时的样式
+  // ============================================
+  &--with-text {
+    .apron-divider__line {
+      flex: none;
+    }
+
+    .apron-divider__line--left,
+    .apron-divider__line--right {
+      flex: 1;
+    }
+  }
+
+  // ============================================
+  // Text 文字样式
+  // ============================================
+  &__text {
+    flex-shrink: 0;
+    padding: 0 $spacing-3;
+    font-size: $font-size-sm;
+    color: var(--apron-divider-text-color);
+    line-height: $line-height-normal;
+    transition: all $transition-slow;
+  }
+
+  // ============================================
+  // Align Left (左边留40px线，右边撑满)
+  // ============================================
+  &--left {
+    .apron-divider__line--left {
+      flex: none;
+      width: 40px;
+    }
+
+    .apron-divider__line--right {
+      flex: 1;
+    }
+  }
+
+  // ============================================
+  // Align Center (左右等分)
+  // ============================================
+  &--center {
+    .apron-divider__line--left,
+    .apron-divider__line--right {
+      flex: 1;
+    }
+  }
+
+  // ============================================
+  // Align Right (右边留40px线，左边撑满)
+  // ============================================
+  &--right {
+    .apron-divider__line--left {
+      flex: 1;
+    }
+
+    .apron-divider__line--right {
+      flex: none;
+      width: 40px;
+    }
+  }
+}
+

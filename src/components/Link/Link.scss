@@ -1,0 +1,138 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Link CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Primary variant
+  --apron-link-primary-color: #{$color-primary-500};
+  --apron-link-primary-color-hover: #{$color-primary-400};
+  --apron-link-primary-color-active: #{$color-primary-900};
+
+  // Secondary variant
+  --apron-link-secondary-color: #{$color-secondary-500};
+  --apron-link-secondary-color-hover: #{$color-secondary-600};
+  --apron-link-secondary-color-active: #{$color-secondary-700};
+
+  // Danger
+  --apron-link-danger-color: #{$color-error-600};
+  --apron-link-danger-color-hover: #{$color-error-500};
+  --apron-link-danger-color-active: #{$color-error-600};
+}
+
+// ============================================
+// Link CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  // Primary variant
+  --apron-link-primary-color: #{$color-primary-200};
+  --apron-link-primary-color-hover: #{$color-primary-100};
+  --apron-link-primary-color-active: #{$color-primary-50};
+
+  // Secondary variant
+  --apron-link-secondary-color: #{$color-secondary-400};
+  --apron-link-secondary-color-hover: #{$color-secondary-300};
+  --apron-link-secondary-color-active: #{$color-secondary-200};
+
+  // Danger
+  --apron-link-danger-color: #{$color-error-500};
+  --apron-link-danger-color-hover: #{$color-error-500};
+  --apron-link-danger-color-active: #{$color-error-600};
+}
+
+// ============================================
+// Link Base Styles
+// ============================================
+.apron-link {
+  font-family: var(--apron-font-family);
+  font-size: inherit;
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all $transition-slow;
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-offset: 2px;
+    border-radius: $radius-sm;
+  }
+
+  // ============================================
+  // Primary Variant
+  // ============================================
+  &--primary {
+    color: var(--apron-link-primary-color);
+
+    &:hover {
+      color: var(--apron-link-primary-color-hover);
+    }
+
+    &:active {
+      color: var(--apron-link-primary-color-active);
+    }
+  }
+
+  // ============================================
+  // Secondary Variant
+  // ============================================
+  &--secondary {
+    color: var(--apron-link-secondary-color);
+
+    &:hover {
+      color: var(--apron-link-secondary-color-hover);
+    }
+
+    &:active {
+      color: var(--apron-link-secondary-color-active);
+    }
+  }
+
+  // ============================================
+  // Underline: always
+  // ============================================
+  &--underline-always {
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // ============================================
+  // Underline: hover
+  // ============================================
+  &--underline-hover {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // ============================================
+  // Underline: never
+  // ============================================
+  &--underline-never {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  // ============================================
+  // Danger
+  // ============================================
+  &--danger {
+    color: var(--apron-link-danger-color);
+
+    &:hover {
+      color: var(--apron-link-danger-color-hover);
+    }
+
+    &:active {
+      color: var(--apron-link-danger-color-active);
+    }
+  }
+}

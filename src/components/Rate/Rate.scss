@@ -1,0 +1,106 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Rate CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-rate-value-color: #{$color-primary-500};
+}
+
+// ============================================
+// Rate CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-rate-value-color: #{$color-primary-200};
+}
+
+// ============================================
+// Rate Base Styles
+// ============================================
+.apron-rate {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--apron-font-family);
+
+  &__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__star {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    &-bg,
+    &-fg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-bg {
+      position: relative;
+    }
+
+    &-fg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    // Interactive state
+    &--interactive {
+      cursor: pointer;
+      transition: transform $transition-fast;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__value {
+    margin-left: 8px;
+    font-size: $font-size-base;
+    color: var(--apron-rate-value-color);
+    font-weight: 500;
+    min-width: 28px;
+  }
+
+  // Interactive mode
+  &--interactive {
+    .apron-rate__star {
+      cursor: pointer;
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    .apron-rate__star {
+      cursor: not-allowed;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,75 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Card CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-card-bg: #ffffff;
+  --apron-card-border-color: #{$color-neutral-200};
+  --apron-card-header-title-color: #{$color-primary-900};
+}
+
+// ============================================
+// Card CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-card-bg: #{$color-neutral-800};
+  --apron-card-border-color: #{$color-neutral-700};
+  --apron-card-header-title-color: #{$color-neutral-100};
+}
+
+// ============================================
+// Card Base Styles
+// ============================================
+.apron-card {
+  background-color: var(--apron-card-bg);
+  border: 1px solid var(--apron-card-border-color);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition: all $transition-slow;
+
+  // ============================================
+  // CardHeader
+  // ============================================
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--apron-card-border-color);
+    transition: all $transition-slow;
+
+    &-title {
+      font-family: var(--apron-font-family);
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: var(--apron-card-header-title-color);
+      line-height: $line-height-normal;
+    }
+
+    &-extra {
+      margin-left: auto;
+    }
+  }
+
+  // ============================================
+  // CardBody
+  // ============================================
+  &__body {
+    padding: 10px 15px;
+    font-family: var(--apron-font-family);
+    transition: all $transition-slow;
+  }
+
+  // ============================================
+  // CardFooter
+  // ============================================
+  &__footer {
+    padding: 10px 15px;
+    border-top: 1px solid var(--apron-card-border-color);
+    font-family: var(--apron-font-family);
+    transition: all $transition-slow;
+  }
+}
+

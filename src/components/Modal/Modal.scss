@@ -1,0 +1,204 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Modal CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-modal-bg: #ffffff;
+  --apron-modal-border-color: #{$color-neutral-200};
+  --apron-modal-title-color: #{$color-primary-900};
+  --apron-modal-text-color: #{$color-primary-500};
+  --apron-modal-close-color: #{$color-neutral-400};
+  --apron-modal-close-hover-color: #{$color-neutral-600};
+  --apron-modal-overlay-bg: rgba(0, 0, 0, 0.45);
+}
+
+// ============================================
+// Modal CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-modal-bg: #{$color-neutral-800};
+  --apron-modal-border-color: #{$color-neutral-700};
+  --apron-modal-title-color: #{$color-neutral-100};
+  --apron-modal-text-color: #{$color-primary-200};
+  --apron-modal-close-color: #{$color-neutral-500};
+  --apron-modal-close-hover-color: #{$color-neutral-300};
+  --apron-modal-overlay-bg: rgba(0, 0, 0, 0.65);
+}
+
+// ============================================
+// Modal Root (Portal container)
+// ============================================
+.apron-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: $z-index-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  // 进入状态
+  &--entering {
+    .apron-modal__overlay {
+      opacity: 0;
+    }
+
+    .apron-modal {
+      opacity: 0;
+      transform: scale(0.95) translateY(-20px);
+    }
+  }
+
+  // 打开状态
+  &--open {
+    pointer-events: auto;
+
+    .apron-modal__overlay {
+      opacity: 1;
+    }
+
+    .apron-modal {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  // 离开状态
+  &--leaving {
+    pointer-events: none;
+
+    .apron-modal__overlay {
+      opacity: 0;
+    }
+
+    .apron-modal {
+      opacity: 0;
+      transform: scale(0.95) translateY(-20px);
+    }
+  }
+}
+
+// ============================================
+// Modal Overlay (蒙层)
+// ============================================
+.apron-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--apron-modal-overlay-bg);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: opacity 0.3s ease;
+}
+
+// ============================================
+// Modal Wrapper
+// ============================================
+.apron-modal__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: $spacing-6;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+// ============================================
+// Modal Content
+// ============================================
+.apron-modal {
+  position: relative;
+  background-color: var(--apron-modal-bg);
+  border: 1px solid var(--apron-modal-border-color);
+  border-radius: 8px;
+  box-shadow: $shadow-xl;
+  max-width: calc(100vw - #{$spacing-6} * 2);
+  max-height: calc(100vh - #{$spacing-6} * 2);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--apron-font-family);
+  transition: all 0.3s ease;
+
+  // Centered mode
+  &--centered {
+    margin: auto;
+  }
+
+  // ============================================
+  // Modal Header
+  // ============================================
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    padding-right: 48px; // 为关闭按钮留出空间
+    border-bottom: 1px solid var(--apron-modal-border-color);
+    flex-shrink: 0;
+  }
+
+  &__title {
+    flex: 1;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: var(--apron-modal-title-color);
+    line-height: $line-height-normal;
+  }
+
+  &__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--apron-modal-close-color);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all $transition-fast;
+    z-index: 1;
+
+    &:hover {
+      color: var(--apron-modal-close-hover-color);
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  // ============================================
+  // Modal Body
+  // ============================================
+  &__body {
+    padding: 10px 15px;
+    color: var(--apron-modal-text-color);
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
+    overflow: auto;
+    flex: 1;
+  }
+
+  // ============================================
+  // Modal Footer
+  // ============================================
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $spacing-2;
+    padding: 10px 15px;
+    border-top: 1px solid var(--apron-modal-border-color);
+    flex-shrink: 0;
+  }
+}
+

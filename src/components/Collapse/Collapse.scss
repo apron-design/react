@@ -1,0 +1,165 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Collapse CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-collapse-bg: #ffffff;
+  --apron-collapse-border-color: #{$color-neutral-200};
+  --apron-collapse-title-color: #{$color-primary-900};
+  --apron-collapse-content-color: #{$color-primary-900};
+  --apron-collapse-arrow-color: #{$color-neutral-500};
+  --apron-collapse-disabled-color: #{$color-neutral-400};
+  --apron-collapse-disabled-bg: #{$color-neutral-50};
+}
+
+// ============================================
+// Collapse CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-collapse-bg: #{$color-neutral-800};
+  --apron-collapse-border-color: #{$color-neutral-700};
+  --apron-collapse-title-color: #{$color-neutral-100};
+  --apron-collapse-content-color: #{$color-primary-100};
+  --apron-collapse-arrow-color: #{$color-neutral-400};
+  --apron-collapse-disabled-color: #{$color-neutral-600};
+  --apron-collapse-disabled-bg: #{$color-neutral-900};
+}
+
+// ============================================
+// Collapse Base Styles
+// ============================================
+.apron-collapse {
+  border: 1px solid var(--apron-collapse-border-color);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition: all $transition-slow;
+}
+
+// ============================================
+// CollapseItem
+// ============================================
+.apron-collapse-item {
+  background-color: var(--apron-collapse-bg);
+  transition: all $transition-slow;
+
+  // 非第一个项目有上边框
+  &:not(:first-child) {
+    border-top: 1px solid var(--apron-collapse-border-color);
+  }
+
+  // ============================================
+  // Header
+  // ============================================
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    user-select: none;
+    transition: all $transition-slow;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      outline-offset: -2px;
+    }
+  }
+
+  // ============================================
+  // Arrow
+  // ============================================
+  &__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--apron-collapse-arrow-color);
+    transition: transform $transition-slow;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // ============================================
+  // Title
+  // ============================================
+  &__title {
+    font-family: var(--apron-font-family);
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: var(--apron-collapse-title-color);
+    line-height: $line-height-normal;
+  }
+
+  // ============================================
+  // Content (展开区域容器)
+  // ============================================
+  &__content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows $transition-slow;
+  }
+
+  // ============================================
+  // Body (正文)
+  // ============================================
+  &__body {
+    overflow: hidden;
+    font-family: var(--apron-font-family);
+    color: var(--apron-collapse-content-color);
+    // 左边和标题对齐：箭头容器 20px + gap 10px + padding-left 15px = 45px
+    padding: 0 15px 0 45px;
+    transition: all $transition-slow;
+  }
+
+  // ============================================
+  // Active State (展开状态)
+  // ============================================
+  &--active {
+    .apron-collapse-item__arrow {
+      transform: rotate(90deg);
+    }
+
+    .apron-collapse-item__content {
+      grid-template-rows: 1fr;
+    }
+
+    .apron-collapse-item__body {
+      padding: 15px 15px 15px 45px;
+    }
+  }
+
+  // ============================================
+  // Disabled State
+  // ============================================
+  &--disabled {
+    background-color: var(--apron-collapse-disabled-bg);
+
+    .apron-collapse-item__header {
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .apron-collapse-item__arrow {
+      color: var(--apron-collapse-disabled-color);
+    }
+
+    .apron-collapse-item__title {
+      color: var(--apron-collapse-disabled-color);
+    }
+  }
+}
+

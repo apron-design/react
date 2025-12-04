@@ -1,0 +1,193 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Switch CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Unchecked state
+  --apron-switch-unchecked-bg: #{$color-primary-50};
+  --apron-switch-thumb-bg: #ffffff;
+
+  // Checked state - default/primary variant
+  --apron-switch-checked-bg: #{$color-primary-500};
+
+  // Checked state - secondary variant
+  --apron-switch-checked-bg-secondary: #{$color-secondary-500};
+
+  // Disabled state
+  --apron-switch-disabled-opacity: 0.5;
+}
+
+// ============================================
+// Switch CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-switch-unchecked-bg: #{$color-neutral-700};
+  --apron-switch-thumb-bg: #ffffff;
+  --apron-switch-checked-bg: #{$color-primary-300};
+  --apron-switch-checked-bg-secondary: #{$color-secondary-400};
+}
+
+// ============================================
+// Switch Base Styles
+// ============================================
+.apron-switch {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  // Hidden native input
+  &__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  // Track (背景轨道)
+  &__track {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    border-radius: $radius-full;
+    background-color: var(--apron-switch-unchecked-bg);
+    transition: background-color $transition-normal;
+
+    // Hover overlay (darkens background only)
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background-color: rgb(0 0 0 / 0.05);
+      opacity: 0;
+      transition: opacity $transition-fast;
+      pointer-events: none;
+    }
+  }
+
+  // Thumb (指示器)
+  &__thumb {
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: var(--apron-switch-thumb-bg);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+    transition: transform $transition-normal;
+  }
+
+  // ============================================
+  // Sizes
+  // ============================================
+
+  // Default size: 84 × 40
+  &--default {
+    .apron-switch__track {
+      width: 84px;
+      height: 40px;
+    }
+
+    .apron-switch__thumb {
+      width: 32px;
+      height: 32px;
+      left: 4px;
+    }
+
+    &.apron-switch--checked .apron-switch__thumb {
+      transform: translateX(44px);
+    }
+  }
+
+  // Small size: 62 × 30
+  &--small {
+    .apron-switch__track {
+      width: 62px;
+      height: 30px;
+    }
+
+    .apron-switch__thumb {
+      width: 24px;
+      height: 24px;
+      left: 3px;
+    }
+
+    &.apron-switch--checked .apron-switch__thumb {
+      transform: translateX(32px);
+    }
+  }
+
+  // Mini size: 42 × 20
+  &--mini {
+    .apron-switch__track {
+      width: 42px;
+      height: 20px;
+    }
+
+    .apron-switch__thumb {
+      width: 16px;
+      height: 16px;
+      left: 2px;
+    }
+
+    &.apron-switch--checked .apron-switch__thumb {
+      transform: translateX(22px);
+    }
+  }
+
+  // ============================================
+  // Variants - Checked State
+  // ============================================
+
+  // Default & Primary variant
+  &--default,
+  &--primary {
+    &.apron-switch--checked {
+      .apron-switch__track {
+        background-color: var(--apron-switch-checked-bg);
+      }
+    }
+  }
+
+  // Secondary variant
+  &--secondary {
+    &.apron-switch--checked {
+      .apron-switch__track {
+        background-color: var(--apron-switch-checked-bg-secondary);
+      }
+    }
+  }
+
+  // ============================================
+  // States
+  // ============================================
+
+  // Focus state
+  &__input:focus-visible + .apron-switch__track {
+    @include focus-ring;
+  }
+
+  // Hover state (only darken background, not thumb)
+  &:hover:not(.apron-switch--disabled) {
+    .apron-switch__track::before {
+      opacity: 1;
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    cursor: not-allowed;
+    opacity: var(--apron-switch-disabled-opacity);
+
+    .apron-switch__track {
+      cursor: not-allowed;
+    }
+  }
+}
+

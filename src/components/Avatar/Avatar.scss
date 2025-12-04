@@ -1,0 +1,118 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Avatar CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-avatar-bg: #{$color-neutral-200};
+  --apron-avatar-color: #{$color-neutral-600};
+  --apron-avatar-border-color: #ffffff;
+}
+
+// ============================================
+// Avatar CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-avatar-bg: #{$color-neutral-700};
+  --apron-avatar-color: #{$color-neutral-300};
+  --apron-avatar-border-color: #{$color-neutral-900};
+}
+
+// ============================================
+// Avatar Base Styles
+// ============================================
+.apron-avatar {
+  @include flex-center;
+
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  background-color: var(--apron-avatar-bg);
+  color: var(--apron-avatar-color);
+  font-family: var(--apron-font-family);
+  font-weight: $font-weight-medium;
+  vertical-align: middle;
+  white-space: nowrap;
+  border-radius: 50%;
+  transition: all $transition-slow;
+
+  // ============================================
+  // Sizes
+  // ============================================
+  &--mini {
+    width: 28px;
+    height: 28px;
+    font-size: $font-size-xs;
+  }
+
+  &--small {
+    width: 34px;
+    height: 34px;
+    font-size: $font-size-sm;
+  }
+
+  &--middle {
+    width: 40px;
+    height: 40px;
+    font-size: $font-size-base;
+  }
+
+  &--large {
+    width: 64px;
+    height: 64px;
+    font-size: $font-size-xl;
+  }
+
+  // ============================================
+  // Square Shape
+  // ============================================
+  &--square {
+    border-radius: $radius-lg;
+  }
+
+  // ============================================
+  // Image
+  // ============================================
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // ============================================
+  // Content (文字/图标)
+  // ============================================
+  &__content {
+    @include flex-center;
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    svg {
+      width: 60%;
+      height: 60%;
+    }
+  }
+}
+
+// ============================================
+// Avatar Group
+// ============================================
+.apron-avatar-group {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  transition: all $transition-slow;
+
+  .apron-avatar {
+    box-sizing: content-box;
+    border: 2px solid var(--apron-avatar-border-color);
+
+    &:not(:last-child) {
+      margin-left: -12px;
+    }
+  }
+}
+

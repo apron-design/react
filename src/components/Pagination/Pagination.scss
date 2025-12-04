@@ -1,0 +1,155 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Pagination CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-pagination-text: #{$color-primary-500};
+  --apron-pagination-bg-hover: #{$color-primary-50};
+  --apron-pagination-active-bg: #{$color-primary-900};
+  --apron-pagination-active-text: #ffffff;
+  --apron-pagination-disabled-text: #{$color-neutral-300};
+  --apron-pagination-ellipsis-text: #{$color-neutral-400};
+}
+
+// ============================================
+// Pagination CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-pagination-text: #{$color-primary-200};
+  --apron-pagination-bg-hover: #{$color-neutral-700};
+  --apron-pagination-active-bg: #{$color-primary-200};
+  --apron-pagination-active-text: #{$color-primary-900};
+  --apron-pagination-disabled-text: #{$color-neutral-600};
+  --apron-pagination-ellipsis-text: #{$color-neutral-500};
+}
+
+// ============================================
+// Pagination Base Styles
+// ============================================
+.apron-pagination {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-family: var(--apron-font-family);
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  // ============================================
+  // Page Item
+  // ============================================
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--apron-pagination-text);
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+    user-select: none;
+
+    &:hover:not(:disabled):not(.apron-pagination__item--active):not(.apron-pagination__ellipsis) {
+      background-color: var(--apron-pagination-bg-hover);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    // Active state
+    &--active {
+      background-color: var(--apron-pagination-active-bg);
+      color: var(--apron-pagination-active-text);
+      cursor: default;
+    }
+
+    // Disabled state
+    &--disabled,
+    &:disabled {
+      color: var(--apron-pagination-disabled-text);
+      cursor: not-allowed;
+    }
+  }
+
+  // ============================================
+  // Ellipsis
+  // ============================================
+  &__ellipsis {
+    color: var(--apron-pagination-ellipsis-text);
+    cursor: default;
+
+    &:hover {
+      background: transparent !important;
+    }
+  }
+
+  // ============================================
+  // Size Variants
+  // ============================================
+
+  // Large size (40px)
+  &--large {
+    .apron-pagination__item {
+      width: 40px;
+      height: 40px;
+      font-size: $font-size-base;
+    }
+
+    .apron-pagination__arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .apron-pagination__ellipsis svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // Default size (30px)
+  &--default {
+    .apron-pagination__item {
+      width: 30px;
+      height: 30px;
+      font-size: $font-size-sm;
+    }
+
+    .apron-pagination__arrow svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .apron-pagination__ellipsis svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  // Small size (20px)
+  &--small {
+    .apron-pagination__item {
+      width: 20px;
+      height: 20px;
+      font-size: $font-size-xs;
+    }
+
+    .apron-pagination__arrow svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .apron-pagination__ellipsis svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}
+

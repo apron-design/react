@@ -1,0 +1,298 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Select CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Inactive state
+  --apron-select-bg: #{$color-primary-50};
+  --apron-select-border: #{$color-primary-50};
+  --apron-select-text: #{$color-primary-300};
+  --apron-select-placeholder: #{$color-primary-300};
+
+  // Active state
+  --apron-select-active-bg: #ffffff;
+  --apron-select-active-border: #{$color-primary-500};
+  --apron-select-active-text: #{$color-primary-500};
+
+  // Disabled state
+  --apron-select-disabled-bg: #{$color-neutral-100};
+  --apron-select-disabled-border: #{$color-neutral-200};
+  --apron-select-disabled-text: #{$color-neutral-400};
+
+  // Dropdown
+  --apron-select-dropdown-bg: #ffffff;
+  --apron-select-dropdown-border: #{$color-neutral-200};
+  --apron-select-dropdown-shadow: #{$shadow-lg};
+
+  // Option
+  --apron-select-option-text: #{$color-primary-500};
+  --apron-select-option-hover-bg: #{$color-neutral-100};
+  --apron-select-option-selected-text: #{$color-secondary-500};
+  --apron-select-option-disabled-text: #{$color-neutral-300};
+
+  // Icon
+  --apron-select-icon-color: #{$color-primary-300};
+}
+
+// ============================================
+// Select CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  // Inactive state
+  --apron-select-bg: #{$color-neutral-800};
+  --apron-select-border: #{$color-neutral-700};
+  --apron-select-text: #{$color-neutral-400};
+  --apron-select-placeholder: #{$color-neutral-500};
+
+  // Active state
+  --apron-select-active-bg: #{$color-neutral-900};
+  --apron-select-active-border: #{$color-primary-200};
+  --apron-select-active-text: #{$color-primary-200};
+
+  // Disabled state
+  --apron-select-disabled-bg: #{$color-neutral-800};
+  --apron-select-disabled-border: #{$color-neutral-700};
+  --apron-select-disabled-text: #{$color-neutral-600};
+
+  // Dropdown
+  --apron-select-dropdown-bg: #{$color-neutral-800};
+  --apron-select-dropdown-border: #{$color-neutral-700};
+  --apron-select-dropdown-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.3);
+
+  // Option
+  --apron-select-option-text: #{$color-primary-200};
+  --apron-select-option-hover-bg: #{$color-neutral-700};
+  --apron-select-option-selected-text: #{$color-secondary-400};
+  --apron-select-option-disabled-text: #{$color-neutral-600};
+
+  // Icon
+  --apron-select-icon-color: #{$color-neutral-500};
+}
+
+// ============================================
+// Select Base Styles
+// ============================================
+.apron-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  font-family: var(--apron-font-family);
+  font-size: $font-size-base;
+  outline: none;
+  box-sizing: border-box;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  // Trigger (选择器头部)
+  &__trigger {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: 0 $spacing-4;
+    background-color: var(--apron-select-bg);
+    border: 1px solid var(--apron-select-border);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all $transition-fast;
+  }
+
+  // Value / Placeholder
+  &__value {
+    flex: 1;
+    color: var(--apron-select-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &--placeholder {
+      color: var(--apron-select-placeholder);
+    }
+  }
+
+  // Suffix (arrow / loading)
+  &__suffix {
+    display: flex;
+    align-items: center;
+    margin-left: $spacing-2;
+    color: var(--apron-select-icon-color);
+    flex-shrink: 0;
+  }
+
+  // Arrow icon
+  &__arrow {
+    transition: transform $transition-fast;
+
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  // Loading icon
+  &__loading-icon {
+    animation: apron-select-spin 1s linear infinite;
+  }
+
+  // Dropdown
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background-color: var(--apron-select-dropdown-bg);
+    border: 1px solid var(--apron-select-dropdown-border);
+    border-radius: 20px;
+    box-shadow: var(--apron-select-dropdown-shadow);
+    z-index: $z-index-dropdown;
+    overflow: hidden;
+    // Animation
+    animation: apron-select-dropdown-open $transition-fast forwards;
+    transform-origin: top center;
+  }
+
+  // Options container (scrollable)
+  &__options {
+    max-height: calc(40px * 5 + 1px); // 5 rows max + 1px for border
+    overflow-y: auto;
+    border-top: 1px solid var(--apron-select-dropdown-border);
+  }
+
+  // Single option
+  &__option {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 $spacing-4;
+    color: var(--apron-select-option-text);
+    cursor: pointer;
+    transition: background-color $transition-fast;
+
+    &:hover:not(.apron-select__option--disabled) {
+      background-color: var(--apron-select-option-hover-bg);
+    }
+
+    &--selected {
+      color: var(--apron-select-option-selected-text);
+      font-weight: $font-weight-medium;
+    }
+
+    &--disabled {
+      color: var(--apron-select-option-disabled-text);
+      cursor: not-allowed;
+    }
+  }
+
+  // ============================================
+  // States
+  // ============================================
+
+  // Focus state
+  &:focus-visible {
+    .apron-select__trigger {
+      @include focus-ring;
+    }
+  }
+
+  // Active state (有值或展开)
+  &--active {
+    .apron-select__trigger {
+      background-color: var(--apron-select-active-bg);
+      border-color: var(--apron-select-active-border);
+    }
+
+    .apron-select__value {
+      color: var(--apron-select-active-text);
+
+      &--placeholder {
+        color: var(--apron-select-placeholder);
+      }
+    }
+  }
+
+  // Open state
+  &--open {
+    .apron-select__trigger {
+      background-color: var(--apron-select-active-bg);
+      border-color: var(--apron-select-active-border);
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    .apron-select__trigger {
+      background-color: var(--apron-select-disabled-bg);
+      border-color: var(--apron-select-disabled-border);
+      cursor: not-allowed;
+    }
+
+    .apron-select__value {
+      color: var(--apron-select-disabled-text);
+    }
+
+    .apron-select__suffix {
+      color: var(--apron-select-disabled-text);
+    }
+  }
+
+  // Loading state
+  &--loading {
+    .apron-select__trigger {
+      cursor: wait;
+    }
+  }
+
+  // ============================================
+  // Inflow Mode (撑开容器)
+  // ============================================
+  &--inflow {
+    .apron-select__dropdown {
+      position: relative;
+      top: 0;
+      margin-top: 0;
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+      box-shadow: none;
+    }
+
+    &.apron-select--open {
+      .apron-select__trigger {
+        border-radius: 20px 20px 0 0;
+        border-bottom-color: transparent;
+      }
+
+      .apron-select__dropdown {
+        border-color: var(--apron-select-active-border);
+        border-top: none;
+      }
+    }
+  }
+}
+
+// Loading animation
+@keyframes apron-select-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Dropdown open animation
+@keyframes apron-select-dropdown-open {
+  from {
+    opacity: 0;
+    transform: scaleY(0.9) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+

@@ -1,0 +1,246 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// InputOtp CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Slot
+  --apron-input-otp-bg: #{$color-primary-50};
+  --apron-input-otp-border: #{$color-primary-50};
+  --apron-input-otp-text: #{$color-primary-500};
+
+  // Active slot
+  --apron-input-otp-active-bg: #ffffff;
+  --apron-input-otp-active-border: #{$color-primary-500};
+
+  // Filled slot
+  --apron-input-otp-filled-bg: #ffffff;
+  --apron-input-otp-filled-border: #{$color-primary-500};
+
+  // Disabled
+  --apron-input-otp-disabled-bg: #{$color-neutral-100};
+  --apron-input-otp-disabled-border: #{$color-neutral-200};
+  --apron-input-otp-disabled-text: #{$color-neutral-400};
+
+  // Separator
+  --apron-input-otp-separator-color: #{$color-primary-300};
+
+  // Cursor
+  --apron-input-otp-cursor-color: #{$color-primary-500};
+}
+
+// ============================================
+// InputOtp CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-input-otp-bg: #{$color-neutral-800};
+  --apron-input-otp-border: #{$color-neutral-700};
+  --apron-input-otp-text: #{$color-primary-200};
+
+  --apron-input-otp-active-bg: #{$color-neutral-900};
+  --apron-input-otp-active-border: #{$color-primary-200};
+
+  --apron-input-otp-filled-bg: #{$color-neutral-900};
+  --apron-input-otp-filled-border: #{$color-primary-200};
+
+  --apron-input-otp-disabled-bg: #{$color-neutral-800};
+  --apron-input-otp-disabled-border: #{$color-neutral-700};
+  --apron-input-otp-disabled-text: #{$color-neutral-600};
+
+  --apron-input-otp-separator-color: #{$color-neutral-500};
+
+  --apron-input-otp-cursor-color: #{$color-primary-200};
+}
+
+// ============================================
+// InputOtp Base Styles
+// ============================================
+.apron-input-otp {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: text;
+
+  // Hidden input
+  &__hidden-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    opacity: 0;
+  }
+
+  // Display container
+  &__display {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+  }
+
+  // Individual slot
+  &__slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--apron-input-otp-bg);
+    border: 1px solid var(--apron-input-otp-border);
+    border-radius: $radius-lg;
+    color: var(--apron-input-otp-text);
+    font-family: var(--apron-font-family);
+    font-weight: $font-weight-semibold;
+    transition: all $transition-fast;
+    position: relative;
+
+    &--active {
+      background-color: var(--apron-input-otp-active-bg);
+      border-color: var(--apron-input-otp-active-border);
+    }
+
+    &--filled {
+      background-color: var(--apron-input-otp-filled-bg);
+      border-color: var(--apron-input-otp-filled-border);
+    }
+  }
+
+  // Separator
+  &__separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apron-input-otp-separator-color);
+    font-weight: $font-weight-medium;
+  }
+
+  // Cursor
+  &__cursor {
+    position: absolute;
+    width: 2px;
+    height: 50%;
+    background-color: var(--apron-input-otp-cursor-color);
+    animation: apron-input-otp-blink 1s infinite;
+  }
+
+  // ============================================
+  // Sizes
+  // ============================================
+  &--default {
+    .apron-input-otp__slot {
+      width: 40px;
+      height: 60px;
+      font-size: $font-size-2xl;
+    }
+
+    .apron-input-otp__separator {
+      font-size: $font-size-xl;
+      min-width: 16px;
+    }
+  }
+
+  &--small {
+    .apron-input-otp__slot {
+      width: 28px;
+      height: 40px;
+      font-size: $font-size-lg;
+    }
+
+    .apron-input-otp__separator {
+      font-size: $font-size-base;
+      min-width: 12px;
+    }
+  }
+
+  // ============================================
+  // Square
+  // ============================================
+  &--square {
+    &.apron-input-otp--default {
+      .apron-input-otp__slot {
+        height: 40px;
+      }
+    }
+
+    &.apron-input-otp--small {
+      .apron-input-otp__slot {
+        height: 28px;
+      }
+    }
+  }
+
+  // ============================================
+  // Disabled
+  // ============================================
+  &--disabled {
+    cursor: not-allowed;
+
+    .apron-input-otp__slot {
+      background-color: var(--apron-input-otp-disabled-bg);
+      border-color: var(--apron-input-otp-disabled-border);
+      color: var(--apron-input-otp-disabled-text);
+    }
+
+    .apron-input-otp__separator {
+      color: var(--apron-input-otp-disabled-text);
+    }
+  }
+
+  // ============================================
+  // Success Status
+  // ============================================
+  &--success {
+    .apron-input-otp__slot {
+      border-color: $color-success-600;
+      color: $color-success-600;
+
+      &--filled {
+        border-color: $color-success-600;
+      }
+    }
+
+    .apron-input-otp__separator {
+      color: $color-success-600;
+    }
+  }
+
+  // ============================================
+  // Error Status
+  // ============================================
+  &--error {
+    .apron-input-otp__slot {
+      border-color: $color-error-600;
+      color: $color-error-600;
+
+      &--filled {
+        border-color: $color-error-600;
+      }
+    }
+
+    .apron-input-otp__separator {
+      color: $color-error-600;
+    }
+
+    .apron-input-otp__cursor {
+      background-color: $color-error-600;
+    }
+  }
+}
+
+// ============================================
+// Animations
+// ============================================
+@keyframes apron-input-otp-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+

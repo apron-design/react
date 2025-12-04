@@ -1,0 +1,119 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Tag CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Primary
+  --apron-tag-primary-bg: #{$color-primary-500};
+  --apron-tag-primary-text: #ffffff;
+  --apron-tag-primary-close-hover-bg: rgba(255, 255, 255, 0.2);
+
+  // Default
+  --apron-tag-default-bg: #{$color-neutral-100};
+  --apron-tag-default-text: #{$color-primary-900};
+  --apron-tag-default-border: #{$color-neutral-300};
+  --apron-tag-default-close-hover-bg: #{$color-neutral-200};
+}
+
+// ============================================
+// Tag CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  // Primary
+  --apron-tag-primary-bg: #{$color-primary-200};
+  --apron-tag-primary-text: #{$color-primary-900};
+  --apron-tag-primary-close-hover-bg: rgba(0, 0, 0, 0.2);
+
+  // Default
+  --apron-tag-default-bg: #{$color-neutral-800};
+  --apron-tag-default-text: #{$color-primary-100};
+  --apron-tag-default-border: #{$color-neutral-600};
+  --apron-tag-default-close-hover-bg: #{$color-neutral-700};
+}
+
+// ============================================
+// Tag Base Styles
+// ============================================
+.apron-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  font-family: var(--apron-font-family);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  line-height: 1;
+  border-radius: 15px;
+  white-space: nowrap;
+  transition: all $transition-slow;
+
+  // ============================================
+  // Primary Variant
+  // ============================================
+  &--primary {
+    background-color: var(--apron-tag-primary-bg);
+    color: var(--apron-tag-primary-text);
+
+    .apron-tag__close:hover {
+      background-color: var(--apron-tag-primary-close-hover-bg);
+    }
+  }
+
+  // ============================================
+  // Default Variant
+  // ============================================
+  &--default {
+    background-color: var(--apron-tag-default-bg);
+    color: var(--apron-tag-default-text);
+    border: 1px solid var(--apron-tag-default-border);
+
+    .apron-tag__close:hover {
+      background-color: var(--apron-tag-default-close-hover-bg);
+    }
+  }
+
+  // ============================================
+  // Closable
+  // ============================================
+  &--closable {
+    padding-right: 6px;
+  }
+
+  // ============================================
+  // Content
+  // ============================================
+  &__content {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  // ============================================
+  // Close Button
+  // ============================================
+  &__close {
+    @include button-reset;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-left: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all $transition-slow;
+    flex-shrink: 0;
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}
+

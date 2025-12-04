@@ -1,0 +1,138 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Toast CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-toast-bg: #ffffff;
+  --apron-toast-text: #{$color-primary-500};
+  --apron-toast-border: #{$color-neutral-200};
+}
+
+// ============================================
+// Toast CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-toast-bg: #{$color-neutral-900};
+  --apron-toast-text: #{$color-primary-200};
+  --apron-toast-border: #{$color-neutral-700};
+}
+
+// ============================================
+// Toast Root
+// ============================================
+.apron-toast-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+// ============================================
+// Toast Overlay
+// ============================================
+.apron-toast__overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  pointer-events: auto;
+}
+
+// ============================================
+// Toast Base Styles
+// ============================================
+.apron-toast {
+  width: 200px;
+  height: 200px;
+  background-color: var(--apron-toast-bg);
+  border: 1px solid var(--apron-toast-border);
+  border-radius: 30px;
+  box-shadow: $shadow-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--apron-font-family);
+  pointer-events: auto;
+
+  // Animation states
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+
+  &--visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &--entering {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  &--leaving {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  // ============================================
+  // Toast Content
+  // ============================================
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-4;
+    padding: $spacing-4;
+  }
+
+  // ============================================
+  // Toast Icon
+  // ============================================
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  // ============================================
+  // Toast Text
+  // ============================================
+  &__text {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: var(--apron-toast-text);
+    text-align: center;
+    word-break: break-word;
+    max-width: 180px;
+  }
+
+  // ============================================
+  // Loading Icon Animation
+  // ============================================
+  &__loading-icon {
+    animation: apron-toast-spin 1s linear infinite;
+  }
+}
+
+// ============================================
+// Loading Animation
+// ============================================
+@keyframes apron-toast-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

@@ -1,0 +1,197 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Skeleton CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-skeleton-bg: #{$color-neutral-200};
+  --apron-skeleton-gradient: linear-gradient(
+    103.5deg,
+    #{$color-neutral-200} 25%,
+    #{$color-neutral-100} 50%,
+    #{$color-neutral-200} 75%
+  );
+}
+
+// ============================================
+// Skeleton CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-skeleton-bg: #{$color-neutral-700};
+  --apron-skeleton-gradient: linear-gradient(
+    103.5deg,
+    #{$color-neutral-700} 25%,
+    #{$color-neutral-600} 50%,
+    #{$color-neutral-700} 75%
+  );
+}
+
+// ============================================
+// Animation
+// ============================================
+@keyframes apron-skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+// ============================================
+// Base Element Styles
+// ============================================
+.apron-skeleton__element--animated {
+  background: var(--apron-skeleton-gradient);
+  background-size: 400% 100%;
+  animation: apron-skeleton-loading 1.5s ease infinite;
+}
+
+// ============================================
+// Skeleton Container
+// ============================================
+.apron-skeleton {
+  width: 100%;
+
+  &__content {
+    display: flex;
+    gap: $spacing-4;
+  }
+
+  &__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+  }
+}
+
+// ============================================
+// Element Variants
+// ============================================
+.apron-skeleton__element {
+  background-color: var(--apron-skeleton-bg);
+
+  &--text {
+    height: 16px;
+    border-radius: $radius-sm;
+  }
+
+  &--circular {
+    border-radius: 50%;
+  }
+
+  &--rectangular {
+    border-radius: 0;
+  }
+
+  &--rounded {
+    border-radius: $radius-md;
+  }
+}
+
+// ============================================
+// Avatar
+// ============================================
+.apron-skeleton__avatar {
+  flex-shrink: 0;
+  background-color: var(--apron-skeleton-bg);
+
+  &--circle {
+    border-radius: 50%;
+  }
+
+  &--square {
+    border-radius: $radius-md;
+  }
+}
+
+// ============================================
+// Title
+// ============================================
+.apron-skeleton__title {
+  height: 20px;
+  background-color: var(--apron-skeleton-bg);
+  border-radius: $radius-sm;
+}
+
+// ============================================
+// Paragraph
+// ============================================
+.apron-skeleton__paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.apron-skeleton__row {
+  height: 16px;
+  background-color: var(--apron-skeleton-bg);
+  border-radius: $radius-sm;
+}
+
+// ============================================
+// Button
+// ============================================
+.apron-skeleton__button {
+  display: inline-block;
+  background-color: var(--apron-skeleton-bg);
+
+  &--sm {
+    width: 64px;
+    height: 32px;
+  }
+
+  &--md {
+    width: 80px;
+    height: 40px;
+  }
+
+  &--lg {
+    width: 96px;
+    height: 48px;
+  }
+
+  &--default {
+    border-radius: $radius-md;
+  }
+
+  &--circle {
+    border-radius: 50%;
+    
+    &.apron-skeleton__button--sm {
+      width: 32px;
+    }
+
+    &.apron-skeleton__button--md {
+      width: 40px;
+    }
+
+    &.apron-skeleton__button--lg {
+      width: 48px;
+    }
+  }
+
+  &--round {
+    border-radius: 9999px;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+}
+
+// ============================================
+// Image
+// ============================================
+.apron-skeleton__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--apron-skeleton-bg);
+  border-radius: $radius-md;
+  color: var(--apron-skeleton-bg);
+}
+

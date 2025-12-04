@@ -1,0 +1,231 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Spin CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-spin-color: #{$color-primary-500};
+  --apron-spin-text-color: #{$color-primary-500};
+  --apron-spin-overlay-bg: rgba(255, 255, 255, 0.8);
+}
+
+// ============================================
+// Spin CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-spin-color: #{$color-primary-400};
+  --apron-spin-text-color: #{$color-primary-300};
+  --apron-spin-overlay-bg: rgba(24, 24, 27, 0.8);
+}
+
+// ============================================
+// Spin Root (for global instance)
+// ============================================
+.apron-spin-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+// ============================================
+// Spin Wrapper (包裹模式)
+// ============================================
+.apron-spin-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+// ============================================
+// Spin Base Styles
+// ============================================
+.apron-spin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--apron-spin-color);
+  font-family: var(--apron-font-family);
+
+  // ============================================
+  // Fullscreen Mode
+  // ============================================
+  &--fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    .apron-spin__overlay {
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  &--visible {
+    opacity: 1;
+  }
+
+  &--entering {
+    opacity: 0;
+  }
+
+  &--leaving {
+    opacity: 0;
+  }
+
+  // ============================================
+  // Overlay (蒙层)
+  // ============================================
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    background-color: var(--apron-spin-overlay-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &--visible {
+      opacity: 1;
+    }
+
+    &--entering {
+      opacity: 0;
+    }
+
+    &--leaving {
+      opacity: 0;
+    }
+  }
+
+  // ============================================
+  // Content Container
+  // ============================================
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+
+    // 垂直排列（居中时）
+    &--vertical {
+      flex-direction: column;
+    }
+
+    // 水平排列（非居中时）
+    &--horizontal {
+      flex-direction: row;
+    }
+
+    // ============================================
+    // Position Variants
+    // ============================================
+    &--center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &--top {
+      position: absolute;
+      top: $spacing-6;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &--bottom {
+      position: absolute;
+      bottom: $spacing-6;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &--left {
+      position: absolute;
+      top: 50%;
+      left: $spacing-6;
+      transform: translateY(-50%);
+    }
+
+    &--right {
+      position: absolute;
+      top: 50%;
+      right: $spacing-6;
+      transform: translateY(-50%);
+    }
+
+    &--top-left {
+      position: absolute;
+      top: $spacing-6;
+      left: $spacing-6;
+    }
+
+    &--top-right {
+      position: absolute;
+      top: $spacing-6;
+      right: $spacing-6;
+    }
+
+    &--bottom-left {
+      position: absolute;
+      bottom: $spacing-6;
+      left: $spacing-6;
+    }
+
+    &--bottom-right {
+      position: absolute;
+      bottom: $spacing-6;
+      right: $spacing-6;
+    }
+  }
+
+  // ============================================
+  // Icon
+  // ============================================
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apron-spin-color);
+
+    // 非居中时图标缩小
+    .apron-spin__content--horizontal & {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  &__icon-svg {
+    animation: apron-spin-rotate 1s linear infinite;
+  }
+
+  // ============================================
+  // Text
+  // ============================================
+  &__text {
+    font-size: $font-size-sm;
+    color: var(--apron-spin-text-color);
+    white-space: nowrap;
+  }
+}
+
+// ============================================
+// Spin Animation
+// ============================================
+@keyframes apron-spin-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

@@ -1,0 +1,302 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Drawer CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-drawer-bg: #ffffff;
+  --apron-drawer-border-color: #{$color-neutral-200};
+  --apron-drawer-title-color: #{$color-primary-900};
+  --apron-drawer-text-color: #{$color-primary-500};
+  --apron-drawer-close-color: #{$color-neutral-400};
+  --apron-drawer-close-hover-color: #{$color-neutral-600};
+  --apron-drawer-overlay-bg: rgba(0, 0, 0, 0.45);
+}
+
+// ============================================
+// Drawer CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-drawer-bg: #{$color-neutral-800};
+  --apron-drawer-border-color: #{$color-neutral-700};
+  --apron-drawer-title-color: #{$color-neutral-100};
+  --apron-drawer-text-color: #{$color-primary-200};
+  --apron-drawer-close-color: #{$color-neutral-500};
+  --apron-drawer-close-hover-color: #{$color-neutral-300};
+  --apron-drawer-overlay-bg: rgba(0, 0, 0, 0.65);
+}
+
+// ============================================
+// Drawer Root (Portal container)
+// ============================================
+.apron-drawer-root {
+  position: fixed;
+  inset: 0;
+  z-index: $z-index-modal;
+  pointer-events: none;
+
+  // 进入状态
+  &--entering {
+    .apron-drawer__overlay {
+      opacity: 0;
+    }
+
+    .apron-drawer--right {
+      transform: translateX(100%);
+    }
+
+    .apron-drawer--left {
+      transform: translateX(-100%);
+    }
+
+    .apron-drawer--top {
+      transform: translateY(-100%);
+    }
+
+    .apron-drawer--bottom {
+      transform: translateY(100%);
+    }
+  }
+
+  // 打开状态
+  &--open {
+    pointer-events: auto;
+
+    .apron-drawer__overlay {
+      opacity: 1;
+    }
+
+    .apron-drawer {
+      transform: translate(0, 0);
+    }
+  }
+
+  // 离开状态
+  &--leaving {
+    pointer-events: none;
+
+    .apron-drawer__overlay {
+      opacity: 0;
+    }
+
+    .apron-drawer--right {
+      transform: translateX(100%);
+    }
+
+    .apron-drawer--left {
+      transform: translateX(-100%);
+    }
+
+    .apron-drawer--top {
+      transform: translateY(-100%);
+    }
+
+    .apron-drawer--bottom {
+      transform: translateY(100%);
+    }
+  }
+}
+
+// ============================================
+// Drawer Overlay (蒙层)
+// ============================================
+.apron-drawer__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--apron-drawer-overlay-bg);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+// ============================================
+// Drawer Content
+// ============================================
+.apron-drawer {
+  position: absolute;
+  background-color: var(--apron-drawer-bg);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--apron-font-family);
+  box-shadow: $shadow-xl;
+  transition: transform 0.3s ease;
+  pointer-events: auto;
+
+  // ============================================
+  // Placement Variants
+  // ============================================
+  &--right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-left: 1px solid var(--apron-drawer-border-color);
+    transform: translateX(100%);
+    // 移动端左右弹出不加圆角
+  }
+
+  &--left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-right: 1px solid var(--apron-drawer-border-color);
+    transform: translateX(-100%);
+    // 移动端左右弹出不加圆角
+  }
+
+  &--top {
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--apron-drawer-border-color);
+    transform: translateY(-100%);
+
+    &.apron-drawer--mobile {
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+  }
+
+  &--bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid var(--apron-drawer-border-color);
+    transform: translateY(100%);
+
+    &.apron-drawer--mobile {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+  }
+
+  // ============================================
+  // Drawer Close Button
+  // ============================================
+  &__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--apron-drawer-close-color);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all $transition-fast;
+    z-index: 1;
+
+    &:hover {
+      color: var(--apron-drawer-close-hover-color);
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  // ============================================
+  // Drawer Header
+  // ============================================
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    padding-right: 48px; // 为关闭按钮留出空间
+    border-bottom: 1px solid var(--apron-drawer-border-color);
+    flex-shrink: 0;
+
+    // 移动端 header：三列布局
+    &--mobile {
+      padding-right: 15px;
+      justify-content: space-between;
+    }
+  }
+
+  &__header-left,
+  &__header-right {
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__header-left {
+    justify-content: flex-start;
+  }
+
+  &__header-right {
+    justify-content: flex-end;
+  }
+
+  &__title {
+    flex: 1;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: var(--apron-drawer-title-color);
+    line-height: $line-height-normal;
+
+    // 移动端标题居中
+    .apron-drawer__header--mobile & {
+      text-align: center;
+    }
+  }
+
+  // ============================================
+  // Drawer Body
+  // ============================================
+  &__body {
+    padding: 10px 15px;
+    color: var(--apron-drawer-text-color);
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
+    overflow: auto;
+    flex: 1;
+  }
+
+  // ============================================
+  // Drawer Footer
+  // ============================================
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $spacing-2;
+    padding: 10px 15px;
+    border-top: 1px solid var(--apron-drawer-border-color);
+    flex-shrink: 0;
+
+    // PC端：右侧弹出时，左对齐
+    &--right {
+      justify-content: flex-start;
+    }
+
+    // PC端：左、上、下弹出时，右对齐
+    &--left,
+    &--top,
+    &--bottom {
+      justify-content: flex-end;
+    }
+
+    // 移动端自定义 footer
+    &--mobile {
+      justify-content: center;
+    }
+  }
+
+  // ============================================
+  // Drawer Close Button (inline for mobile)
+  // ============================================
+  &__close--inline {
+    position: static;
+    width: 28px;
+    height: 28px;
+  }
+}
+

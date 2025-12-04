@@ -1,0 +1,236 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Checkbox CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Unchecked state
+  --apron-checkbox-bg: #ffffff;
+  --apron-checkbox-border: #{$color-neutral-300};
+  --apron-checkbox-border-hover: #{$color-neutral-400};
+
+  // Checked state
+  --apron-checkbox-checked-bg: #{$color-success-500};
+  --apron-checkbox-checked-border: #{$color-success-500};
+  --apron-checkbox-checked-icon: #ffffff;
+
+  // Indeterminate state
+  --apron-checkbox-indeterminate-bg: #{$color-success-500};
+  --apron-checkbox-indeterminate-border: #{$color-success-500};
+  --apron-checkbox-indeterminate-icon: #ffffff;
+
+  // Disabled state
+  --apron-checkbox-disabled-bg: #{$color-neutral-100};
+  --apron-checkbox-disabled-border: #{$color-neutral-200};
+  --apron-checkbox-disabled-checked-bg: #{$color-neutral-200};
+  --apron-checkbox-disabled-icon: #{$color-neutral-400};
+  --apron-checkbox-disabled-text: #{$color-neutral-400};
+
+  // Label
+  --apron-checkbox-label-color: #{$color-primary-500};
+}
+
+// ============================================
+// Checkbox CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  // Unchecked state
+  --apron-checkbox-bg: #{$color-neutral-800};
+  --apron-checkbox-border: #{$color-neutral-600};
+  --apron-checkbox-border-hover: #{$color-neutral-500};
+
+  // Checked state
+  --apron-checkbox-checked-bg: #{$color-success-500};
+  --apron-checkbox-checked-border: #{$color-success-500};
+  --apron-checkbox-checked-icon: #ffffff;
+
+  // Indeterminate state
+  --apron-checkbox-indeterminate-bg: #{$color-success-500};
+  --apron-checkbox-indeterminate-border: #{$color-success-500};
+  --apron-checkbox-indeterminate-icon: #ffffff;
+
+  // Disabled state
+  --apron-checkbox-disabled-bg: #{$color-neutral-800};
+  --apron-checkbox-disabled-border: #{$color-neutral-700};
+  --apron-checkbox-disabled-checked-bg: #{$color-neutral-700};
+  --apron-checkbox-disabled-icon: #{$color-neutral-600};
+  --apron-checkbox-disabled-text: #{$color-neutral-600};
+
+  // Label
+  --apron-checkbox-label-color: #{$color-primary-200};
+}
+
+// ============================================
+// Checkbox Base Styles
+// ============================================
+.apron-checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--apron-font-family);
+  font-size: $font-size-base;
+
+  // Input wrapper
+  &__input-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+  }
+
+  // Hidden native input
+  &__input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    cursor: inherit;
+    z-index: 1;
+  }
+
+  // Custom checkbox box
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    background-color: var(--apron-checkbox-bg);
+    border: 1.5px solid var(--apron-checkbox-border);
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+  }
+
+  // Checkmark / Indeterminate icon
+  &__icon {
+    width: 20px;
+    height: 20px;
+    color: var(--apron-checkbox-checked-icon);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all $transition-fast;
+
+    &--check,
+    &--indeterminate {
+      position: absolute;
+    }
+  }
+
+  // Label text
+  &__label {
+    margin-left: 10px;
+    line-height: 25px;
+    color: var(--apron-checkbox-label-color);
+  }
+
+  // Label not clickable
+  &--label-not-clickable {
+    .apron-checkbox__label {
+      cursor: default;
+    }
+  }
+
+  // Hover state (only for unchecked state)
+  &:hover:not(.apron-checkbox--disabled):not(.apron-checkbox--checked):not(.apron-checkbox--indeterminate) {
+    .apron-checkbox__box {
+      border-color: var(--apron-checkbox-border-hover);
+    }
+  }
+
+  // Focus state
+  &__input:focus-visible + .apron-checkbox__box {
+    @include focus-ring;
+  }
+
+  // ============================================
+  // Checked State
+  // ============================================
+  &--checked:not(.apron-checkbox--indeterminate) {
+    .apron-checkbox__box {
+      background-color: var(--apron-checkbox-checked-bg);
+      border-color: var(--apron-checkbox-checked-border);
+    }
+
+    .apron-checkbox__icon--check {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // ============================================
+  // Indeterminate State
+  // ============================================
+  &--indeterminate {
+    .apron-checkbox__box {
+      background-color: var(--apron-checkbox-indeterminate-bg);
+      border-color: var(--apron-checkbox-indeterminate-border);
+    }
+
+    .apron-checkbox__icon--indeterminate {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // ============================================
+  // Disabled State
+  // ============================================
+  &--disabled {
+    cursor: not-allowed;
+
+    .apron-checkbox__box {
+      background-color: var(--apron-checkbox-disabled-bg);
+      border-color: var(--apron-checkbox-disabled-border);
+    }
+
+    .apron-checkbox__label {
+      color: var(--apron-checkbox-disabled-text);
+    }
+
+    // Disabled + Checked
+    &.apron-checkbox--checked:not(.apron-checkbox--indeterminate) {
+      .apron-checkbox__box {
+        background-color: var(--apron-checkbox-disabled-checked-bg);
+        border-color: var(--apron-checkbox-disabled-border);
+      }
+
+      .apron-checkbox__icon {
+        color: var(--apron-checkbox-disabled-icon);
+      }
+    }
+
+    // Disabled + Indeterminate
+    &.apron-checkbox--indeterminate {
+      .apron-checkbox__box {
+        background-color: var(--apron-checkbox-disabled-checked-bg);
+        border-color: var(--apron-checkbox-disabled-border);
+      }
+
+      .apron-checkbox__icon {
+        color: var(--apron-checkbox-disabled-icon);
+      }
+    }
+  }
+}
+
+// ============================================
+// Checkbox Group Styles
+// ============================================
+.apron-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-4;
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+}
+

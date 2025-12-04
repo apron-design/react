@@ -1,0 +1,251 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Form CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-form-label-color: #{$color-primary-500};
+  --apron-form-label-required-color: #{$color-error-500};
+  --apron-form-help-color: #{$color-neutral-500};
+  --apron-form-error-color: #{$color-error-500};
+  --apron-form-extra-color: #{$color-neutral-400};
+
+  // Floating label
+  --apron-form-floating-label-color: #{$color-primary-300};
+  --apron-form-floating-label-active-color: #{$color-primary-500};
+  --apron-form-floating-label-bg: #ffffff;
+}
+
+// ============================================
+// Form CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-form-label-color: #{$color-primary-200};
+  --apron-form-label-required-color: #{$color-error-500};
+  --apron-form-help-color: #{$color-neutral-400};
+  --apron-form-error-color: #{$color-error-500};
+  --apron-form-extra-color: #{$color-neutral-500};
+
+  // Floating label
+  --apron-form-floating-label-color: #{$color-neutral-500};
+  --apron-form-floating-label-active-color: #{$color-primary-200};
+  --apron-form-floating-label-bg: #{$color-neutral-900};
+}
+
+// ============================================
+// Form Base Styles
+// ============================================
+.apron-form {
+  font-family: var(--apron-font-family);
+  font-size: $font-size-base;
+
+  // Vertical layout (default)
+  &--vertical {
+    .apron-form-item {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  // Horizontal layout
+  &--horizontal {
+    .apron-form-item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .apron-form-item__label {
+      flex-shrink: 0;
+      padding-top: 8px; // 对齐输入框
+      padding-right: $spacing-3;
+    }
+
+    .apron-form-item__control {
+      flex: 1;
+    }
+  }
+
+  // Inline layout
+  &--inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-4;
+
+    .apron-form-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 0;
+    }
+
+    .apron-form-item__label {
+      padding-right: $spacing-2;
+      margin-bottom: 0;
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+// ============================================
+// Form Item Base Styles
+// ============================================
+.apron-form-item {
+  margin-bottom: $spacing-5;
+
+  // Label
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: var(--apron-form-label-color);
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-base;
+    line-height: 1.5;
+  }
+
+  // Required asterisk
+  &__required {
+    color: var(--apron-form-label-required-color);
+    margin-left: 4px;
+  }
+
+  // Control container
+  &__control {
+    position: relative;
+    flex: 1;
+  }
+
+  // Content (holds the actual input)
+  &__content {
+    position: relative;
+  }
+
+  // Error message
+  &__error {
+    margin-top: $spacing-1;
+    color: var(--apron-form-error-color);
+    font-size: $font-size-sm;
+    line-height: 1.5;
+  }
+
+  // Help text
+  &__help {
+    margin-top: $spacing-1;
+    color: var(--apron-form-help-color);
+    font-size: $font-size-sm;
+    line-height: 1.5;
+  }
+
+  // Extra text
+  &__extra {
+    margin-top: $spacing-1;
+    color: var(--apron-form-extra-color);
+    font-size: $font-size-sm;
+    line-height: 1.5;
+  }
+
+  // Error state
+  &--error {
+    .apron-input,
+    .apron-select__trigger,
+    .apron-textarea {
+      border-color: var(--apron-form-error-color) !important;
+    }
+  }
+
+  // ============================================
+  // Floating Label Mode
+  // ============================================
+  &--floating-label {
+    .apron-form-item__control {
+      position: relative;
+    }
+
+    .apron-form-item__floating-label {
+      position: absolute;
+      top: 20px;
+      left: $spacing-4;
+      transform: translateY(-50%);
+      color: var(--apron-form-floating-label-color);
+      font-size: $font-size-base;
+      font-weight: $font-weight-normal;
+      pointer-events: none;
+      transition: all $transition-fast;
+      z-index: 1;
+      background-color: transparent;
+      padding: 0 4px;
+      margin-left: -4px;
+    }
+
+    .apron-form-item__required {
+      color: var(--apron-form-label-required-color);
+      margin-left: 2px;
+    }
+
+    // 当激活时（focus 或有值）
+    &.apron-form-item--floating-active {
+      .apron-form-item__floating-label {
+        top: 0;
+        transform: translateY(-50%);
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        color: var(--apron-form-floating-label-active-color);
+        background-color: var(--apron-form-floating-label-bg);
+      }
+    }
+
+    // 错误状态下的浮动标签
+    &.apron-form-item--error {
+      .apron-form-item__floating-label {
+        color: var(--apron-form-error-color);
+      }
+    }
+
+    // 隐藏原本的 placeholder
+    .apron-input__inner::placeholder,
+    .apron-textarea__inner::placeholder,
+    .apron-select__value--placeholder {
+      opacity: 0;
+    }
+
+    // 激活时显示 placeholder（如果需要）
+    &.apron-form-item--floating-active {
+      .apron-input__inner::placeholder,
+      .apron-textarea__inner::placeholder {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    .apron-form-item__label,
+    .apron-form-item__floating-label {
+      opacity: 0.6;
+    }
+  }
+}
+
+// ============================================
+// Adjustments for different form controls
+// ============================================
+
+// Input with floating label
+.apron-form-item--floating-label {
+  // 确保输入框在浮动标签模式下有正确的样式
+  .apron-input,
+  .apron-select__trigger {
+    // 激活状态时保持白色背景
+    &:focus-within {
+      background-color: var(--apron-form-floating-label-bg);
+    }
+  }
+}
+

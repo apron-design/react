@@ -1,0 +1,138 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Alert CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-alert-bg: #ffffff;
+  --apron-alert-border: #{$color-neutral-200};
+  --apron-alert-text: #{$color-primary-500};
+
+  // Type colors (for left border)
+  --apron-alert-info-color: #{$color-secondary-500};
+  --apron-alert-success-color: #{$color-success-500};
+  --apron-alert-warning-color: #{$color-warning-500};
+  --apron-alert-error-color: #{$color-error-500};
+}
+
+// ============================================
+// Alert CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-alert-bg: #{$color-primary-900};
+  --apron-alert-border: #{$color-neutral-700};
+  --apron-alert-text: #{$color-primary-200};
+
+  --apron-alert-info-color: #{$color-secondary-400};
+  --apron-alert-success-color: #{$color-success-500};
+  --apron-alert-warning-color: #{$color-warning-500};
+  --apron-alert-error-color: #{$color-error-500};
+}
+
+// ============================================
+// Alert Container (fixed position)
+// ============================================
+.apron-alert-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.apron-alert-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: $spacing-4;
+}
+
+// ============================================
+// Alert Base Styles
+// ============================================
+.apron-alert {
+  display: flex;
+  align-items: center;
+  min-width: 300px;
+  max-width: 500px;
+  min-height: 40px;
+  padding: $spacing-2 $spacing-4;
+  margin-bottom: $spacing-3;
+  background-color: var(--apron-alert-bg);
+  border: 1px solid var(--apron-alert-border);
+  border-radius: $radius-lg;
+  font-family: var(--apron-font-family);
+  font-size: $font-size-base;
+  pointer-events: auto;
+  box-sizing: border-box;
+
+  // Animation states
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  transform: translateY(-20px);
+  transition: 
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    max-height 0.3s ease,
+    margin-bottom 0.3s ease,
+    padding 0.3s ease;
+
+  &--visible {
+    opacity: 1;
+    max-height: 200px;
+    margin-bottom: $spacing-3;
+    padding-top: $spacing-2;
+    padding-bottom: $spacing-2;
+    transform: translateY(0);
+  }
+
+  &--leaving {
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transform: translateY(-10px);
+  }
+
+  // Static display (no animation)
+  &--static {
+    opacity: 1;
+    max-height: none;
+    overflow: visible;
+    transform: none;
+    position: relative;
+    margin-bottom: $spacing-3;
+    padding: $spacing-2 $spacing-4;
+  }
+
+  // Icon
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: $spacing-3;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  // Message
+  &__message {
+    flex: 1;
+    color: var(--apron-alert-text);
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+}
+

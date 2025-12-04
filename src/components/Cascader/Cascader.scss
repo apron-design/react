@@ -1,0 +1,334 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Cascader CSS Variables (Light Mode)
+// ============================================
+:root {
+  // Inactive state
+  --apron-cascader-bg: #{$color-primary-50};
+  --apron-cascader-border: #{$color-primary-50};
+  --apron-cascader-text: #{$color-primary-300};
+  --apron-cascader-placeholder: #{$color-primary-300};
+
+  // Active state
+  --apron-cascader-active-bg: #ffffff;
+  --apron-cascader-active-border: #{$color-primary-500};
+  --apron-cascader-active-text: #{$color-primary-500};
+
+  // Disabled state
+  --apron-cascader-disabled-bg: #{$color-neutral-100};
+  --apron-cascader-disabled-border: #{$color-neutral-200};
+  --apron-cascader-disabled-text: #{$color-neutral-400};
+
+  // Dropdown
+  --apron-cascader-dropdown-bg: #ffffff;
+  --apron-cascader-dropdown-border: #{$color-neutral-200};
+  --apron-cascader-dropdown-shadow: #{$shadow-lg};
+
+  // Option
+  --apron-cascader-option-text: #{$color-primary-500};
+  --apron-cascader-option-hover-bg: #{$color-neutral-100};
+  --apron-cascader-option-selected-text: #{$color-secondary-500};
+  --apron-cascader-option-disabled-text: #{$color-neutral-300};
+
+  // Column divider
+  --apron-cascader-column-divider: #{$color-neutral-200};
+
+  // Icon
+  --apron-cascader-icon-color: #{$color-primary-300};
+}
+
+// ============================================
+// Cascader CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  // Inactive state
+  --apron-cascader-bg: #{$color-neutral-800};
+  --apron-cascader-border: #{$color-neutral-700};
+  --apron-cascader-text: #{$color-neutral-400};
+  --apron-cascader-placeholder: #{$color-neutral-500};
+
+  // Active state
+  --apron-cascader-active-bg: #{$color-neutral-900};
+  --apron-cascader-active-border: #{$color-primary-200};
+  --apron-cascader-active-text: #{$color-primary-200};
+
+  // Disabled state
+  --apron-cascader-disabled-bg: #{$color-neutral-800};
+  --apron-cascader-disabled-border: #{$color-neutral-700};
+  --apron-cascader-disabled-text: #{$color-neutral-600};
+
+  // Dropdown
+  --apron-cascader-dropdown-bg: #{$color-neutral-800};
+  --apron-cascader-dropdown-border: #{$color-neutral-700};
+  --apron-cascader-dropdown-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.3);
+
+  // Option
+  --apron-cascader-option-text: #{$color-primary-200};
+  --apron-cascader-option-hover-bg: #{$color-neutral-700};
+  --apron-cascader-option-selected-text: #{$color-secondary-400};
+  --apron-cascader-option-disabled-text: #{$color-neutral-600};
+
+  // Column divider
+  --apron-cascader-column-divider: #{$color-neutral-700};
+
+  // Icon
+  --apron-cascader-icon-color: #{$color-neutral-500};
+}
+
+// ============================================
+// Cascader Base Styles
+// ============================================
+.apron-cascader {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  font-family: var(--apron-font-family);
+  font-size: $font-size-base;
+  outline: none;
+  box-sizing: border-box;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  // Trigger (选择器头部)
+  &__trigger {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: 0 $spacing-4;
+    background-color: var(--apron-cascader-bg);
+    border: 1px solid var(--apron-cascader-border);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all $transition-fast;
+  }
+
+  // Value / Placeholder
+  &__value {
+    flex: 1;
+    color: var(--apron-cascader-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &--placeholder {
+      color: var(--apron-cascader-placeholder);
+    }
+  }
+
+  // Suffix (arrow / loading)
+  &__suffix {
+    display: flex;
+    align-items: center;
+    margin-left: $spacing-2;
+    color: var(--apron-cascader-icon-color);
+    flex-shrink: 0;
+  }
+
+  // Arrow icon
+  &__arrow {
+    transition: transform $transition-fast;
+
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  // Loading icon
+  &__loading-icon {
+    animation: apron-cascader-spin 1s linear infinite;
+  }
+
+  // Dropdown
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 100%;
+    background-color: var(--apron-cascader-dropdown-bg);
+    border: 1px solid var(--apron-cascader-dropdown-border);
+    border-radius: 20px;
+    box-shadow: var(--apron-cascader-dropdown-shadow);
+    z-index: $z-index-dropdown;
+    overflow: hidden;
+    // Animation
+    animation: apron-cascader-dropdown-open $transition-fast forwards;
+    transform-origin: top center;
+  }
+
+  // Columns container
+  &__columns {
+    display: flex;
+    border-top: 1px solid var(--apron-cascader-column-divider);
+  }
+
+  // Single column
+  &__column {
+    min-width: 150px;
+    flex-shrink: 0;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--apron-cascader-column-divider);
+    }
+  }
+
+  // Options container (scrollable)
+  &__options {
+    max-height: calc(40px * 5 + 1px); // 5 rows max + 1px for border
+    overflow-y: auto;
+  }
+
+  // Single option
+  &__option {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 $spacing-4;
+    color: var(--apron-cascader-option-text);
+    cursor: pointer;
+    transition: background-color $transition-fast;
+
+    &:hover:not(.apron-cascader__option--disabled) {
+      background-color: var(--apron-cascader-option-hover-bg);
+    }
+
+    &--expanded {
+      background-color: var(--apron-cascader-option-hover-bg);
+    }
+
+    &--selected {
+      color: var(--apron-cascader-option-selected-text);
+      font-weight: $font-weight-medium;
+    }
+
+    &--disabled {
+      color: var(--apron-cascader-option-disabled-text);
+      cursor: not-allowed;
+    }
+  }
+
+  &__option-label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // ============================================
+  // States
+  // ============================================
+
+  // Focus state
+  &:focus-visible {
+    .apron-cascader__trigger {
+      @include focus-ring;
+    }
+  }
+
+  // Active state (有值或展开)
+  &--active {
+    .apron-cascader__trigger {
+      background-color: var(--apron-cascader-active-bg);
+      border-color: var(--apron-cascader-active-border);
+    }
+
+    .apron-cascader__value {
+      color: var(--apron-cascader-active-text);
+
+      &--placeholder {
+        color: var(--apron-cascader-placeholder);
+      }
+    }
+  }
+
+  // Open state
+  &--open {
+    .apron-cascader__trigger {
+      background-color: var(--apron-cascader-active-bg);
+      border-color: var(--apron-cascader-active-border);
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    .apron-cascader__trigger {
+      background-color: var(--apron-cascader-disabled-bg);
+      border-color: var(--apron-cascader-disabled-border);
+      cursor: not-allowed;
+    }
+
+    .apron-cascader__value {
+      color: var(--apron-cascader-disabled-text);
+    }
+
+    .apron-cascader__suffix {
+      color: var(--apron-cascader-disabled-text);
+    }
+  }
+
+  // Loading state
+  &--loading {
+    .apron-cascader__trigger {
+      cursor: wait;
+    }
+  }
+
+  // ============================================
+  // Inflow Mode (撑开容器)
+  // ============================================
+  &--inflow {
+    .apron-cascader__dropdown {
+      position: relative;
+      top: 0;
+      margin-top: 0;
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+      box-shadow: none;
+    }
+
+    &.apron-cascader--open {
+      .apron-cascader__trigger {
+        border-radius: 20px 20px 0 0;
+        border-bottom-color: transparent;
+      }
+
+      .apron-cascader__dropdown {
+        border-color: var(--apron-cascader-active-border);
+        border-top: none;
+      }
+
+      .apron-cascader__columns {
+        border-top-color: var(--apron-cascader-column-divider);
+      }
+    }
+  }
+}
+
+// Loading animation
+@keyframes apron-cascader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Dropdown open animation
+@keyframes apron-cascader-dropdown-open {
+  from {
+    opacity: 0;
+    transform: scaleY(0.9) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+

@@ -1,0 +1,101 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Badge CSS Variables
+// ============================================
+:root {
+  --apron-badge-bg: #{$color-error-600};
+  --apron-badge-color: #ffffff;
+  --apron-badge-border-color: #ffffff;
+}
+
+[data-theme='dark'] {
+  --apron-badge-bg: #{$color-error-600};
+  --apron-badge-color: #ffffff;
+  --apron-badge-border-color: #{$color-neutral-900};
+}
+
+// ============================================
+// Badge Base Styles
+// ============================================
+.apron-badge {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  transition: all $transition-slow;
+
+  // ============================================
+  // Dot 红点样式
+  // ============================================
+  &__dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--apron-badge-bg);
+    border: 1px solid var(--apron-badge-border-color);
+    box-sizing: border-box;
+    transition: all $transition-slow;
+  }
+
+  // ============================================
+  // Count 数字样式
+  // ============================================
+  &__count {
+    @include flex-center;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background-color: var(--apron-badge-bg);
+    color: var(--apron-badge-color);
+    font-family: var(--apron-font-family);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    line-height: 1;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: all $transition-slow;
+
+    // 单个数字时为正圆
+    &:not(&--multi) {
+      padding: 0;
+      width: 20px;
+    }
+  }
+
+  // ============================================
+  // Content 自定义内容样式
+  // ============================================
+  &__content {
+    @include flex-center;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background-color: var(--apron-badge-bg);
+    color: var(--apron-badge-color);
+    font-family: var(--apron-font-family);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    line-height: 1;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: all $transition-slow;
+  }
+}
+

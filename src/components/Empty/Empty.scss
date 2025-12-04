@@ -1,0 +1,65 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Empty CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-empty-border-color: #{$color-neutral-200};
+  --apron-empty-icon-color: #{$color-neutral-400};
+  --apron-empty-text-color: #{$color-neutral-500};
+}
+
+// ============================================
+// Empty CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-empty-border-color: #{$color-neutral-700};
+  --apron-empty-icon-color: #{$color-neutral-500};
+  --apron-empty-text-color: #{$color-neutral-400};
+}
+
+// ============================================
+// Empty Base Styles
+// ============================================
+.apron-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 200px;
+  padding: $spacing-6;
+  border: 1px solid var(--apron-empty-border-color);
+  border-radius: $radius-lg;
+  transition: all $transition-slow;
+
+  // ============================================
+  // Icon
+  // ============================================
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apron-empty-icon-color);
+    transition: all $transition-slow;
+
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  // ============================================
+  // Text
+  // ============================================
+  &__text {
+    font-family: var(--apron-font-family);
+    font-size: $font-size-base;
+    color: var(--apron-empty-text-color);
+    text-align: center;
+    line-height: $line-height-normal;
+    transition: all $transition-slow;
+  }
+}
+

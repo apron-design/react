@@ -1,0 +1,95 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Image CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-image-bg: #{$color-neutral-100};
+  --apron-image-icon-color: #{$color-neutral-400};
+  --apron-image-text-color: #{$color-neutral-500};
+}
+
+// ============================================
+// Image CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-image-bg: #{$color-neutral-800};
+  --apron-image-icon-color: #{$color-neutral-500};
+  --apron-image-text-color: #{$color-neutral-400};
+}
+
+// ============================================
+// Image Base Styles
+// ============================================
+.apron-image {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  background-color: var(--apron-image-bg);
+  transition: all $transition-slow;
+
+  // ============================================
+  // Placeholder State
+  // ============================================
+  &--placeholder {
+    min-width: 100px;
+    min-height: 100px;
+  }
+
+  // ============================================
+  // Placeholder Content
+  // ============================================
+  &__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: $spacing-4;
+  }
+
+  // ============================================
+  // Icon
+  // ============================================
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apron-image-icon-color);
+    transition: all $transition-slow;
+
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  // ============================================
+  // Text
+  // ============================================
+  &__text {
+    font-family: var(--apron-font-family);
+    font-size: $font-size-sm;
+    color: var(--apron-image-text-color);
+    text-align: center;
+    transition: all $transition-slow;
+  }
+
+  // ============================================
+  // Image Element
+  // ============================================
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: opacity $transition-slow;
+  }
+}
+

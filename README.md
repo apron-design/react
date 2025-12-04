@@ -39,18 +39,174 @@ yarn add @apron-design/react
 pnpm add @apron-design/react
 ```
 
-## 🔨 Example
+## 🔨 Usage
+
+### Full Import
+
+Import all components and styles globally. Suitable for quick start or when bundle size is not a concern:
 
 ```tsx
-import { Button } from '@apron-design/react';
+// Import global styles in your entry file (e.g., main.tsx or App.tsx)
 import '@apron-design/react/styles';
+
+// Then use components anywhere
+import { Button, Input, Modal, Toast } from '@apron-design/react';
 
 function App() {
   return (
-    <Button variant="primary" onClick={() => console.log('clicked')}>
-      Click me
-    </Button>
+    <div>
+      <Button variant="primary" onClick={() => Toast.success('Success!')}>
+        Click me
+      </Button>
+      <Input placeholder="Enter content" />
+    </div>
   );
+}
+```
+
+### On-demand Import
+
+Import only the components you need to reduce bundle size:
+
+```tsx
+// Method: Import components from main package (recommended)
+// Styles still need to be imported once globally
+import '@apron-design/react/styles';
+
+import { Button } from '@apron-design/react';
+import { Input, Textarea } from '@apron-design/react';
+import { Modal, Drawer } from '@apron-design/react';
+
+function App() {
+  return <Button variant="primary">Button</Button>;
+}
+```
+
+> 💡 **Tip**: Since the component library uses ES Module format, modern bundlers (like Vite, Webpack 5+) will automatically perform Tree Shaking, only bundling the component code you actually use.
+
+### Component List
+
+The library provides the following components:
+
+**General**
+- `Button` - Button
+- `Link` - Link
+
+**Layout**
+- `Row` / `Col` - Grid layout
+- `Space` - Spacing
+- `Divider` - Divider
+
+**Data Display**
+- `Avatar` / `AvatarGroup` - Avatar
+- `Badge` - Badge
+- `Card` - Card
+- `Collapse` - Collapse panel
+- `Empty` - Empty state
+- `Image` - Image
+- `Pagination` - Pagination
+- `Skeleton` - Skeleton screen
+- `Steps` - Steps
+- `Tabs` - Tabs
+- `Tag` - Tag
+- `Timeline` - Timeline
+- `Tooltip` - Tooltip
+- `Popover` - Popover
+
+**Data Entry**
+- `Input` / `Textarea` - Input
+- `InputOtp` - OTP Input
+- `Select` - Select
+- `Cascader` - Cascading selector
+- `DatePicker` - Date picker
+- `Checkbox` / `CheckboxGroup` - Checkbox
+- `Radio` / `RadioGroup` - Radio
+- `Rate` - Rate
+- `Switch` - Switch
+- `Form` / `FormItem` - Form
+
+**Feedback**
+- `Alert` - Alert
+- `Message` - Global message
+- `Modal` - Modal dialog
+- `Drawer` - Drawer
+- `ResponsiveModal` - Responsive modal
+- `Spin` - Loading
+- `Toast` - Toast
+
+### Global Methods
+
+Some components provide global methods that can be called anywhere:
+
+```tsx
+import { Message, Toast, Spin } from '@apron-design/react';
+
+// Message notification
+Message.success('Operation successful');
+Message.error('Operation failed');
+Message.warning('Warning message');
+Message.info('Info message');
+
+// Toast (mobile)
+Toast.success('Success');
+Toast.fail('Failed');
+Toast.loading('Loading...');
+Toast.close();
+
+// Global loading
+Spin.show({ text: 'Loading...' });
+Spin.close();
+```
+
+### SSR Support
+
+The component library supports Server-Side Rendering (SSR) and can be used with frameworks like Next.js and Remix:
+
+```tsx
+// Next.js App Router example
+// app/layout.tsx
+import '@apron-design/react/styles';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
+}
+
+// app/page.tsx
+import { Button, Card } from '@apron-design/react';
+
+export default function Page() {
+  return (
+    <Card title="Welcome">
+      <Button variant="primary">Get Started</Button>
+    </Card>
+  );
+}
+```
+
+> ⚠️ **Note**: Global methods (like `Toast.show()`, `Spin.show()`, `Message.success()`) rely on browser APIs and can only be called on the client side. In SSR environments, ensure these methods are called within `useEffect` or event handlers.
+
+```tsx
+'use client'; // Required in Next.js for client components
+
+import { useEffect } from 'react';
+import { Toast } from '@apron-design/react';
+
+export default function MyComponent() {
+  useEffect(() => {
+    // ✅ Correct: Call within useEffect
+    Toast.success('Page loaded');
+  }, []);
+
+  const handleClick = () => {
+    // ✅ Correct: Call within event handler
+    Toast.success('Click successful');
+  };
+
+  return <button onClick={handleClick}>Click</button>;
 }
 ```
 

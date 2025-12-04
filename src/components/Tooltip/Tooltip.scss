@@ -1,0 +1,78 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Tooltip CSS Variables (Light Mode)
+// 浅色模式：primary900 背景，白色字
+// ============================================
+:root {
+  --apron-tooltip-bg: #{$color-primary-900};
+  --apron-tooltip-color: #ffffff;
+  --apron-tooltip-shadow: #{$shadow-md};
+}
+
+
+// ============================================
+// Tooltip Base Styles
+// ============================================
+.apron-tooltip {
+  position: absolute;
+  z-index: $z-index-tooltip;
+  max-width: 300px;
+  background-color: var(--apron-tooltip-bg);
+  border-radius: $radius-lg;
+  box-shadow: var(--apron-tooltip-shadow);
+  transition: opacity $transition-fast, transform $transition-fast;
+  animation: apron-tooltip-fade-in 0.15s ease;
+
+  // ============================================
+  // Arrow (底部箭头，指向下方)
+  // ============================================
+  &__arrow {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 6px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--apron-tooltip-bg);
+    }
+  }
+
+  // ============================================
+  // Content
+  // ============================================
+  &__content {
+    padding: 6px 10px;
+    font-family: var(--apron-font-family);
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+    color: var(--apron-tooltip-color);
+    line-height: $line-height-normal;
+    word-wrap: break-word;
+  }
+}
+
+// ============================================
+// Animation
+// ============================================
+@keyframes apron-tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

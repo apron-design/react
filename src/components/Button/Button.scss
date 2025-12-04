@@ -5,14 +5,14 @@
 // Button CSS Variables (Light Mode)
 // ============================================
 :root {
-  // Primary type
+  // Primary type (hover-active 颜色逐渐变深)
   --apron-button-primary-bg: #{$color-primary-500};
-  --apron-button-primary-bg-hover: #{$color-primary-400};
-  --apron-button-primary-bg-active: #{$color-primary-900};
+  --apron-button-primary-bg-hover: #{$color-primary-600};
+  --apron-button-primary-bg-active: #{$color-primary-700};
   --apron-button-primary-text: #FFFFFF;
   --apron-button-primary-border: #{$color-primary-500};
 
-  // Secondary type
+  // Secondary type (hover-active 颜色逐渐变深)
   --apron-button-secondary-bg: transparent;
   --apron-button-secondary-text: #{$color-secondary-500};
   --apron-button-secondary-text-hover: #{$color-secondary-600};
@@ -21,22 +21,22 @@
   --apron-button-secondary-border-hover: #{$color-secondary-600};
   --apron-button-secondary-border-active: #{$color-secondary-700};
 
-  // Default type
+  // Default type (hover-active 颜色逐渐变深)
   --apron-button-default-bg: transparent;
   --apron-button-default-text: #{$color-primary-500};
-  --apron-button-default-text-hover: #{$color-primary-400};
-  --apron-button-default-text-active: #{$color-primary-900};
+  --apron-button-default-text-hover: #{$color-primary-600};
+  --apron-button-default-text-active: #{$color-primary-700};
   --apron-button-default-border: #{$color-primary-500};
-  --apron-button-default-border-hover: #{$color-primary-400};
-  --apron-button-default-border-active: #{$color-primary-900};
+  --apron-button-default-border-hover: #{$color-primary-600};
+  --apron-button-default-border-active: #{$color-primary-700};
 
-  // Text type
+  // Text type (hover-active 背景逐渐变深)
   --apron-button-text-bg: #FFFFFF;
-  --apron-button-text-bg-hover: #{$color-primary-50};
-  --apron-button-text-bg-active: #{$color-primary-100};
+  --apron-button-text-bg-hover: #{$color-primary-100};
+  --apron-button-text-bg-active: #{$color-primary-200};
 
   // Danger
-  --apron-button-danger-color: #{$color-error-600};
+  --apron-button-danger-color: #{$color-error-500};
 
   // Disabled
   --apron-button-disabled-bg: #{$color-neutral-100};
@@ -48,14 +48,14 @@
 // Button CSS Variables (Dark Mode)
 // ============================================
 [data-theme='dark'] {
-  // Primary type
+  // Primary type (hover-active 颜色逐渐变亮，暗色模式下"强调"体现为更亮)
   --apron-button-primary-bg: #{$color-primary-200};
-  --apron-button-primary-bg-hover: #{$color-primary-700};
+  --apron-button-primary-bg-hover: #{$color-primary-100};
   --apron-button-primary-bg-active: #{$color-primary-50};
   --apron-button-primary-text: #{$color-primary-900};
   --apron-button-primary-border: #{$color-primary-200};
 
-  // Secondary type
+  // Secondary type (hover-active 颜色逐渐变亮)
   --apron-button-secondary-bg: transparent;
   --apron-button-secondary-text: #{$color-secondary-400};
   --apron-button-secondary-text-hover: #{$color-secondary-300};
@@ -64,16 +64,16 @@
   --apron-button-secondary-border-hover: #{$color-secondary-300};
   --apron-button-secondary-border-active: #{$color-secondary-200};
 
-  // Default type
+  // Default type (hover-active 颜色逐渐变亮)
   --apron-button-default-bg: transparent;
   --apron-button-default-text: #{$color-primary-200};
-  --apron-button-default-text-hover: #{$color-primary-700};
+  --apron-button-default-text-hover: #{$color-primary-100};
   --apron-button-default-text-active: #{$color-primary-50};
   --apron-button-default-border: #{$color-primary-200};
-  --apron-button-default-border-hover: #{$color-primary-700};
+  --apron-button-default-border-hover: #{$color-primary-100};
   --apron-button-default-border-active: #{$color-primary-50};
 
-  // Text type
+  // Text type (hover-active 背景逐渐变亮)
   --apron-button-text-bg: #{$color-neutral-800};
   --apron-button-text-bg-hover: #{$color-neutral-700};
   --apron-button-text-bg-active: #{$color-neutral-600};
@@ -99,13 +99,26 @@
   font-family: var(--apron-font-family);
   font-weight: $font-weight-medium;
   line-height: 1;
-  transition: all var(--apron-transition-fast);
+  transition: all $transition-slow;
   white-space: nowrap;
   border-style: solid;
   border-width: 1px;
+  overflow: hidden;
 
   &:focus-visible {
     @include focus-ring;
+  }
+
+  // ============================================
+  // Ripple Effect
+  // ============================================
+  &__ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.35);
+    transform: scale(0);
+    animation: apron-button-ripple 0.6s ease-out forwards;
+    pointer-events: none;
   }
 
   // ============================================
@@ -150,20 +163,20 @@
       cursor: not-allowed;
     }
 
-    // Primary + Danger
+    // Primary + Danger (hover-active 颜色逐渐变深)
     &.apron-button--danger {
       background-color: var(--apron-button-danger-color);
       border-color: var(--apron-button-danger-color);
       color: #FFFFFF;
 
       &:hover:not(:disabled) {
-        background-color: #{$color-error-500};
-        border-color: #{$color-error-500};
+        background-color: #{$color-error-600};
+        border-color: #{$color-error-600};
       }
 
       &:active:not(:disabled) {
-        background-color: #{$color-error-600};
-        border-color: #{$color-error-600};
+        background-color: #{$color-error-700};
+        border-color: #{$color-error-700};
       }
     }
   }
@@ -175,6 +188,10 @@
     background-color: var(--apron-button-secondary-bg);
     border-color: var(--apron-button-secondary-border);
     color: var(--apron-button-secondary-text);
+
+    .apron-button__ripple {
+      background-color: rgba($color-secondary-500, 0.2);
+    }
 
     &:hover:not(:disabled) {
       border-color: var(--apron-button-secondary-border-hover);
@@ -193,19 +210,23 @@
       cursor: not-allowed;
     }
 
-    // Secondary + Danger
+    // Secondary + Danger (hover-active 颜色逐渐变深)
     &.apron-button--danger {
       border-color: var(--apron-button-danger-color);
       color: var(--apron-button-danger-color);
 
+      .apron-button__ripple {
+        background-color: rgba($color-error-500, 0.2);
+      }
+
       &:hover:not(:disabled) {
-        border-color: #{$color-error-500};
-        color: #{$color-error-500};
+        border-color: #{$color-error-600};
+        color: #{$color-error-600};
       }
 
       &:active:not(:disabled) {
-        border-color: #{$color-error-600};
-        color: #{$color-error-600};
+        border-color: #{$color-error-700};
+        color: #{$color-error-700};
       }
     }
   }
@@ -217,6 +238,10 @@
     background-color: var(--apron-button-default-bg);
     border-color: var(--apron-button-default-border);
     color: var(--apron-button-default-text);
+
+    .apron-button__ripple {
+      background-color: rgba($color-primary-500, 0.2);
+    }
 
     &:hover:not(:disabled) {
       border-color: var(--apron-button-default-border-hover);
@@ -235,19 +260,23 @@
       cursor: not-allowed;
     }
 
-    // Default + Danger
+    // Default + Danger (hover-active 颜色逐渐变深)
     &.apron-button--danger {
       border-color: var(--apron-button-danger-color);
       color: var(--apron-button-danger-color);
 
+      .apron-button__ripple {
+        background-color: rgba($color-error-500, 0.2);
+      }
+
       &:hover:not(:disabled) {
-        border-color: #{$color-error-500};
-        color: #{$color-error-500};
+        border-color: #{$color-error-600};
+        color: #{$color-error-600};
       }
 
       &:active:not(:disabled) {
-        border-color: #{$color-error-600};
-        color: #{$color-error-600};
+        border-color: #{$color-error-700};
+        color: #{$color-error-700};
       }
     }
   }
@@ -259,6 +288,10 @@
     background-color: var(--apron-button-text-bg);
     border-color: transparent;
     color: var(--apron-button-default-text);
+
+    .apron-button__ripple {
+      background-color: rgba($color-primary-500, 0.15);
+    }
 
     &:hover:not(:disabled) {
       background-color: var(--apron-button-text-bg-hover);
@@ -276,18 +309,22 @@
       cursor: not-allowed;
     }
 
-    // Text + Danger
+    // Text + Danger (hover-active 颜色逐渐变深)
     &.apron-button--danger {
       color: var(--apron-button-danger-color);
 
+      .apron-button__ripple {
+        background-color: rgba($color-error-500, 0.15);
+      }
+
       &:hover:not(:disabled) {
-        background-color: rgba($color-error-600, 0.08);
-        color: #{$color-error-500};
+        background-color: rgba($color-error-500, 0.08);
+        color: #{$color-error-600};
       }
 
       &:active:not(:disabled) {
-        background-color: rgba($color-error-600, 0.15);
-        color: #{$color-error-600};
+        background-color: rgba($color-error-500, 0.15);
+        color: #{$color-error-700};
       }
     }
   }
@@ -301,6 +338,11 @@
     color: var(--apron-button-secondary-text);
     padding: 0;
     height: auto;
+    overflow: visible;
+
+    .apron-button__ripple {
+      display: none;
+    }
 
     &:hover:not(:disabled) {
       color: var(--apron-button-secondary-text-hover);
@@ -315,16 +357,16 @@
       cursor: not-allowed;
     }
 
-    // Link + Danger
+    // Link + Danger (hover-active 颜色逐渐变深)
     &.apron-button--danger {
       color: var(--apron-button-danger-color);
 
       &:hover:not(:disabled) {
-        color: #{$color-error-500};
+        color: #{$color-error-600};
       }
 
       &:active:not(:disabled) {
-        color: #{$color-error-600};
+        color: #{$color-error-700};
       }
     }
   }
@@ -394,5 +436,12 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes apron-button-ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
   }
 }

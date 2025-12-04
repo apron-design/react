@@ -1,0 +1,194 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Steps CSS Variables (Light Mode)
+// ============================================
+:root {
+  --apron-steps-completed-color: #{$color-success-600};
+  --apron-steps-current-color: #{$color-primary-500};
+  --apron-steps-pending-color: #{$color-neutral-300};
+  --apron-steps-pending-text: #{$color-neutral-400};
+  --apron-steps-line-pending: #{$color-neutral-300};
+}
+
+// ============================================
+// Steps CSS Variables (Dark Mode)
+// ============================================
+[data-theme='dark'] {
+  --apron-steps-completed-color: #{$color-success-500};
+  --apron-steps-current-color: #{$color-primary-400};
+  --apron-steps-pending-color: #{$color-neutral-600};
+  --apron-steps-pending-text: #{$color-neutral-500};
+  --apron-steps-line-pending: #{$color-neutral-600};
+}
+
+// ============================================
+// Steps Container
+// ============================================
+.apron-steps {
+  display: flex;
+  width: 100%;
+  font-family: var(--apron-font-family);
+}
+
+// ============================================
+// Single Step
+// ============================================
+.apron-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+
+  // ============================================
+  // Step Content (Icon + Line)
+  // ============================================
+  &__content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+
+  // ============================================
+  // Step Icon
+  // ============================================
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+    width: 25px;
+    height: 25px;
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  // ============================================
+  // Connection Line
+  // ============================================
+  &__line {
+    flex: 1;
+    height: 4px;
+    margin-left: -2px;
+    margin-right: -2px;
+
+    &--completed {
+      background-color: var(--apron-steps-completed-color);
+    }
+
+    &--completed-to-current {
+      background: linear-gradient(
+        to right,
+        var(--apron-steps-completed-color),
+        var(--apron-steps-current-color)
+      );
+    }
+
+    &--current-to-pending {
+      background: linear-gradient(
+        to right,
+        var(--apron-steps-current-color),
+        var(--apron-steps-line-pending)
+      );
+    }
+
+    &--pending {
+      background-color: var(--apron-steps-line-pending);
+    }
+  }
+
+  // ============================================
+  // Step Label
+  // ============================================
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    left: 12.5px;
+    transform: translateX(-50%);
+
+    &--top {
+      margin-bottom: $spacing-2;
+    }
+
+    &--bottom {
+      margin-top: $spacing-2;
+    }
+  }
+
+  // ============================================
+  // Status Styles
+  // ============================================
+  &--completed {
+    .apron-step__icon {
+      color: var(--apron-steps-completed-color);
+    }
+
+    .apron-step__label {
+      color: var(--apron-steps-completed-color);
+    }
+  }
+
+  &--current {
+    .apron-step__icon {
+      color: var(--apron-steps-current-color);
+    }
+
+    .apron-step__label {
+      color: var(--apron-steps-current-color);
+    }
+  }
+
+  &--pending {
+    .apron-step__icon {
+      color: var(--apron-steps-pending-color);
+    }
+
+    .apron-step__label {
+      color: var(--apron-steps-pending-text);
+    }
+  }
+}
+
+// ============================================
+// Label Placement Variants
+// ============================================
+.apron-steps--label-top {
+  .apron-step {
+    flex-direction: column;
+  }
+}
+
+.apron-steps--label-bottom {
+  .apron-step {
+    flex-direction: column;
+  }
+}
+
+.apron-steps--label-both {
+  .apron-step {
+    flex-direction: column;
+
+    .apron-step__label--top {
+      order: -1;
+    }
+
+    .apron-step__content {
+      order: 0;
+    }
+
+    .apron-step__label--bottom {
+      order: 1;
+    }
+  }
+}
+

@@ -1,0 +1,49 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ============================================
+// Space Base Styles
+// ============================================
+.apron-space {
+  display: inline-flex;
+  gap: var(--apron-space-gap, #{$spacing-4});
+  transition: all $transition-slow;
+
+  // ============================================
+  // Orientation
+  // ============================================
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  // ============================================
+  // Wrap (仅 horizontal 有效)
+  // ============================================
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  // ============================================
+  // Align
+  // ============================================
+  &--align-start {
+    align-items: flex-start;
+  }
+
+  &--align-end {
+    align-items: flex-end;
+  }
+
+  &--align-center {
+    align-items: center;
+  }
+
+  &--align-baseline {
+    align-items: baseline;
+  }
+}
+
