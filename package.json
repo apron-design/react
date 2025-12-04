@@ -1,7 +1,7 @@
 {
   "name": "@apron-design/react",
   "version": "21.0.1",
-  "description": "A modern React component library with SCSS",
+  "description": "Apron Design - A modern, intelligent React component library built with TypeScript and SCSS. Featuring 40+ components with dark mode support.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -20,7 +20,10 @@
     "./styles": "./dist/styles/index.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
   ],
   "sideEffects": [
     "**/*.css",
@@ -74,16 +77,37 @@
   },
   "keywords": [
     "react",
+    "react-components",
     "components",
     "ui",
+    "ui-components",
     "design-system",
-    "scss"
+    "component-library",
+    "scss",
+    "typescript",
+    "dark-mode",
+    "form",
+    "modal",
+    "toast",
+    "grid",
+    "responsive",
+    "ssr"
   ],
-  "author": "",
+  "author": "Apron Design Team, Offontime Inc.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/apron-design/react.git"
+  },
+  "homepage": "https://github.com/apron-design/react#readme",
+  "bugs": {
+    "url": "https://github.com/apron-design/react/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
-
