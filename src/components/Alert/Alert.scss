@@ -55,8 +55,7 @@
 .apron-alert {
   display: flex;
   align-items: center;
-  min-width: 300px;
-  max-width: 500px;
+  width: 100%;
   min-height: 40px;
   padding: $spacing-2 $spacing-4;
   margin-bottom: $spacing-3;
