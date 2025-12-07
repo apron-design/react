@@ -36,7 +36,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const tooltipRect = tooltipRef.current.getBoundingClientRect();
 
-      let top = triggerRect.top - tooltipRect.height - 8 + window.scrollY;
+      const top = triggerRect.top - tooltipRect.height - 8 + window.scrollY;
       let left = triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2 + window.scrollX;
 
       // 边界检测
@@ -85,7 +85,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const triggerProps: Record<string, unknown> = {
       ref: triggerRef,
       onMouseEnter: (e: React.MouseEvent) => {
-        if (isValidElement(children) && children.props.onMouseEnter) {
+        if (hasProps(children) && children.props.onMouseEnter) {
           children.props.onMouseEnter(e);
         }
         if (hoverTimeoutRef.current) {
@@ -94,7 +94,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         open();
       },
       onMouseLeave: (e: React.MouseEvent) => {
-        if (isValidElement(children) && children.props.onMouseLeave) {
+        if (hasProps(children) && children.props.onMouseLeave) {
           children.props.onMouseLeave(e);
         }
         hoverTimeoutRef.current = setTimeout(() => {
@@ -125,7 +125,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           createPortal(
             <div
               ref={(node) => {
-                tooltipRef.current = node;
+                (tooltipRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
                 if (typeof ref === 'function') {
                   ref(node);
                 } else if (ref) {
@@ -151,3 +151,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
 Tooltip.displayName = 'Tooltip';
 
+// 添加类型守卫函数
+const hasProps = (element: ReactElement): element is ReactElement & { props: Record<string, unknown> } => {
+  return element && typeof element === 'object' && 'props' in element && typeof element.props === 'object';
+};

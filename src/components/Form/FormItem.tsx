@@ -139,11 +139,17 @@ export const FormItem: React.FC<FormItemProps> = ({
       disabled: formContext.disabled || (child.props as Record<string, unknown>).disabled,
       onFocus: (e: React.FocusEvent) => {
         handleFocus();
-        (child.props as Record<string, unknown>).onFocus?.(e);
+        const onFocus = (child.props as Record<string, unknown>).onFocus;
+        if (typeof onFocus === 'function') {
+          onFocus(e);
+        }
       },
       onBlur: (e: React.FocusEvent) => {
         handleBlur();
-        (child.props as Record<string, unknown>).onBlur?.(e);
+        const onBlur = (child.props as Record<string, unknown>).onBlur;
+        if (typeof onBlur === 'function') {
+          onBlur(e);
+        }
       },
     };
 
@@ -159,7 +165,10 @@ export const FormItem: React.FC<FormItemProps> = ({
           newValue = e;
         }
         handleChange(newValue);
-        (child.props as Record<string, unknown>).onChange?.(e);
+        const onChange = (child.props as Record<string, unknown>).onChange;
+        if (typeof onChange === 'function') {
+          onChange(e);
+        }
       };
     }
 

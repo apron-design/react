@@ -1,3 +1,2 @@
 export { Button } from './Button';
-export type { ButtonProps, ButtonVariant, ButtonSize } from './Button';
-
+// Remove type exports to avoid duplication issues

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode, ImgHTMLAttributes } from 'react';
 import './Avatar.scss';
 

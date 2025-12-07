@@ -27,7 +27,7 @@ Card.displayName = 'Card';
 // ============================================
 // CardHeader
 // ============================================
-export interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** 标题 */
   title?: ReactNode;
   /** 右侧额外内容 */

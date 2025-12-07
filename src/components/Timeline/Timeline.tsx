@@ -52,7 +52,7 @@ Timeline.displayName = 'Timeline';
 // ============================================
 // TimelineItem
 // ============================================
-export interface TimelineItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface TimelineItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'content'> {
   /** 标题 */
   title?: ReactNode;
   /** 内容 */

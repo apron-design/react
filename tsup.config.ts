@@ -11,10 +11,12 @@ export default defineConfig({
   injectStyle: false,
   treeshake: true,
   minify: false,
+  loader: {
+    '.scss': 'local-css',
+  },
   esbuildOptions(options) {
     options.banner = {
       js: '"use client";',
     };
   },
 });
-

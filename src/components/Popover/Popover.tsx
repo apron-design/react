@@ -38,6 +38,11 @@ const closeOtherPopovers = (currentId: string) => {
 let popoverIdCounter = 0;
 const generatePopoverId = () => `popover-${++popoverIdCounter}`;
 
+// 添加类型守卫函数
+const hasProps = (element: ReactElement): element is ReactElement & { props: Record<string, unknown> } => {
+  return element && typeof element === 'object' && 'props' in element && typeof element.props === 'object';
+};
+
 // ============================================
 // Popover
 // ============================================
@@ -70,7 +75,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const popoverRect = popoverRef.current.getBoundingClientRect();
 
-      let top = triggerRect.top - popoverRect.height - 8 + window.scrollY;
+      const top = triggerRect.top - popoverRect.height - 8 + window.scrollY;
       let left = triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2 + window.scrollX;
 
       // 边界检测
@@ -145,7 +150,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     if (mode === 'click') {
       triggerProps.onClick = (e: React.MouseEvent) => {
-        if (isValidElement(children) && children.props.onClick) {
+        if (hasProps(children) && children.props.onClick) {
           children.props.onClick(e);
         }
         if (visible) {
@@ -156,7 +161,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       };
     } else {
       triggerProps.onMouseEnter = (e: React.MouseEvent) => {
-        if (isValidElement(children) && children.props.onMouseEnter) {
+        if (hasProps(children) && children.props.onMouseEnter) {
           children.props.onMouseEnter(e);
         }
         if (hoverTimeoutRef.current) {
@@ -165,7 +170,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         open();
       };
       triggerProps.onMouseLeave = (e: React.MouseEvent) => {
-        if (isValidElement(children) && children.props.onMouseLeave) {
+        if (hasProps(children) && children.props.onMouseLeave) {
           children.props.onMouseLeave(e);
         }
         hoverTimeoutRef.current = setTimeout(() => {
@@ -198,7 +203,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           createPortal(
             <div
               ref={(node) => {
-                popoverRef.current = node;
+                (popoverRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
                 if (typeof ref === 'function') {
                   ref(node);
                 } else if (ref) {
@@ -282,7 +287,7 @@ export const PopoverConfirm = forwardRef<HTMLDivElement, PopoverConfirmProps>(
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const popoverRect = popoverRef.current.getBoundingClientRect();
 
-      let top = triggerRect.top - popoverRect.height - 8 + window.scrollY;
+      const top = triggerRect.top - popoverRect.height - 8 + window.scrollY;
       let left = triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2 + window.scrollX;
 
       // 边界检测
@@ -365,7 +370,7 @@ export const PopoverConfirm = forwardRef<HTMLDivElement, PopoverConfirmProps>(
     const triggerProps: Record<string, unknown> = {
       ref: triggerRef,
       onClick: (e: React.MouseEvent) => {
-        if (isValidElement(children) && children.props.onClick) {
+        if (hasProps(children) && children.props.onClick) {
           children.props.onClick(e);
         }
         if (visible) {
@@ -393,7 +398,7 @@ export const PopoverConfirm = forwardRef<HTMLDivElement, PopoverConfirmProps>(
           createPortal(
             <div
               ref={(node) => {
-                popoverRef.current = node;
+                (popoverRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
                 if (typeof ref === 'function') {
                   ref(node);
                 } else if (ref) {
