@@ -6,11 +6,6 @@ export const locales = [
     "id": "zh-CN",
     "name": "中文",
     "base": "/"
-  },
-  {
-    "id": "en-US",
-    "name": "English",
-    "base": "/en-US"
   }
 ];
 export const messages = {

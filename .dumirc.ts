@@ -8,21 +8,14 @@ export default defineConfig({
   hash: true,
   locales: [
     { id: 'zh-CN', name: '中文' },
-    { id: 'en-US', name: 'English' },
   ],
   themeConfig: {
     carrier: 'dumi',
-    nav: {
-      'zh-CN': [
-        { title: '组件', link: '/components' },
-        { title: 'GitHub', link: 'https://github.com/apron-design/react' },
-      ],
-      'en-US': [
-        { title: 'Components', link: '/components' },
-        { title: 'GitHub', link: 'https://github.com/apron-design/react' },
-      ],
-    },
-    footer: 'Copyright © 2025 Apron Design | Built with Dumi',
+    nav: [
+      { title: '组件', link: '/components' },
+      { title: 'GitHub', link: 'https://github.com/apron-design/react' },
+    ],
+    footer: `Copyright ©2022~${new Date().getFullYear()} Apron Design React | With offontime.com | Docs built with Dumi`,
   },
   resolve: {
     docDirs: ['docs'],

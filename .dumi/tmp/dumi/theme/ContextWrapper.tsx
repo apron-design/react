@@ -3,8 +3,8 @@
 // DO NOT CHANGE IT MANUALLY!
 import React, { useState, useEffect, useRef } from 'react';
 import { useOutlet, history } from 'dumi';
-import { warning } from '/Users/mitkimi/Documents/develop/opensource/ApronDesign/react/node_modules/rc-util';
-import { SiteContext, type ISiteContext } from '/Users/mitkimi/Documents/develop/opensource/ApronDesign/react/node_modules/dumi/dist/client/theme-api/context.js';
+import { warning } from 'D:/OPENSOURCE/apron.design/react/node_modules/rc-util';
+import { SiteContext, type ISiteContext } from 'D:/OPENSOURCE/apron.design/react/node_modules/dumi/dist/client/theme-api/context.js';
 import { components } from '../meta/atoms';
 import { locales } from '../locales/config';
 
@@ -17,7 +17,7 @@ const entryExports = {
 const pkg = {"name":"@apron-design/react","description":"Apron Design - A modern, intelligent React component library built with TypeScript and SCSS. Featuring 40+ components with dark mode support.","version":"21.0.1","license":"MIT","repository":{"type":"git","url":"git+https://github.com/apron-design/react.git"},"author":"Apron Design Team, Offontime Inc."};
 const historyType = "browser";
 const hostname = undefined;
-const themeConfig = {"logo":"/images/logo-light.svg","title":"Apron Design","footer":"Copyright © 2025 Apron Design | Built with Dumi","prefersColor":{"default":"light","switch":true},"nprogress":true,"lastUpdated":true,"carrier":"dumi","nav":{"zh-CN":[{"title":"组件","link":"/components"},{"title":"GitHub","link":"https://github.com/apron-design/react"}],"en-US":[{"title":"Components","link":"/components"},{"title":"GitHub","link":"https://github.com/apron-design/react"}]},"sourceLink":"https://github.com/apron-design/react/tree/dev-up/{fileName}#L{line}","editLink":"https://github.com/apron-design/react/edit/dev-up/{filename}"};
+const themeConfig = {"logo":"/images/logo-light.svg","title":"Apron Design","footer":"Copyright ©2022~2025 Apron Design React | With offontime.com | Docs built with Dumi","prefersColor":{"default":"light","switch":true},"nprogress":true,"lastUpdated":true,"carrier":"dumi","nav":[{"title":"组件","link":"/components"},{"title":"GitHub","link":"https://github.com/apron-design/react"}],"sourceLink":"https://github.com/apron-design/react/tree/dev-up/{fileName}#L{line}","editLink":"https://github.com/apron-design/react/edit/dev-up/{filename}"};
 const _2_level_nav_available = true;
 
 export default function DumiContextWrapper() {
