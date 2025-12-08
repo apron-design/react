@@ -32,7 +32,8 @@ export default defineConfig({
     '/assets/style.css',
     '/assets/custom.scss',
     '/theme/layout.less',
-    '/theme/notfound.less'
+    '/theme/notfound.less',
+    '/theme/styles/theme.less'
   ],
   // 主题变量配置
   theme: {
