@@ -23,7 +23,7 @@ export default () => <Tag>标签</Tag>;
 Tag 组件提供两种变体：`primary` 和 `default`。
 
 ```jsx
-import { Space } from '@apron-design/react';
+import { Tag, Space } from '@apron-design/react';
 
 export default () => (
   <Space>
@@ -38,7 +38,7 @@ export default () => (
 通过设置 `closable` 属性，可以让标签变成可关闭的状态。当用户点击关闭按钮时会触发 `onClose` 回调。
 
 ```jsx
-import { Space } from '@apron-design/react';
+import { Tag, Space } from '@apron-design/react';
 
 export default () => (
   <Space>
@@ -58,7 +58,7 @@ export default () => (
 
 ```jsx
 import React, { useState } from 'react';
-import { Space } from '@apron-design/react';
+import { Space, Tag } from '@apron-design/react';
 
 export default () => {
   const [tags, setTags] = useState(['标签1', '标签2', '标签3', '标签4']);
@@ -87,7 +87,7 @@ export default () => {
 在实际应用中，Tag 组件通常以组的形式出现，用于表示技术栈、分类等信息。
 
 ```jsx
-import { Space } from '@apron-design/react';
+import { Tag, Space } from '@apron-design/react';
 
 export default () => (
   <Space wrap>
@@ -105,7 +105,7 @@ export default () => (
 Tag 组件也常用于表示不同的状态。
 
 ```jsx
-import { Space } from '@apron-design/react';
+import { Tag, Space } from '@apron-design/react';
 
 export default () => (
   <Space>
@@ -122,7 +122,7 @@ export default () => (
 
 ```jsx
 import React, { useState } from 'react';
-import { Space } from '@apron-design/react';
+import { Tag, Space } from '@apron-design/react';
 
 export default () => {
   const [tags, setTags] = useState(['前端', '后端', '设计']);
@@ -152,7 +152,7 @@ export default () => {
 Tag 组件支持暗色模式，在暗色主题下会自动应用合适的样式。
 
 ```jsx
-import { Space } from '@apron-design/react';
+import { Tag, Space } from '@apron-design/react';
 
 export default () => (
   <div

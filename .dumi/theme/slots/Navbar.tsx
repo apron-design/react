@@ -25,9 +25,9 @@ const Navbar: React.FC<{ location: any }> = ({ location }) => {
         <div className="dumi-default-header-left">
           <div className="dumi-default-header-logo">
             <picture>
-              <source srcSet="/images/logo-dark.svg" media="(prefers-color-scheme: dark)" />
+              <source srcSet="/react/images/logo-dark.svg" media="(prefers-color-scheme: dark)" />
               <img 
-                src="/images/logo-light.svg" 
+                src="/react/images/logo-light.svg" 
                 alt="Apron Design Logo" 
                 className="dumi-default-header-logo-img"
                 style={{ height: '32px', width: 'auto' }}
@@ -37,12 +37,12 @@ const Navbar: React.FC<{ location: any }> = ({ location }) => {
         </div>
         <div className="dumi-default-header-right">
           <nav className="dumi-default-header-nav">
-            {/* <a href="/" className={!location || location.pathname === '/' ? 'active' : ''}>首页</a> */}
-            <a href="/components" className={!location || location.pathname.startsWith('/components') ? 'active' : ''}>组件</a>
-            <a href="/demo" className={!location || location.pathname === '/demo' ? 'active' : ''}>演示</a>
+            <a href="/react/" className={!location || location.pathname === '/react/' ? 'active' : ''}>首页</a>
+            <a href="/react/components" className={!location || location.pathname.startsWith('/react/components') ? 'active' : ''}>组件</a>
+            <a href="/react/demo" className={!location || location.pathname === '/react/demo' ? 'active' : ''}>演示</a>
             <a href="https://github.com/apron-design/react" target="_blank" rel="noopener noreferrer">GitHub</a>
           </nav>
-          <button className="dumi-default-theme-toggle" onClick={toggleTheme} aria-label="切换主题">
+          {/* <button className="dumi-default-theme-toggle" onClick={toggleTheme} aria-label="切换主题">
             {isDarkMode ? (
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="5" />
@@ -60,7 +60,7 @@ const Navbar: React.FC<{ location: any }> = ({ location }) => {
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             )}
-          </button>
+          </button> */}
         </div>
       </div>
     </header>

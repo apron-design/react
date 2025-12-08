@@ -39,7 +39,7 @@
 // ============================================
 // Select CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   // Inactive state
   --apron-select-bg: #{$color-neutral-800};
   --apron-select-border: #{$color-neutral-700};

@@ -14,10 +14,10 @@ const entryExports = {
 };
 
 // Static content
-const pkg = {"name":"@apron-design/react","description":"Apron Design - A modern, intelligent React component library built with TypeScript and SCSS. Featuring 40+ components with dark mode support.","version":"21.0.1","license":"MIT","repository":{"type":"git","url":"git+https://github.com/apron-design/react.git"},"author":"Apron Design Team, Offontime Inc."};
+const pkg = {"name":"@apron-design/react","description":"Apron Design - A modern, intelligent React component library built with TypeScript and SCSS. Featuring 40+ components with dark mode support.","version":"21.0.2","license":"MIT","repository":{"type":"git","url":"git+https://github.com/apron-design/react.git"},"author":"Apron Design Team, Offontime Inc."};
 const historyType = "browser";
 const hostname = undefined;
-const themeConfig = {"logo":"/images/logo-light.svg","title":"Apron Design","footer":"Copyright ©2022~2025 Apron Design React | With offontime.com | Docs built with Dumi","prefersColor":{"default":"light","switch":true},"nprogress":true,"lastUpdated":true,"carrier":"dumi","nav":[{"title":"组件","link":"/components"},{"title":"GitHub","link":"https://github.com/apron-design/react"}],"sourceLink":"https://github.com/apron-design/react/tree/dev-up/{fileName}#L{line}","editLink":"https://github.com/apron-design/react/edit/dev-up/{filename}"};
+const themeConfig = {"logo":"/react/images/logo-light.svg","title":"Apron Design","footer":"Copyright ©2022~2025 Apron Design React | With offontime.com | Docs built with Dumi","prefersColor":{"default":"light","switch":true},"nprogress":true,"lastUpdated":true,"carrier":"dumi","nav":[{"title":"组件","link":"/react/components"},{"title":"GitHub","link":"https://github.com/apron-design/react"}],"sourceLink":"https://github.com/apron-design/react/tree/dev-up/{fileName}#L{line}","editLink":"https://github.com/apron-design/react/edit/dev-up/{filename}"};
 const _2_level_nav_available = true;
 
 export default function DumiContextWrapper() {

@@ -37,7 +37,7 @@ import React from 'react';
 import { Alert, Space } from '@apron-design/react';
 
 export default () => (
-  <Space direction="vertical">
+  <Space orientation="vertical">
     <Alert type="info" message="Information goes here" />
     <Alert type="success" message="Success information goes here" />
     <Alert type="warning" message="Warning information goes here" />

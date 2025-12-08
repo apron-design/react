@@ -4,6 +4,9 @@ node_modules/
 # Build output
 dist/
 storybook-static/
+docs-dist/
+.dumi/tmp/
+.dumi/tmp-production/
 
 # IDE
 .idea/
@@ -34,6 +37,10 @@ coverage/
 *.tmp
 *.temp
 .cache/
+
+# Dumi temp files
+.dumi/tmp/
+.dumi/tmp-production/
 
 # Lock files (choose one)
 package-lock.json

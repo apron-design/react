@@ -33,6 +33,8 @@ export default () => (
 ### 内容在右边（默认）
 
 ```jsx
+import { Timeline, TimelineItem } from '@apron-design/react';
+
 export default () => (
   <Timeline side="right">
     <TimelineItem title="The first milestone" date="2017-03-10" />
@@ -45,6 +47,8 @@ export default () => (
 ### 内容在左边
 
 ```jsx
+import { Timeline, TimelineItem } from '@apron-design/react';
+
 export default () => (
   <Timeline side="left">
     <TimelineItem title="The first milestone" date="2017-03-10" />
@@ -56,6 +60,8 @@ export default () => (
 ### 内容交替左右
 
 ```jsx
+import { Timeline, TimelineItem } from '@apron-design/react';
+
 export default () => (
   <Timeline side="both">
     <TimelineItem title="The first milestone" date="2017-03-10" />
@@ -70,6 +76,8 @@ export default () => (
 通过 `dotColor` 属性可以设置时间轴节点的颜色，支持 `default`、`primary`、`main`、`success`、`warning` 和 `danger` 六种颜色。
 
 ```jsx
+import { Timeline, TimelineItem } from '@apron-design/react';
+
 export default () => (
   <Timeline>
     <TimelineItem title="A Primary Dot" date="2017-03-10" dotColor="primary" />
@@ -86,6 +94,8 @@ export default () => (
 除了标题和日期，还可以通过 `content` 属性添加详细的内容描述。
 
 ```jsx
+import { Timeline, TimelineItem } from '@apron-design/react';
+
 export default () => (
   <Timeline>
     <TimelineItem
@@ -122,6 +132,8 @@ export default () => (
 Timeline 组件非常适合用于展示订单的物流跟踪信息。
 
 ```jsx
+import { Timeline, TimelineItem } from '@apron-design/react';
+
 export default () => (
   <Timeline>
     <TimelineItem
@@ -163,6 +175,8 @@ export default () => (
 Timeline 组件也可用于展示产品的版本迭代历史。
 
 ```jsx
+import { Timeline, TimelineItem } from '@apron-design/react';
+
 export default () => (
   <Timeline side="left">
     <TimelineItem
@@ -191,6 +205,8 @@ export default () => (
 Timeline 组件支持暗色模式，在暗色主题下会自动应用合适的样式。
 
 ```jsx
+import { Timeline, TimelineItem } from '@apron-design/react';
+
 export default () => (
   <div
     data-theme="dark"

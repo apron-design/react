@@ -2,17 +2,19 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   title: 'Apron Design',
-  favicons: ['/images/icon.svg'],
-  logo: '/images/logo-light.svg',
+  favicons: ['/react/images/icon.svg'],
+  logo: '/react/images/logo-light.svg',
   outputPath: 'docs-dist',
   hash: true,
+  base: '/react/',
+  publicPath: '/react/',
   locales: [
     { id: 'zh-CN', name: '中文' },
   ],
   themeConfig: {
     carrier: 'dumi',
     nav: [
-      { title: '组件', link: '/components' },
+      { title: '组件', link: '/react/components' },
       { title: 'GitHub', link: 'https://github.com/apron-design/react' },
     ],
     footer: `Copyright ©2022~${new Date().getFullYear()} Apron Design React | With offontime.com | Docs built with Dumi`,

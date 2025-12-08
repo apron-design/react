@@ -85,7 +85,7 @@
 }
 
 // Dark mode
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   --apron-color-text: #{$color-neutral-100};
   --apron-color-text-secondary: #{$color-neutral-400};
   --apron-color-text-disabled: #{$color-neutral-600};

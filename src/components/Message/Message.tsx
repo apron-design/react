@@ -146,17 +146,25 @@ const showMessage = (
     leaving: false,
   };
 
-  if (setGlobalMessages) {
-    setGlobalMessages((prev) => [...prev, newMessage]);
-  }
+  // 等待 GlobalMessageManager 挂载并设置 setGlobalMessages
+  const waitForGlobalMessages = () => {
+    if (setGlobalMessages) {
+      setGlobalMessages((prev) => [...prev, newMessage]);
+      
+      // 自动关闭
+      if (duration > 0) {
+        const timer = setTimeout(() => {
+          removeMessage(id);
+        }, duration);
+        messageTimers.set(id, timer);
+      }
+    } else {
+      // 如果 setGlobalMessages 还未设置，等待一段时间后重试
+      setTimeout(waitForGlobalMessages, 10);
+    }
+  };
 
-  // 自动关闭
-  if (duration > 0) {
-    const timer = setTimeout(() => {
-      removeMessage(id);
-    }, duration);
-    messageTimers.set(id, timer);
-  }
+  waitForGlobalMessages();
 
   return id;
 };

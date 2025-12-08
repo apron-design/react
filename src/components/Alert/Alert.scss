@@ -19,7 +19,7 @@
 // ============================================
 // Alert CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   --apron-alert-bg: #{$color-primary-900};
   --apron-alert-border: #{$color-neutral-700};
   --apron-alert-text: #{$color-primary-200};
@@ -67,6 +67,11 @@
   pointer-events: auto;
   box-sizing: border-box;
 
+  // 默认情况下占满父容器宽度
+  width: 100%;
+  min-width: unset;
+  max-width: unset;
+
   // Animation states
   opacity: 0;
   max-height: 0;
@@ -109,6 +114,21 @@
     position: relative;
     margin-bottom: $spacing-3;
     padding: $spacing-2 $spacing-4;
+    
+    // 页面上静态展示时占满父容器宽度
+    width: 100%;
+    min-width: unset;
+    max-width: unset;
+  }
+  
+  // Message 中使用的 Alert 样式
+  .apron-alert-container > & {
+    // Message 中使用时限制宽度
+    width: auto;
+    min-width: 300px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   // Icon

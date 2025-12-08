@@ -13,7 +13,7 @@
 // ============================================
 // Avatar CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   --apron-avatar-bg: #{$color-neutral-700};
   --apron-avatar-color: #{$color-neutral-300};
   --apron-avatar-border-color: #{$color-neutral-900};

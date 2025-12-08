@@ -14,13 +14,13 @@ order: 1
 - 选项数量较多，不适合使用单选框时
 - 表单中需要用户提供选择时
 
-## 示例
+## 代码演示
 
 ### 基础用法
 
 最简单的选择器使用方式。
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 export default function BasicSelect() {
@@ -44,7 +44,7 @@ export default function BasicSelect() {
 
 选择器支持多种状态：正常、选中/聚焦、加载中、禁用。
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 const defaultOptions = [
@@ -93,7 +93,7 @@ export default function SelectStates() {
 
 ### 正常状态
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 const defaultOptions = [
@@ -116,7 +116,7 @@ export default function NormalSelect() {
 
 ### 选中/聚焦状态
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 const defaultOptions = [
@@ -143,7 +143,7 @@ export default function SelectedFocusedSelect() {
 
 ### 加载状态
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 const defaultOptions = [
@@ -180,7 +180,7 @@ export default function LoadingSelect() {
 
 ### 禁用状态
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 const defaultOptions = [
@@ -207,7 +207,7 @@ export default function DisabledSelect() {
 
 ### 下拉框展开
 
-```
+```jsx
 import { useState } from 'react';
 import { Select } from '@apron-design/react';
 // Types imported from @apron-design/react
@@ -241,7 +241,7 @@ export default function DropdownOpenSelect() {
 
 ### 带滚动条（超过5个选项）
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 const manyOptions = [
@@ -272,7 +272,7 @@ export default function WithScrollingSelect() {
 
 在 Inflow 模式下，下拉框会展开容器高度。
 
-```
+```jsx
 import { useState } from 'react';
 import { Select } from '@apron-design/react';
 // Types imported from @apron-design/react
@@ -314,7 +314,7 @@ export default function InflowModeSelect() {
 
 在 Float 模式下，下拉框会浮动在内容之上。
 
-```
+```jsx
 import { useState } from 'react';
 import { Select } from '@apron-design/react';
 // Types imported from @apron-design/react
@@ -353,7 +353,7 @@ export default function FloatModeSelect() {
 
 ### 带禁用选项
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 export default function WithDisabledOptionsSelect() {
@@ -361,12 +361,12 @@ export default function WithDisabledOptionsSelect() {
     <div style={{ width: '400px' }}>
       <h4 style={{ margin: '0 0 12px 0', color: '#393939' }}>With Disabled Options</h4>
       <Select
-        options={[
-          { label: 'Available Option 1', value: '1' },
-          { label: 'Disabled Option', value: '2', disabled: true },
-          { label: 'Available Option 3', value: '3' },
-          { label: 'Another Disabled', value: '4', disabled: true },
-          { label: 'Available Option 5', value: '5' },
+        options={[{
+          label: 'Available Option 1', value: '1' }, {
+          label: 'Disabled Option', value: '2', disabled: true }, {
+          label: 'Available Option 3', value: '3' }, {
+          label: 'Another Disabled', value: '4', disabled: true }, {
+          label: 'Available Option 5', value: '5' },
         ]}
         placeholder="Select an option"
       />
@@ -379,7 +379,7 @@ export default function WithDisabledOptionsSelect() {
 
 在受控模式下，可以通过 `value` 和 `onChange` 属性控制选择器的值。
 
-```
+```jsx
 import { useState } from 'react';
 import { Select } from '@apron-design/react';
 // Types imported from @apron-design/react
@@ -415,7 +415,7 @@ export default function ControlledModeSelect() {
 
 选择器在暗色模式下会自动适配主题颜色。
 
-```
+```jsx
 import { Select } from '@apron-design/react';
 
 const defaultOptions = [
