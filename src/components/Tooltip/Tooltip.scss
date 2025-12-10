@@ -11,6 +11,15 @@
   --apron-tooltip-shadow: #{$shadow-md};
 }
 
+// ============================================
+// Tooltip CSS Variables (Dark Mode)
+// ============================================
+[data-prefers-color='dark'] {
+  --apron-tooltip-bg: #{$color-neutral-700};
+  --apron-tooltip-color: #{$color-neutral-100};
+  --apron-tooltip-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+}
+
 
 // ============================================
 // Tooltip Base Styles

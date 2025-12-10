@@ -4,7 +4,7 @@ import { Modal } from '../Modal';
 import type { ModalProps } from '../Modal';
 import { Drawer } from '../Drawer';
 import type { DrawerPlacement } from '../Drawer';
-import type { ButtonProps } from '../Button';
+import type { ButtonProps } from '../Button/Button';
 
 export interface ResponsiveModalProps {
   /** 是否显示 */

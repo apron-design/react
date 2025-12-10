@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 import { Button } from '../Button';
-import type { ButtonProps } from '../Button';
+import type { ButtonProps } from '../Button/Button';
 import './Drawer.scss';
 
 export type DrawerPlacement = 'top' | 'right' | 'bottom' | 'left';

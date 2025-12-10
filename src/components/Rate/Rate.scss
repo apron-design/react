@@ -11,7 +11,7 @@
 // ============================================
 // Rate CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   --apron-rate-value-color: #{$color-primary-200};
 }
 

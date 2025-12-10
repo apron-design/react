@@ -1,0 +1,148 @@
+// 404 页面样式
+.not-found-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 128px);
+  padding: 24px 0;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+  
+  .not-found-content {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .error-code {
+    font-size: 6rem;
+    font-weight: 800;
+    margin: 0 0 16px;
+    color: #e4e9ec;
+    text-shadow: -1px -1px 0 #d0d5d8;
+    
+    [data-prefers-color="dark"] & {
+      color: #2a353c;
+      text-shadow: -1px -1px 0 #1c2022;
+    }
+  }
+  
+  .error-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: #393939;
+    
+    [data-prefers-color="dark"] & {
+      color: #f4f4f5;
+    }
+  }
+  
+  .error-description {
+    font-size: 1.1rem;
+    color: #71717a;
+    margin: 0 0 32px;
+    line-height: 1.6;
+    
+    [data-prefers-color="dark"] & {
+      color: #a1a1aa;
+    }
+  }
+  
+  .error-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+      
+      &-primary {
+        background-color: #4C9EEA;
+        color: white;
+        box-shadow: 0 2px 0 rgba(76, 158, 234, 0.2);
+        
+        &:hover {
+          background-color: #3182CE;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 8px rgba(76, 158, 234, 0.3);
+        }
+        
+        [data-prefers-color="dark"] & {
+          background-color: #6DAEEF;
+          box-shadow: 0 2px 0 rgba(109, 174, 239, 0.2);
+          
+          &:hover {
+            background-color: #4C9EEA;
+            box-shadow: 0 4px 8px rgba(109, 174, 239, 0.3);
+          }
+        }
+      }
+      
+      &-secondary {
+        background-color: #f4f4f5;
+        color: #393939;
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+        
+        &:hover {
+          background-color: #e4e4e7;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        [data-prefers-color="dark"] & {
+          background-color: #27272a;
+          color: #f4f4f5;
+          box-shadow: 0 2px 0 rgba(255, 255, 255, 0.02);
+          
+          &:hover {
+            background-color: #3f3f46;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+    }
+  }
+}
+
+// 响应式优化
+@media (max-width: 768px) {
+  .not-found-page {
+    min-height: calc(100vh - 112px);
+    
+    .error-code {
+      font-size: 4rem;
+    }
+    
+    .error-title {
+      font-size: 1.5rem;
+    }
+    
+    .error-description {
+      font-size: 1rem;
+    }
+    
+    .error-actions {
+      flex-direction: column;
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -45,7 +45,7 @@
 // ============================================
 // DatePicker CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   // Inactive state
   --apron-datepicker-bg: #{$color-neutral-800};
   --apron-datepicker-border: #{$color-neutral-700};

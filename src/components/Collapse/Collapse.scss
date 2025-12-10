@@ -17,7 +17,7 @@
 // ============================================
 // Collapse CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   --apron-collapse-bg: #{$color-neutral-800};
   --apron-collapse-border-color: #{$color-neutral-700};
   --apron-collapse-title-color: #{$color-neutral-100};

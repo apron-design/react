@@ -10,7 +10,7 @@
   --apron-badge-border-color: #ffffff;
 }
 
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   --apron-badge-bg: #{$color-error-600};
   --apron-badge-color: #ffffff;
   --apron-badge-border-color: #{$color-neutral-900};

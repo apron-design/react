@@ -16,7 +16,7 @@
 // ============================================
 // Tabs CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   --apron-tabs-text-color: #{$color-primary-300};
   --apron-tabs-text-active-color: #{$color-primary-100};
   --apron-tabs-capsule-bg: #ffffff;
@@ -116,6 +116,7 @@
     .apron-tabs__tab {
       padding: 0 20px;
       border-radius: 20px;
+      transition: background-color $transition-slow;
 
       &--active {
         background-color: var(--apron-tabs-capsule-bg);

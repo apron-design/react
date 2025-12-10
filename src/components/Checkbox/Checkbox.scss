@@ -34,7 +34,7 @@
 // ============================================
 // Checkbox CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   // Unchecked state
   --apron-checkbox-bg: #{$color-neutral-800};
   --apron-checkbox-border: #{$color-neutral-600};

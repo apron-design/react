@@ -78,7 +78,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       .join(' ');
 
     // 自定义颜色样式
-    const customStyle: React.CSSProperties = {};
+    const customStyle: React.CSSProperties & Record<string, string> = {};
     if (checkedColor && isChecked) {
       customStyle['--apron-switch-checked-bg'] = checkedColor;
     }

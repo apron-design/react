@@ -5,5 +5,4 @@ import './styles/index.scss';
 export * from './components';
 
 // Types
-export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button';
-
+// All types are already exported via components/index.ts, so we don't need to re-export them here

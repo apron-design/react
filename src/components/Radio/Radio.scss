@@ -29,7 +29,7 @@
 // ============================================
 // Radio CSS Variables (Dark Mode)
 // ============================================
-[data-theme='dark'] {
+[data-prefers-color='dark'] {
   // Unchecked state
   --apron-radio-bg: #{$color-neutral-800};
   --apron-radio-border: #{$color-neutral-600};
