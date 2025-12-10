@@ -34,7 +34,7 @@ jobs:
         with:
           repository: apron-design/apron-design.github.io
           path: gh-pages
-          token: ${{ secrets.GH_PAGES_TOKEN }}
+          token: ${{ secrets.DEPLOY_TOKEN }}
 
       - name: Clean and copy documentation
         run: |
