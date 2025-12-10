@@ -2,7 +2,7 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   title: 'Apron Design',
-  favicons: ['/react/images/icon.svg'],
+  favicons: ['/react/images/logo-light.svg'],
   logo: '/react/images/logo-light.svg',
   outputPath: 'docs-dist',
   hash: true,
