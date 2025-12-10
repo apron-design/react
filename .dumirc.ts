@@ -29,43 +29,6 @@ export default defineConfig({
     '@apron-design/react': require('path').resolve(__dirname, './src'),
     '@apron-design/react/styles': require('path').resolve(__dirname, './src/styles/index.scss'),
   },
-  // 自定义样式配置
-  styles: [
-    '/assets/style.css',
-    '/assets/custom.scss',
-    '/theme/layout.less',
-    '/theme/notfound.less',
-    '/theme/styles/theme.less'
-  ],
-  // 主题变量配置
-  theme: {
-    '@c-primary': '#4C9EEA',
-    '@c-primary-hover': '#3182CE',
-    '@c-primary-active': '#2468AC',
-    '@c-heading': '#1d1d1d',
-    '@c-text': '#444',
-    '@c-text-secondary': '#666',
-    '@c-border': '#e5e5e5',
-    '@c-border-light': '#f0f0f0',
-    '@c-bg': '#ffffff',
-    '@c-bg-light': '#f7f8fa',
-  },
-  // 配置额外的 less 变量
-  lessLoader: {
-    modifyVars: {
-      '@c-primary': '#4C9EEA',
-      '@c-primary-hover': '#3182CE',
-      '@c-primary-active': '#2468AC',
-      '@c-heading': '#1d1d1d',
-      '@c-text': '#444',
-      '@c-text-secondary': '#666',
-      '@c-border': '#e5e5e5',
-      '@c-border-light': '#f0f0f0',
-      '@c-bg': '#ffffff',
-      '@c-bg-light': '#f7f8fa',
-    },
-    javascriptEnabled: true,
-  },
   // 添加自定义脚本
   scripts: [
     `
