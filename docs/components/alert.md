@@ -1,9 +1,3 @@
----
-title: Alert 警告提示
-group: 数据展示
-order: 2
----
-
 # Alert 警告提示
 
 警告提示，展现需要关注的信息。
