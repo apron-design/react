@@ -100,7 +100,7 @@
     "type": "git",
     "url": "git+https://github.com/apron-design/react.git"
   },
-  "homepage": "https://github.com/apron-design/react#readme",
+  "homepage": "https://apron.design/react",
   "bugs": {
     "url": "https://github.com/apron-design/react/issues"
   },
