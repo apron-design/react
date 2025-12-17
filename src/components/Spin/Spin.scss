@@ -49,6 +49,20 @@
   font-family: var(--apron-font-family);
 
   // ============================================
+  // Standalone Mode (不传 children 时)
+  // ============================================
+  &--standalone {
+    position: relative;
+    min-width: 32px;
+    min-height: 32px;
+
+    .apron-spin__content {
+      position: static;
+      transform: none;
+    }
+  }
+
+  // ============================================
   // Fullscreen Mode
   // ============================================
   &--fullscreen {

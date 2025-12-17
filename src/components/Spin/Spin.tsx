@@ -169,7 +169,7 @@ export const Spin: React.FC<SpinProps> & {
   }
 
   return (
-    <div className={`apron-spin ${className}`}>
+    <div className={`apron-spin apron-spin--standalone ${className}`}>
       <SpinContent icon={icon} text={text} placement={placement} />
     </div>
   );

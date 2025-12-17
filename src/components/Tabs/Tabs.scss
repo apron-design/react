@@ -9,6 +9,7 @@
   --apron-tabs-text-active-color: #{$color-primary-900};
   --apron-tabs-capsule-bg: #{$color-primary-900};
   --apron-tabs-capsule-text: #ffffff;
+  --apron-tabs-capsule-hover-bg: rgba(0, 0, 0, 0.05);
   --apron-tabs-border-color: #{$color-neutral-200};
   --apron-tabs-disabled-color: #{$color-neutral-400};
 }
@@ -21,6 +22,7 @@
   --apron-tabs-text-active-color: #{$color-primary-100};
   --apron-tabs-capsule-bg: #ffffff;
   --apron-tabs-capsule-text: #{$color-primary-900};
+  --apron-tabs-capsule-hover-bg: rgba(255, 255, 255, 0.1);
   --apron-tabs-border-color: #{$color-neutral-700};
   --apron-tabs-disabled-color: #{$color-neutral-600};
 }
@@ -116,12 +118,21 @@
     .apron-tabs__tab {
       padding: 0 20px;
       border-radius: 20px;
-      transition: background-color $transition-slow;
+      transition: all $transition-slow;
+
+      &:hover:not(&--disabled):not(&--active) {
+        background-color: var(--apron-tabs-capsule-hover-bg);
+      }
 
       &--active {
         background-color: var(--apron-tabs-capsule-bg);
         color: var(--apron-tabs-capsule-text);
         font-weight: $font-weight-normal;
+
+        // active 状态下 hover 时保持颜色不变
+        &:hover {
+          color: var(--apron-tabs-capsule-text);
+        }
       }
     }
 
