@@ -32,9 +32,9 @@ const LocalesContainer: FC<{ children: ReactNode }> = (props) => {
     const localeMessages = messages[locale] || {};
 
     // append internal message, for use intl as string template util
-    localeMessages['$internal.edit.link'] = "https://github.com/apron-design/react/edit/dev-up/{filename}";
+    localeMessages['$internal.edit.link'] = "https://github.com/apron-design/react/edit/dev/{filename}";
 
-    localeMessages['$internal.api.sourceLink'] = "https://github.com/apron-design/react/tree/dev-up/{fileName}#L{line}";
+    localeMessages['$internal.api.sourceLink'] = "https://github.com/apron-design/react/tree/dev/{fileName}#L{line}";
 
     return createIntl({ locale, messages: localeMessages }, cache);
   }, []);
