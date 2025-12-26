@@ -17,7 +17,7 @@
 // ============================================
 // Modal CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-modal-bg: #{$color-neutral-800};
   --apron-modal-border-color: #{$color-neutral-700};
   --apron-modal-title-color: #{$color-neutral-100};

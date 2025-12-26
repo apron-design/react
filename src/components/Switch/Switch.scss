@@ -22,7 +22,7 @@
 // ============================================
 // Switch CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-switch-unchecked-bg: #{$color-neutral-700};
   --apron-switch-thumb-bg: #ffffff;
   --apron-switch-checked-bg: #{$color-primary-300};

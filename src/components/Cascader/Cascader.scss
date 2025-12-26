@@ -42,7 +42,7 @@
 // ============================================
 // Cascader CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   // Inactive state
   --apron-cascader-bg: #{$color-neutral-800};
   --apron-cascader-border: #{$color-neutral-700};

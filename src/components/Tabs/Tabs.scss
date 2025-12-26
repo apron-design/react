@@ -17,7 +17,7 @@
 // ============================================
 // Tabs CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-tabs-text-color: #{$color-primary-300};
   --apron-tabs-text-active-color: #{$color-primary-100};
   --apron-tabs-capsule-bg: #ffffff;

@@ -19,7 +19,7 @@
 // ============================================
 // Alert CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-alert-bg: #{$color-primary-900};
   --apron-alert-border: #{$color-neutral-700};
   --apron-alert-text: #{$color-primary-200};

@@ -226,13 +226,79 @@ The component library uses CSS variables for theme customization. You can custom
 
 ### Dark Mode
 
-Add the `data-theme="dark"` attribute to the root element to enable dark mode:
+The component library supports two ways to enable dark mode:
 
-```html
-<html data-theme="dark">
-  ...
-</html>
+#### Method 1: Manual Setting
+
+Manually set dark mode using the `apron-theme` attribute on the `body` element:
+
+```javascript
+// Set dark mode
+document.body.setAttribute('apron-theme', 'dark');
+
+// Restore light mode
+document.body.removeAttribute('apron-theme');
 ```
+
+Or use the provided utility functions:
+
+```tsx
+import { setDarkMode, removeDarkMode, toggleDarkMode, isDarkMode } from '@apron-design/react';
+
+// Set dark mode
+setDarkMode();
+
+// Restore light mode
+removeDarkMode();
+
+// Toggle dark mode
+toggleDarkMode();
+
+// Check if currently in dark mode
+const isDark = isDarkMode();
+```
+
+#### Method 2: Follow System Theme
+
+Use the `followSystemTheme()` function to automatically follow the system theme:
+
+```tsx
+import { followSystemTheme } from '@apron-design/react';
+import { useEffect } from 'react';
+
+function App() {
+  useEffect(() => {
+    // Follow system theme, returns cleanup function
+    const cleanup = followSystemTheme();
+    
+    // Cleanup on unmount
+    return cleanup;
+  }, []);
+
+  return <div>Your App</div>;
+}
+```
+
+Or use native JavaScript directly:
+
+```javascript
+const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+
+darkThemeMq.addEventListener('change', e => {
+  if (e.matches) {
+    document.body.setAttribute('apron-theme', 'dark');
+  } else {
+    document.body.removeAttribute('apron-theme');
+  }
+});
+
+// Initial setup
+if (darkThemeMq.matches) {
+  document.body.setAttribute('apron-theme', 'dark');
+}
+```
+
+**Note**: If you manually set the `apron-theme` attribute, system theme changes will not automatically update. Only after removing the attribute will it follow the system theme again.
 
 ## 📄 License
 

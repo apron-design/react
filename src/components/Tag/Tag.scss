@@ -20,7 +20,7 @@
 // ============================================
 // Tag CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   // Primary
   --apron-tag-primary-bg: #{$color-primary-200};
   --apron-tag-primary-text: #{$color-primary-900};

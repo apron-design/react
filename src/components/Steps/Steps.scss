@@ -15,7 +15,7 @@
 // ============================================
 // Steps CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-steps-completed-color: #{$color-success-500};
   --apron-steps-current-color: #{$color-primary-400};
   --apron-steps-pending-color: #{$color-neutral-600};

@@ -24,7 +24,7 @@
 // ============================================
 // Link CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   // Primary variant
   --apron-link-primary-color: #{$color-primary-200};
   --apron-link-primary-color-hover: #{$color-primary-100};

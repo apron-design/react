@@ -17,7 +17,7 @@
 // ============================================
 // Skeleton CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-skeleton-bg: #{$color-neutral-700};
   --apron-skeleton-gradient: linear-gradient(
     103.5deg,
