@@ -224,13 +224,79 @@ export default function MyComponent() {
 
 ### 暗黑模式
 
-添加 `data-theme="dark"` 属性到根元素即可启用暗黑模式：
+组件库支持两种方式启用暗黑模式：
 
-```html
-<html data-theme="dark">
-  ...
-</html>
+#### 方式一：手动设置
+
+使用 `apron-theme` 属性在 `body` 元素上手动设置深色模式：
+
+```javascript
+// 设置为深色模式
+document.body.setAttribute('apron-theme', 'dark');
+
+// 恢复浅色模式
+document.body.removeAttribute('apron-theme');
 ```
+
+或者使用提供的工具函数：
+
+```tsx
+import { setDarkMode, removeDarkMode, toggleDarkMode, isDarkMode } from '@apron-design/react';
+
+// 设置为深色模式
+setDarkMode();
+
+// 恢复浅色模式
+removeDarkMode();
+
+// 切换深色模式
+toggleDarkMode();
+
+// 检查当前是否为深色模式
+const isDark = isDarkMode();
+```
+
+#### 方式二：跟随系统主题
+
+使用 `followSystemTheme()` 函数可以让组件库自动跟随系统主题设置：
+
+```tsx
+import { followSystemTheme } from '@apron-design/react';
+import { useEffect } from 'react';
+
+function App() {
+  useEffect(() => {
+    // 跟随系统主题，返回清理函数
+    const cleanup = followSystemTheme();
+    
+    // 组件卸载时清理
+    return cleanup;
+  }, []);
+
+  return <div>你的应用</div>;
+}
+```
+
+或者直接使用原生 JavaScript：
+
+```javascript
+const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+
+darkThemeMq.addEventListener('change', e => {
+  if (e.matches) {
+    document.body.setAttribute('apron-theme', 'dark');
+  } else {
+    document.body.removeAttribute('apron-theme');
+  }
+});
+
+// 初始设置
+if (darkThemeMq.matches) {
+  document.body.setAttribute('apron-theme', 'dark');
+}
+```
+
+**注意**：如果手动设置了 `apron-theme` 属性，系统主题变化将不会自动更新。只有移除该属性后，才会重新跟随系统主题。
 ## 📄 License
 
 MIT

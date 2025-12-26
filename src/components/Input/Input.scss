@@ -29,7 +29,7 @@
 // ============================================
 // Input CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   // Inactive state
   --apron-input-bg: #{$color-neutral-800};
   --apron-input-border: #{$color-neutral-700};

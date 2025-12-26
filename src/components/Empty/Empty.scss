@@ -13,7 +13,7 @@
 // ============================================
 // Empty CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-empty-border-color: #{$color-neutral-700};
   --apron-empty-icon-color: #{$color-neutral-500};
   --apron-empty-text-color: #{$color-neutral-400};

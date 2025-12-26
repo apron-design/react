@@ -16,7 +16,7 @@
 // ============================================
 // Pagination CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-pagination-text: #{$color-primary-200};
   --apron-pagination-bg-hover: #{$color-neutral-700};
   --apron-pagination-active-bg: #{$color-primary-200};

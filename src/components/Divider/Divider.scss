@@ -12,7 +12,7 @@
 // ============================================
 // Divider CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-divider-color: #{$color-neutral-600};
   --apron-divider-text-color: #{$color-neutral-400};
 }

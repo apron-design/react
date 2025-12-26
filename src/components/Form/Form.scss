@@ -20,7 +20,7 @@
 // ============================================
 // Form CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-form-label-color: #{$color-primary-200};
   --apron-form-label-required-color: #{$color-error-500};
   --apron-form-help-color: #{$color-neutral-400};

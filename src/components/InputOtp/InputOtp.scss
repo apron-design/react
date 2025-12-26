@@ -33,7 +33,7 @@
 // ============================================
 // InputOtp CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-input-otp-bg: #{$color-neutral-800};
   --apron-input-otp-border: #{$color-neutral-700};
   --apron-input-otp-text: #{$color-primary-200};

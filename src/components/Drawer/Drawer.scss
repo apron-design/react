@@ -17,7 +17,7 @@
 // ============================================
 // Drawer CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-drawer-bg: #{$color-neutral-800};
   --apron-drawer-border-color: #{$color-neutral-700};
   --apron-drawer-title-color: #{$color-neutral-100};

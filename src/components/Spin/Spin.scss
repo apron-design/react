@@ -13,7 +13,7 @@
 // ============================================
 // Spin CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-spin-color: #{$color-primary-400};
   --apron-spin-text-color: #{$color-primary-300};
   --apron-spin-overlay-bg: rgba(24, 24, 27, 0.8);

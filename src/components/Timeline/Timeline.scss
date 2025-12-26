@@ -19,7 +19,7 @@
 // ============================================
 // Timeline CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   --apron-timeline-line-color: #{$color-neutral-700};
   --apron-timeline-dot-default: #{$color-neutral-500};
   --apron-timeline-dot-primary: #{$color-primary-300};

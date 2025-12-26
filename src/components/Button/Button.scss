@@ -47,7 +47,7 @@
 // ============================================
 // Button CSS Variables (Dark Mode)
 // ============================================
-[data-prefers-color='dark'] {
+@include dark-mode {
   // Primary type (hover-active 颜色逐渐变亮，暗色模式下"强调"体现为更亮)
   --apron-button-primary-bg: #{$color-primary-200};
   --apron-button-primary-bg-hover: #{$color-primary-100};
