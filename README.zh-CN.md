@@ -296,7 +296,10 @@ if (darkThemeMq.matches) {
 }
 ```
 
-**注意**：如果手动设置了 `apron-theme` 属性，系统主题变化将不会自动更新。只有移除该属性后，才会重新跟随系统主题。
+**重要说明**：
+- 调用 `setDarkMode()`、`removeDarkMode()` 或 `toggleDarkMode()` 会自动停止跟随系统主题
+- 如果需要重新跟随系统主题，需要再次调用 `followSystemTheme()`
+- 手动设置主题和跟随系统主题是互斥的，手动设置会优先
 ## 📄 License
 
 MIT

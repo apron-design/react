@@ -298,7 +298,10 @@ if (darkThemeMq.matches) {
 }
 ```
 
-**Note**: If you manually set the `apron-theme` attribute, system theme changes will not automatically update. Only after removing the attribute will it follow the system theme again.
+**Important Notes**:
+- Calling `setDarkMode()`, `removeDarkMode()`, or `toggleDarkMode()` will automatically stop following the system theme
+- If you need to follow the system theme again, call `followSystemTheme()` again
+- Manual theme setting and following system theme are mutually exclusive, manual setting takes priority
 
 ## 📄 License
 
