@@ -1,6 +1,6 @@
 /**
  * 主题工具函数
- * 支持手动设置深色模式和跟随系统主题自动切换
+ * 支持手动设置深色模式和浅色模式
  */
 
 /**
@@ -46,40 +46,19 @@ export function isDarkMode(): boolean {
 
 /**
  * 跟随系统主题自动切换
- * 当系统主题改变时，自动更新 apron-theme 属性
  * 
- * @returns 返回清理函数，用于移除事件监听器
+ * @deprecated 此功能已废弃。组件库不再支持自动跟随系统主题。
+ * 请使用 setDarkMode() 和 removeDarkMode() 手动控制主题。
+ * 
+ * @returns 返回清理函数（空函数，无实际效果）
  */
 export function followSystemTheme(): () => void {
-  if (typeof window === 'undefined' || !window.matchMedia) {
-    return () => {};
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn(
+      'followSystemTheme() 已废弃。组件库不再支持自动跟随系统主题。' +
+      '请使用 setDarkMode() 和 removeDarkMode() 手动控制主题。'
+    );
   }
-
-  const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
-
-  const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
-    if (e.matches) {
-      document.body.setAttribute('apron-theme', 'dark');
-    } else {
-      document.body.removeAttribute('apron-theme');
-    }
-  };
-
-  // 初始设置
-  handleChange(darkThemeMq);
-
-  // 监听变化
-  if (darkThemeMq.addEventListener) {
-    darkThemeMq.addEventListener('change', handleChange);
-    return () => {
-      darkThemeMq.removeEventListener('change', handleChange);
-    };
-  } else {
-    // 兼容旧版浏览器
-    darkThemeMq.addListener(handleChange);
-    return () => {
-      darkThemeMq.removeListener(handleChange);
-    };
-  }
+  // 返回空函数，不再实际跟随系统主题
+  return () => {};
 }
-

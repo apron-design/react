@@ -106,18 +106,12 @@
 }
 
 // Dark mode selector
-// 支持手动设置 (body[apron-theme='dark']) 和跟随系统主题 (@media prefers-color-scheme)
+// 仅支持手动设置 (body[apron-theme='dark'])
 // 可以在顶层使用（定义 CSS 变量）或嵌套使用（组件样式）
 @mixin dark-mode {
   @at-root {
     body[apron-theme='dark'] {
       @content;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body:not([apron-theme]) {
-        @content;
-      }
     }
   }
 }

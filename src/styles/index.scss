@@ -85,7 +85,7 @@
 }
 
 // Dark mode
-// 支持手动设置 (body[apron-theme='dark']) 和跟随系统主题 (@media prefers-color-scheme)
+// 仅支持手动设置 (body[apron-theme='dark'])
 body[apron-theme='dark'] {
   --apron-color-text: #{$color-neutral-100};
   --apron-color-text-secondary: #{$color-neutral-400};
@@ -97,21 +97,6 @@ body[apron-theme='dark'] {
 
   --apron-color-border: #{$color-neutral-700};
   --apron-color-border-hover: #{$color-neutral-600};
-}
-
-@media (prefers-color-scheme: dark) {
-  body:not([apron-theme]) {
-    --apron-color-text: #{$color-neutral-100};
-    --apron-color-text-secondary: #{$color-neutral-400};
-    --apron-color-text-disabled: #{$color-neutral-600};
-
-    --apron-color-bg: #{$color-neutral-900};
-    --apron-color-bg-secondary: #{$color-neutral-800};
-    --apron-color-bg-elevated: #{$color-neutral-800};
-
-    --apron-color-border: #{$color-neutral-700};
-    --apron-color-border-hover: #{$color-neutral-600};
-  }
 }
 
 // Base reset for components

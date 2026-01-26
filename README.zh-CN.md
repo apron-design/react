@@ -256,47 +256,7 @@ toggleDarkMode();
 const isDark = isDarkMode();
 ```
 
-#### 方式二：跟随系统主题
-
-使用 `followSystemTheme()` 函数可以让组件库自动跟随系统主题设置：
-
-```tsx
-import { followSystemTheme } from '@apron-design/react';
-import { useEffect } from 'react';
-
-function App() {
-  useEffect(() => {
-    // 跟随系统主题，返回清理函数
-    const cleanup = followSystemTheme();
-    
-    // 组件卸载时清理
-    return cleanup;
-  }, []);
-
-  return <div>你的应用</div>;
-}
-```
-
-或者直接使用原生 JavaScript：
-
-```javascript
-const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-
-darkThemeMq.addEventListener('change', e => {
-  if (e.matches) {
-    document.body.setAttribute('apron-theme', 'dark');
-  } else {
-    document.body.removeAttribute('apron-theme');
-  }
-});
-
-// 初始设置
-if (darkThemeMq.matches) {
-  document.body.setAttribute('apron-theme', 'dark');
-}
-```
-
-**注意**：如果手动设置了 `apron-theme` 属性，系统主题变化将不会自动更新。只有移除该属性后，才会重新跟随系统主题。
+**注意**：组件库仅支持手动设置主题，不再支持自动跟随系统主题。请使用上述函数手动控制主题切换。
 ## 📄 License
 
 MIT

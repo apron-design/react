@@ -1,6 +1,6 @@
 {
   "name": "@apron-design/react",
-  "version": "26.0.0",
+  "version": "26.0.5",
   "description": "Apron Design - A modern, intelligent React component library built with TypeScript and SCSS. Featuring 40+ components with dark mode support.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -31,7 +31,8 @@
   ],
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "tsup",
+    "build:css": "node scripts/build-css.mjs",
+    "build": "npm run build:css && tsup",
     "build:storybook": "storybook build",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
