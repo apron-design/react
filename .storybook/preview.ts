@@ -1,10 +1,18 @@
 import type { Preview } from '@storybook/react';
 import React, { useEffect, useRef } from 'react';
 import '../src/styles/index.scss';
-import { setDarkMode, removeDarkMode, followSystemTheme } from '../src/utils/theme';
+import { setDarkMode, removeDarkMode } from '../src/utils/theme';
 
 const THEME_KEY = 'apron-theme';
 const SYSTEM_THEME_KEY = 'apron-follow-system-theme';
+
+// 检测系统主题
+const getSystemTheme = (): 'light' | 'dark' => {
+  if (typeof window === 'undefined' || !window.matchMedia) {
+    return 'light';
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
 
 // 获取初始主题值
 const getInitialTheme = (): 'light' | 'dark' | 'system' => {
@@ -23,7 +31,13 @@ const getInitialTheme = (): 'light' | 'dark' | 'system' => {
 if (typeof window !== 'undefined') {
   const initialTheme = getInitialTheme();
   if (initialTheme === 'system') {
-    followSystemTheme();
+    // 直接检测系统主题并设置，不使用 followSystemTheme
+    const systemTheme = getSystemTheme();
+    if (systemTheme === 'dark') {
+      setDarkMode();
+    } else {
+      removeDarkMode();
+    }
   } else if (initialTheme === 'dark') {
     setDarkMode();
   } else {
@@ -38,16 +52,45 @@ const ThemeDecorator = (Story: any, context: any) => {
   useEffect(() => {
     const theme = context.globals.theme || getInitialTheme();
 
-    // 清理之前的监听器
+    // 清理之前的监听器（如果有）
     if (cleanupRef.current) {
       cleanupRef.current();
       cleanupRef.current = undefined;
     }
 
     if (theme === 'system') {
-      // 跟随系统主题
-      cleanupRef.current = followSystemTheme();
+      // 检测系统主题并设置（仅用于 Storybook 演示）
+      const systemTheme = getSystemTheme();
+      if (systemTheme === 'dark') {
+        setDarkMode();
+      } else {
+        removeDarkMode();
+      }
       localStorage.setItem(SYSTEM_THEME_KEY, 'true');
+      
+      // 监听系统主题变化（仅用于 Storybook）
+      if (typeof window !== 'undefined' && window.matchMedia) {
+        const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
+          if (e.matches) {
+            setDarkMode();
+          } else {
+            removeDarkMode();
+          }
+        };
+        
+        if (darkThemeMq.addEventListener) {
+          darkThemeMq.addEventListener('change', handleChange);
+          cleanupRef.current = () => {
+            darkThemeMq.removeEventListener('change', handleChange);
+          };
+        } else {
+          darkThemeMq.addListener(handleChange);
+          cleanupRef.current = () => {
+            darkThemeMq.removeListener(handleChange);
+          };
+        }
+      }
     } else {
       // 手动设置主题
       localStorage.setItem(SYSTEM_THEME_KEY, 'false');

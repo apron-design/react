@@ -258,50 +258,7 @@ toggleDarkMode();
 const isDark = isDarkMode();
 ```
 
-#### Method 2: Follow System Theme
-
-Use the `followSystemTheme()` function to automatically follow the system theme:
-
-```tsx
-import { followSystemTheme } from '@apron-design/react';
-import { useEffect } from 'react';
-
-function App() {
-  useEffect(() => {
-    // Follow system theme, returns cleanup function
-    const cleanup = followSystemTheme();
-    
-    // Cleanup on unmount
-    return cleanup;
-  }, []);
-
-  return <div>Your App</div>;
-}
-```
-
-Or use native JavaScript directly:
-
-```javascript
-const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-
-darkThemeMq.addEventListener('change', e => {
-  if (e.matches) {
-    document.body.setAttribute('apron-theme', 'dark');
-  } else {
-    document.body.removeAttribute('apron-theme');
-  }
-});
-
-// Initial setup
-if (darkThemeMq.matches) {
-  document.body.setAttribute('apron-theme', 'dark');
-}
-```
-
-**Important Notes**:
-- Calling `setDarkMode()`, `removeDarkMode()`, or `toggleDarkMode()` will automatically stop following the system theme
-- If you need to follow the system theme again, call `followSystemTheme()` again
-- Manual theme setting and following system theme are mutually exclusive, manual setting takes priority
+**Note**: The component library only supports manual theme setting and no longer supports automatically following the system theme. Please use the above functions to manually control theme switching.
 
 ## 📄 License
 
